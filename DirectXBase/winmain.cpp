@@ -1,12 +1,10 @@
 
-#include <Windows.h>
-#include <vector>
-#include <tchar.h>
+#include"Global.h"
 
 #include "Direct3D/direct3d.h"
 #include "Direct3D/sprite.h"
 #include "Direct3D/texture.h"
-
+#include"Direct3D\Xfile.h"
 #include "DirectSound/directSound.h"
 #include "DirectSound/soundbuffer.h"
 #include "DirectSound/wave.h"
@@ -14,8 +12,8 @@
 #include "DirectInput/directInput.h"
 
 //ウィンドウ幅高さの決定
-const int WINDOW_WIDTH = 800;
-const int WINDOW_HEIGHT = 600;
+const int WINDOW_WIDTH = 1800;
+const int WINDOW_HEIGHT = 900;
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
@@ -38,10 +36,21 @@ int _stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	const TCHAR* WC_BASIC = _T("BASIC_WINDOW");
 
 	//シンプルウィンドウクラス設定
-	WNDCLASSEX wcex = { sizeof(WNDCLASSEX), CS_HREDRAW | CS_VREDRAW | CS_DBLCLKS, WndProc, 0, 0, hInstance,
+	WNDCLASSEX wcex = { sizeof(WNDCLASSEX),
+		CS_HREDRAW | CS_VREDRAW | CS_DBLCLKS,
+		WndProc,
+		0,
+		0,
+		hInstance,
 		(HICON)LoadImage(NULL, MAKEINTRESOURCE(IDI_APPLICATION), IMAGE_ICON, 0, 0, LR_DEFAULTSIZE | LR_SHARED),
+
 		(HCURSOR)LoadImage(NULL, MAKEINTRESOURCE(IDC_ARROW), IMAGE_CURSOR, 0, 0, LR_DEFAULTSIZE | LR_SHARED),
-		(HBRUSH)GetStockObject(WHITE_BRUSH), NULL, WC_BASIC, NULL };
+		(HBRUSH)GetStockObject(WHITE_BRUSH),
+		NULL,
+		WC_BASIC,
+		NULL 
+	};
+	
 
 	//シンプルウィンドウクラス
 	if (!RegisterClassEx(&wcex))
@@ -94,7 +103,7 @@ int _stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	//テクスチャのロード
 	Texture texture;
 	//画像は何か適当に用意してください
-
+	
 	
 	
 
@@ -107,8 +116,23 @@ int _stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	sb[1].Play(true);
 	sb[2].Play(true);*/
 
-	int spritey = 0;
 
+
+
+	//----------------------------------------------------
+	//Xファイルのロード
+	//----------------------------------------------------
+	X_FILE *xfile = NULL;
+	xfile = new X_FILE(direct3d.pDevice3D,"catsenkan.x");
+	if (!xfile)
+	{
+		xfile = new X_FILE(direct3d.pDevice3D, "../catsenkan.x");
+		if (!xfile)
+		{
+			SAFE_DELETE(xfile);
+		}
+	}
+	
 	SetRenderState(direct3d.pDevice3D, RENDER_ALPHATEST);
 
 	float rotation = 0.0f;
@@ -168,8 +192,9 @@ int _stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 //				sprite[1].Draw(direct3d.pDevice3D, bomb_tex.pTexture);
 //
 //				SetRenderState(direct3d.pDevice3D, RENDER_DEFAULT);
-//*/
-
+//*/	
+				xfile->SetupMatrices(direct3d.pDevice3D);
+				xfile->Render();
 				direct3d.pDevice3D->EndScene();
 			}
 
@@ -180,7 +205,7 @@ int _stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 			
 		}
 	}
-
+	SAFE_DELETE(xfile);
 	directInput.Release();
 
 	return 0;

@@ -86,6 +86,7 @@
     <ClCompile Include="Direct3D\font.cpp" />
     <ClCompile Include="Direct3D\sprite.cpp" />
     <ClCompile Include="Direct3D\texture.cpp" />
+    <ClCompile Include="Direct3D\Xfile.cpp" />
     <ClCompile Include="DirectInput\directInput.cpp" />
     <ClCompile Include="DirectSound\directSound.cpp" />
     <ClCompile Include="DirectSound\soundbuffer.cpp" />
@@ -97,6 +98,7 @@
     <ClInclude Include="Direct3D\font.h" />
     <ClInclude Include="Direct3D\sprite.h" />
     <ClInclude Include="Direct3D\texture.h" />
+    <ClInclude Include="Direct3D\Xfile.h" />
     <ClInclude Include="DirectInput\directInput.h" />
     <ClInclude Include="DirectSound\directSound.h" />
     <ClInclude Include="DirectSound\soundbuffer.h" />

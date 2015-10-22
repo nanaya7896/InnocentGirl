@@ -84,8 +84,9 @@ bool Direct3D::Create(HWND hWnd, int Width, int Height)
 	D3DPRESENT_PARAMETERS D3DParam =
 	{
 		Width, Height, Display.Format, 1, D3DMULTISAMPLE_NONE, 0,
-		D3DSWAPEFFECT_DISCARD, hWnd, TRUE, TRUE, D3DFMT_D24S8, 0, 0, D3DPRESENT_INTERVAL_DEFAULT
+		D3DSWAPEFFECT_DISCARD, hWnd, TRUE, TRUE, D3DFMT_D16, 0, 0, D3DPRESENT_INTERVAL_DEFAULT
 	};
+	D3DParam.EnableAutoDepthStencil = TRUE;
 
 	//幾つかの設定でデバイス作成を試みる
 	//HALモードで3Dデバイス作成

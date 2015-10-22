@@ -40,6 +40,9 @@
     <ClCompile Include="Direct3D\font.cpp">
       <Filter>Direct3D</Filter>
     </ClCompile>
+    <ClCompile Include="Direct3D\Xfile.cpp">
+      <Filter>Direct3D</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Direct3D\direct3d.h">
@@ -70,5 +73,8 @@
       <Filter>Direct3D</Filter>
     </ClInclude>
     <ClInclude Include="Global.h" />
+    <ClInclude Include="Direct3D\Xfile.h">
+      <Filter>Direct3D</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

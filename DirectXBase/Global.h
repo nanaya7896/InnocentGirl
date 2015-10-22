@@ -11,7 +11,6 @@
 #pragma comment(lib,"dxguid.lib")
 #pragma comment(lib, "dinput8.lib")
 #pragma comment(lib,"dsound.lib")
-
 #pragma comment(lib, "winmm.lib")
 
 
@@ -21,7 +20,7 @@
 #include <mmsystem.h>
 #include <tchar.h>
 #include <vector>
-
+#include <strsafe.h>
 //Direct3D
 #include <d3d9.h>
 #include <d3dx9.h>

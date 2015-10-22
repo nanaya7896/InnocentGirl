@@ -22,8 +22,8 @@ class Direct3D
 {
 public:
 
-	IDirect3D9*	pD3D9 = NULL;				//Direct3Dデバイス生成用オブジェクト
-	IDirect3DDevice9* pDevice3D = NULL;		//Direct3Dのデバイス　スプライトの表示やテクスチャのロード時に必要
+	LPDIRECT3D9	pD3D9 = NULL;				//Direct3Dデバイス生成用オブジェクト
+	LPDIRECT3DDEVICE9 pDevice3D = NULL;		//Direct3Dのデバイス　スプライトの表示やテクスチャのロード時に必要
 
 	//コンストラクタ　デストラクタ
 	Direct3D();
