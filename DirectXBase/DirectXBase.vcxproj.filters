@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Direct3D">
+      <UniqueIdentifier>{6902b8ee-1ee5-4505-b9ea-245233eb65c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DirctSound">
+      <UniqueIdentifier>{3e2164dc-9ef8-499a-91a3-60403c6af953}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DirectInput">
+      <UniqueIdentifier>{7b4d358b-616f-4c2f-97c1-4bc1ec01fa17}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="other">
+      <UniqueIdentifier>{e200cccc-e500-498e-9f18-79f380dbd856}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Direct3D\direct3d.cpp">
+      <Filter>Direct3D</Filter>
+    </ClCompile>
+    <ClCompile Include="Direct3D\sprite.cpp">
+      <Filter>Direct3D</Filter>
+    </ClCompile>
+    <ClCompile Include="Direct3D\texture.cpp">
+      <Filter>Direct3D</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectSound\directSound.cpp">
+      <Filter>DirctSound</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectSound\soundbuffer.cpp">
+      <Filter>DirctSound</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectSound\wave.cpp">
+      <Filter>DirctSound</Filter>
+    </ClCompile>
+    <ClCompile Include="winmain.cpp" />
+    <ClCompile Include="DirectInput\directInput.cpp">
+      <Filter>DirectInput</Filter>
+    </ClCompile>
+    <ClCompile Include="Direct3D\font.cpp">
+      <Filter>Direct3D</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Direct3D\direct3d.h">
+      <Filter>Direct3D</Filter>
+    </ClInclude>
+    <ClInclude Include="Direct3D\sprite.h">
+      <Filter>Direct3D</Filter>
+    </ClInclude>
+    <ClInclude Include="Direct3D\texture.h">
+      <Filter>Direct3D</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectSound\directSound.h">
+      <Filter>DirctSound</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectSound\soundbuffer.h">
+      <Filter>DirctSound</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectSound\wave.h">
+      <Filter>DirctSound</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectInput\directInput.h">
+      <Filter>DirectInput</Filter>
+    </ClInclude>
+    <ClInclude Include="other\MyVector.h">
+      <Filter>other</Filter>
+    </ClInclude>
+    <ClInclude Include="Direct3D\font.h">
+      <Filter>Direct3D</Filter>
+    </ClInclude>
+    <ClInclude Include="Global.h" />
+  </ItemGroup>
+</Project>
