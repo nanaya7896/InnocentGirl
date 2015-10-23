@@ -26,3 +26,5 @@
 #include <d3dx9.h>
 #include <dinput.h>
 
+//ƒ‰ƒCƒuƒ‰ƒŠ‚Ì“Ç‚İ‚İ
+#include"LMath.h"

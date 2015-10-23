@@ -122,20 +122,15 @@ int _stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	//----------------------------------------------------
 	//Xファイルのロード
 	//----------------------------------------------------
-	X_FILE *xfile = NULL;
-	xfile = new X_FILE(direct3d.pDevice3D,"catsenkan.x");
-	if (!xfile)
-	{
-		xfile = new X_FILE(direct3d.pDevice3D, "../catsenkan.x");
-		if (!xfile)
-		{
-			SAFE_DELETE(xfile);
-		}
-	}
-	
-	SetRenderState(direct3d.pDevice3D, RENDER_ALPHATEST);
+	X_FILE xfile;
+	xfile.XfileLoader(direct3d.pDevice3D, _T("catsenkan.x"));
 
-	float rotation = 0.0f;
+
+	direct3d.pDevice3D->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
+	direct3d.pDevice3D->SetRenderState(D3DRS_LIGHTING, FALSE);
+
+	direct3d.pDevice3D->SetRenderState(D3DRS_ZENABLE, TRUE);
+	SetRenderState(direct3d.pDevice3D, RENDER_ALPHATEST);
 
 	MSG msg = {};
 	while (msg.message != WM_QUIT)
@@ -164,10 +159,9 @@ int _stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 
 				DWORD ClearColor = 0xff808080;//背景クリア色
 				//背景クリア
-				direct3d.pDevice3D->Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_STENCIL | D3DCLEAR_ZBUFFER, ClearColor, 1.0f, 0);
+				direct3d.pDevice3D->Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, ClearColor, 1.0f, 0);
 
-
-
+			
 //
 //
 //				//デフォルト
@@ -193,8 +187,9 @@ int _stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 //
 //				SetRenderState(direct3d.pDevice3D, RENDER_DEFAULT);
 //*/	
-				xfile->SetupMatrices(direct3d.pDevice3D);
-				xfile->Render();
+				xfile.SetupMatrices(direct3d.pDevice3D);
+				xfile.Render();
+
 				direct3d.pDevice3D->EndScene();
 			}
 
@@ -205,7 +200,7 @@ int _stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 			
 		}
 	}
-	SAFE_DELETE(xfile);
+	
 	directInput.Release();
 
 	return 0;

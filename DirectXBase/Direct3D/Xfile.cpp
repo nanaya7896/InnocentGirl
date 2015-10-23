@@ -1,92 +1,68 @@
-
 #include"Xfile.h"
 
-//コンストラクタ
-X_FILE::X_FILE(LPDIRECT3DDEVICE9 dev, LPCSTR model)
+
+BOOL X_FILE::XfileLoader(LPDIRECT3DDEVICE9 pD3D9,LPCWSTR name)
 {
-	LPD3DXBUFFER pD3DXMtrlBuffer;
 
-	pMesh = NULL;
-	pMat = NULL;
-	pTex = NULL;
-	dwNum = 0L;
+	D3DXLoadMeshFromX(name, D3DXMESH_SYSTEMMEM, pD3D9,
+		NULL, NULL, NULL, NULL, &g_pMesh);
+	return TRUE;
 
-	if (FAILED(D3DXLoadMeshFromX((LPCWSTR)model, D3DXMESH_SYSTEMMEM, dev, NULL,
-		&pD3DXMtrlBuffer, NULL, &dwNum, &pMesh)))
-	{
-		MessageBox(NULL, _T("Could not find x file"), _T("LoadMeshFromX"), MB_OK);
-		return;
-	}
-	D3DXMATERIAL* d3dxMaterials = (D3DXMATERIAL*)pD3DXMtrlBuffer->GetBufferPointer();
-	pMat = new D3DMATERIAL9[dwNum];
-	if (pMat == NULL)     return;
-	pTex = new LPDIRECT3DTEXTURE9[dwNum];
-	if (pTex == NULL)     return;
-	for (DWORD i = 0; i<dwNum; i++)
-	{
-		pMat[i] = d3dxMaterials[i].MatD3D;
-		pTex[i] = NULL;
-		if (d3dxMaterials[i].pTextureFilename != NULL &&
-			lstrlen((LPCWSTR)d3dxMaterials[i].pTextureFilename)>0)
-		{
-			if (FAILED(D3DXCreateTextureFromFile(dev,
-				(LPCWSTR)d3dxMaterials[i].pTextureFilename, &pTex[i])))
-				MessageBox(NULL, _T("Could not find texture map"), _T("X File Object"), MB_OK);
-		}
-	}
-	pD3DXMtrlBuffer->Release();
-
-	// 法線ベクトルが設定されていないときの処理
-	if (!((pMesh)->GetFVF() & D3DFVF_NORMAL))
-	{
-		ID3DXMesh* pTempMesh;
-		(pMesh)->CloneMeshFVF((pMesh)->GetOptions(), (pMesh)->GetFVF() | D3DFVF_NORMAL, dev, &pTempMesh);
-		D3DXComputeNormals(pTempMesh, NULL);
-		SAFE_RELEASE(pMesh);
-		(pMesh) = pTempMesh;
-	}
 }
 
-//★デストラクタ
-X_FILE::~X_FILE()
-{
-	SAFE_DELETE(pMat);
-	if (pTex)
-	{
-		for (DWORD i = 0; i<dwNum; i++)   SAFE_RELEASE(pTex[i]);
-		SAFE_DELETE(pTex);
-	}
-	SAFE_RELEASE(pMesh);
-}
 
-void X_FILE::SetupMatrices(LPDIRECT3DDEVICE9 pD3D9)
+
+BOOL X_FILE::SetupMatrices(LPDIRECT3DDEVICE9 pD3D9)
 {
-	D3DXMATRIXA16 matWorld;
-	D3DXMatrixRotationY(&matWorld, timeGetTime() / 1000.0f);
+
+	D3DXMATRIXA16 matWorld, matView, matProj;
+	D3DXVECTOR3 vEyePt, vLookatPt, vUpVec;
+
+	// World Matrix.
+	D3DXMatrixRotationY(&matWorld, 100.5f);//timeGetTime() /
 	pD3D9->SetTransform(D3DTS_WORLD, &matWorld);
-	D3DXVECTOR3 vEyePt(0.0f, 3.0f, -5.0f);
-	D3DXVECTOR3 vLookatPt(0.0f, 0.0f, 0.0f);
-	D3DXVECTOR3 vUpVec(0.0f, 1.0f, 0.0f);
-	D3DXMATRIXA16 matView;
+	// ◆モデルの配置
+
+	//D3DXMatrixIdentity(&matWorld);
+
+	// モデルの拡大縮小
+	//D3DXMatrixScaling(&matWorld, 1.0f, 1.0f, 1.0f);
+
+	// モデルの移動
+	//	D3DXMatrixTranslation(&matWorld, 20.0f, 0.1f, 0.0f);
+
+	// ワールドマトリックスをDirectXに設定
+	//g_pd3dDevice->SetTransform(D3DTS_WORLD, &matWorld);
+
+
+	// ワールドマトリックスをDirectXに設定
+	//g_pd3dDevice->SetTransform(D3DTS_WORLD, &matWorld);
+	// Camera.
+	//カメラの位置
+	vEyePt.x = 0.0f;
+	vEyePt.y = 3.0f;
+	vEyePt.z = 0.0f - 50.0f;//遠近を変える
+	//ちゅうしせん
+	vLookatPt.x = 0.0f;
+	vLookatPt.y = 0.0f;
+	vLookatPt.z = 0.0f;
+
+	vUpVec.x = 0.0f;
+	vUpVec.y = 1.0f;
+	vUpVec.z = 0.0f;
 	D3DXMatrixLookAtLH(&matView, &vEyePt, &vLookatPt, &vUpVec);
 	pD3D9->SetTransform(D3DTS_VIEW, &matView);
-	D3DXMATRIXA16 matProj;
-	D3DXMatrixPerspectiveFovLH(&matProj, D3DX_PI / 4, 1.0f, 1.0f, 100.0f);
+
+	// Projection Matrix.
+	D3DXMatrixPerspectiveFovLH(&matProj, 3.0f / 4.0f, 1.0f, 0.5f, 100.0f);
 	pD3D9->SetTransform(D3DTS_PROJECTION, &matProj);
+	return TRUE;
+
 }
 
-
-
-// モデルを描画
-void X_FILE::Render()
+BOOL X_FILE::Render()
 {
-	if (pMesh)
-	{
-		for (DWORD i = 0; i<dwNum; i++)
-		{
-			pDEV->SetMaterial(&pMat[i]);
-			pDEV->SetTexture(0, pTex[i]);
-			pMesh->DrawSubset(i);
-		}
-	}
+	g_pMesh->DrawSubset(0);
+
+	return true;
 }
