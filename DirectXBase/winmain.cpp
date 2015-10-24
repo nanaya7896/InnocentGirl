@@ -139,16 +139,16 @@ int _stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	//----------------------------------------------------
 	X_FILE xfile;
 	//Xファイルをロードします.
-	xfile.XfileLoader(direct3d.pDevice3D, _T("catsenkan.x"));
+	xfile.XfileLoader(direct3d.pDevice3D, _T("yukicyan.X"));
 	//xfile.XfileLoader(direct3d.pDevice3D, _T("catsenkan.X"));
-	
+	xfile.MaterialRead(direct3d.pDevice3D);
 	//----------------------------------------------------
 	//Playerのロード
 	//----------------------------------------------------
 	
 
 	direct3d.pDevice3D->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
-	direct3d.pDevice3D->SetRenderState(D3DRS_LIGHTING, FALSE);
+	
 
 	direct3d.pDevice3D->SetRenderState(D3DRS_ZENABLE, TRUE);
 	SetRenderState(direct3d.pDevice3D, RENDER_ALPHATEST);
@@ -200,10 +200,11 @@ int _stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 				
 				//光源
 				xfile.NatureLight(direct3d.pDevice3D);
-				//3Dのマテリアル等のセットアップ
-				xfile.SetupMatrices(direct3d.pDevice3D,hWnd, lasttime);
+				
+				// 3Dのマテリアル等のセットアップ
+					xfile.SetupMatrices(direct3d.pDevice3D, hWnd, lasttime);
 				//描画
-				//xfile.Render();
+				xfile.Render(direct3d.pDevice3D);
 				direct3d.pDevice3D->EndScene();
 			}
 
@@ -216,6 +217,6 @@ int _stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	}
 	
 	directInput.Release();
-	xfile.CleanUp();
+
 	return 0;
 }

@@ -21,6 +21,7 @@
 #include <tchar.h>
 #include <vector>
 #include <strsafe.h>
+#include<string.h>
 //Direct3D
 #include <d3d9.h>
 #include <d3dx9.h>

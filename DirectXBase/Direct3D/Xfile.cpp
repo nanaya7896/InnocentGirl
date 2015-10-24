@@ -2,13 +2,14 @@
 
 X_FILE::X_FILE()
 {
-
+	
 
 }
 
 X_FILE::~X_FILE()
 {
-
+	if (g_pMesh != NULL)
+		g_pMesh->Release();
 
 }
 
@@ -18,42 +19,100 @@ BOOL X_FILE::XfileLoader(LPDIRECT3DDEVICE9 pD3D9,LPCWSTR name)
 {
 
 	D3DXLoadMeshFromX(name, D3DXMESH_SYSTEMMEM, pD3D9,
-		NULL, NULL, NULL, NULL, &g_pMesh);
+		NULL, &pD3DXMatrlBuffer, NULL, &MaterialNum, &g_pMesh);
 	//もしXファイルがなければ
 	if (g_pMesh == NULL)
 	{
+		MessageBox(NULL,_T("メッシュがないよ！"),_T("Mesh.exe"),MB_OK);
 		//falseを返す
-		return false;
+		return FALSE;
+	}
+	
+	return TRUE;
+
+}
+void X_FILE::CleanUp()
+{
+	if (g_pMaterial != NULL)
+	{
+		delete[] g_pMaterial;
 	}
 
-	return TRUE;
+	if (g_pTexture)
+	{
+		for (DWORD i = 0; i < MaterialNum; i++)
+		{
+			if (g_pTexture[i])
+			{
+				g_pTexture[i]->Release();
+			}
+
+		}
+		delete[] g_pTexture;
+	}
 
 }
 
-BOOL X_FILE::CleanUp()
+BOOL X_FILE::MaterialRead(LPDIRECT3DDEVICE9 pD3D9)
 {
+	
+	d3dxMaterials = (D3DXMATERIAL*)pD3DXMatrlBuffer->GetBufferPointer();
+	g_pMaterial = new D3DMATERIAL9[MaterialNum];
+	if (g_pMaterial == NULL)
+	{
+		return E_OUTOFMEMORY;
+	}
+	g_pTexture = new LPDIRECT3DTEXTURE9[MaterialNum];
+	if (g_pTexture == NULL)
+	{
+		return E_OUTOFMEMORY;
+	}
 
-	if (g_pMesh != NULL)
-		g_pMesh->Release();
+	for (DWORD i = 0; i < MaterialNum; i++)
+	{
+
+		//Copy the Material
+		g_pMaterial[i] = d3dxMaterials[i].MatD3D;
+		//Set the ambient color for the material
+		g_pMaterial[i].Ambient = g_pMaterial[i].Diffuse;
+
+		g_pTexture[i] = NULL;
+		if(d3dxMaterials[i].pTextureFilename !=NULL && lstrlen((LPCWSTR)d3dxMaterials[i].pTextureFilename))
+		{
+		//Create The Texture
+			if (FAILED(D3DXCreateTextureFromFileA(pD3D9, d3dxMaterials[i].pTextureFilename, &g_pTexture[i])))
+			{
+				
+					const TCHAR* strPrefix = TEXT("..\\");
+						TCHAR strTexture[MAX_PATH];
+						StringCchCopy(strTexture,MAX_PATH,strPrefix);
+						StringCchCat(strTexture,MAX_PATH,(STRSAFE_LPCWSTR)d3dxMaterials[i].pTextureFilename);
+
+				if (FAILED(D3DXCreateTextureFromFile(pD3D9, strTexture, &g_pTexture[i])))
+				{
+					MessageBox(NULL, _T("テクスチャマップはないよ！"), _T("Meshes.exe"), MB_OK);
+				}
+			}
+		}
+	}
+
+	pD3DXMatrlBuffer->Release();
 
 	return TRUE;
-
 }
+
+
 
 
 
 BOOL X_FILE::SetupMatrices(LPDIRECT3DDEVICE9 pD3D9, HWND hWnd, DWORD lasttime)
 {
-	// World Matrix.
-	//D3DXMatrixRotationX(&matWorld, timeGetTime() / 1000.5f);
+	
 	dInput.Init(hWnd);
 
 	dInput.Update();
-	//pD3D9->SetTransform(D3DTS_WORLD, &matWorld);
-	// ◆モデルの配置
-	//D3DXMatrixIdentity(&matWorld);
-	// モデルの拡大縮小
-	//D3DXMatrixScaling(&matWorld, 1.0f, 1.0f, 1.0f);
+	
+	
 	// モデルの移動
 	//	D3DXMatrixTranslation(&matWorld, 20.0f, 0.1f, 0.0f);
 	// ワールドマトリックスをDirectXに設定
@@ -106,12 +165,16 @@ BOOL X_FILE::SetupMatrices(LPDIRECT3DDEVICE9 pD3D9, HWND hWnd, DWORD lasttime)
 	/*vLookatPt.x = 0.0f;
 	vLookatPt.y = 0.0f;
 	vLookatPt.z = 0.0f;*/
+	// ◆モデルの配置
+	//D3DXMatrixIdentity(&matWorld);
+	// モデルの拡大縮小
+	
 
 	vUpVec.x = 0.0f;
 	vUpVec.y = 1.0f;
 	vUpVec.z = 0.0f;
 
-	D3DXVECTOR3 viewvecE(0.0f, 1.0f, -5.0f), viewvecL(0.0f,2.0f,4.0f);
+	D3DXVECTOR3 viewvecE(0.0f, 1.0f, -75.0f), viewvecL(0.0f,2.0f,4.0f);
 	D3DXVECTOR3 viewvec;
 	//ビュー変換
 	D3DXVec3TransformCoord(&viewvec,&viewvecE,&matView);
@@ -129,7 +192,11 @@ BOOL X_FILE::SetupMatrices(LPDIRECT3DDEVICE9 pD3D9, HWND hWnd, DWORD lasttime)
 	//射形変換
 	D3DXMatrixPerspectiveFovLH(&matProj, 3.0f / 4.0f, 1.0f, 0.5f, 100.0f);
 	pD3D9->SetTransform(D3DTS_PROJECTION, &matProj);
-	Render();
+	D3DXMatrixScaling(&matWorld, 0.3f, 0.3f, 0.3f);
+	pD3D9->SetTransform(D3DTS_WORLD, &matWorld);
+	// World Matrix.
+	D3DXMatrixRotationX(&matWorld, timeGetTime() / 1000.5f);
+	pD3D9->SetTransform(D3DTS_WORLD, &matWorld);
 	lasttime = curtime;
 	return TRUE;
 
@@ -137,7 +204,25 @@ BOOL X_FILE::SetupMatrices(LPDIRECT3DDEVICE9 pD3D9, HWND hWnd, DWORD lasttime)
 BOOL X_FILE::NatureLight(LPDIRECT3DDEVICE9 pD3D9)
 {
 	//環境光の設定
-	pD3D9->SetRenderState(D3DRS_AMBIENT,0xffffffff);
+
+	/*mat9.Diffuse.r = mat9.Ambient.r = 1.0f;
+	mat9.Diffuse.g = mat9.Ambient.g = 1.0f;
+	mat9.Diffuse.b = mat9.Ambient.b = 0.0f;
+	mat9.Diffuse.a = mat9.Ambient.a = 1.0f;
+	pD3D9->SetMaterial(&mat9);
+	ZeroMemory(&light,sizeof(D3DLIGHT9));
+	light.Type = D3DLIGHT_DIRECTIONAL;
+	light.Diffuse.r = 1.0f;
+	light.Diffuse.g = 1.0f;
+	light.Diffuse.b = 1.0f;
+	vecDir = D3DXVECTOR3(cosf(timeGetTime() / 350.f), 1.0f, sinf(timeGetTime() / 350.f));
+	D3DXVec3Normalize((D3DXVECTOR3*)&light.Direction, &vecDir);
+	light.Range = 1000.0f;
+	pD3D9->SetLight(0, &light);
+	pD3D9->LightEnable(0, TRUE);
+	pD3D9->SetRenderState(D3DRS_LIGHTING,FALSE);
+*/
+	pD3D9->SetRenderState(D3DRS_AMBIENT,D3DCOLOR_ARGB(0,96,96,96));
 	D3DXMatrixTranslation(&matWorld,0.0f,0.0f,1.0f);
 	D3DXMatrixRotationY(&matView,D3DX_PI);
 
@@ -147,10 +232,14 @@ BOOL X_FILE::NatureLight(LPDIRECT3DDEVICE9 pD3D9)
 
 }
 
-BOOL X_FILE::Render()
+BOOL X_FILE::Render(LPDIRECT3DDEVICE9 pD3D9)
 {
-	g_pMesh->DrawSubset(0);
-
+	for (DWORD i = 0; i < MaterialNum; i++)
+	{
+		pD3D9->SetMaterial(&g_pMaterial[i]);
+		pD3D9->SetTexture(0,g_pTexture[i]);
+		g_pMesh->DrawSubset(i);
+	}
 	return true;
 }
 
