@@ -1,4 +1,4 @@
-
+//includeファイルとライブラリファイルを読み込んでます
 #include"Global.h"
 
 #include "Direct3D/direct3d.h"
@@ -8,22 +8,26 @@
 #include "DirectSound/directSound.h"
 #include "DirectSound/soundbuffer.h"
 #include "DirectSound/wave.h"
-
 #include "DirectInput/directInput.h"
 
 //ウィンドウ幅高さの決定
 const int WINDOW_WIDTH = 1800;
 const int WINDOW_HEIGHT = 900;
 
+//ウィンドウプロシージャ
 LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
+	//メッセージが送られてきた場合
 	switch (msg)
 	{
+		//ウィンドウを閉じるとき
 	case WM_DESTROY:
+		//WM_QUITが送られてくる
 		PostQuitMessage(0);
 		break;
 
 	}
+	//
 	return DefWindowProc(hWnd, msg, wParam, lParam);
 }
 
@@ -32,23 +36,22 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 int _stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
 	//ウィンドウ作成
-
 	const TCHAR* WC_BASIC = _T("BASIC_WINDOW");
 
 	//シンプルウィンドウクラス設定
-	WNDCLASSEX wcex = { sizeof(WNDCLASSEX),
-		CS_HREDRAW | CS_VREDRAW | CS_DBLCLKS,
-		WndProc,
-		0,
-		0,
-		hInstance,
-		(HICON)LoadImage(NULL, MAKEINTRESOURCE(IDI_APPLICATION), IMAGE_ICON, 0, 0, LR_DEFAULTSIZE | LR_SHARED),
-
-		(HCURSOR)LoadImage(NULL, MAKEINTRESOURCE(IDC_ARROW), IMAGE_CURSOR, 0, 0, LR_DEFAULTSIZE | LR_SHARED),
-		(HBRUSH)GetStockObject(WHITE_BRUSH),
-		NULL,
-		WC_BASIC,
-		NULL 
+	WNDCLASSEX wcex = { 
+		sizeof(WNDCLASSEX),																						//構造体のサイズを設定
+		CS_HREDRAW | CS_VREDRAW | CS_DBLCLKS,																	//ウィンドウクラスのスタイル
+		WndProc,																								//ウィンドウプロシージャのアドレス
+		0,																										//追加メモリが必要ならそのバイト数を書く
+		0,																										//同上
+		hInstance,																								//クラスを作成するインスタンスのハンドル
+		(HICON)LoadImage(NULL, MAKEINTRESOURCE(IDI_APPLICATION),IMAGE_ICON,0,0,LR_DEFAULTSIZE | LR_SHARED),		//アイコンのハンドル
+		(HCURSOR)LoadImage(NULL, MAKEINTRESOURCE(IDC_ARROW), IMAGE_CURSOR, 0, 0, LR_DEFAULTSIZE | LR_SHARED),	//カーソル(マウスポインタのハンドル)
+		(HBRUSH)GetStockObject(WHITE_BRUSH),																	//背景色用のブラシハンドル
+		NULL,																									//メニューリソースを表す名前
+		WC_BASIC,																								//ウィンドウクラスの名前
+		NULL																									//アイコン(小)のハンドル
 	};
 	
 
@@ -61,9 +64,20 @@ int _stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	
 
 	//ウィンドウの作成
-	HWND hWnd = CreateWindowEx(0, WC_BASIC,
-		_T("Apprication"), WS_OVERLAPPEDWINDOW | WS_CLIPCHILDREN | WS_VISIBLE, CW_USEDEFAULT,
-		CW_USEDEFAULT, WINDOW_WIDTH, WINDOW_HEIGHT, NULL, NULL, hInstance, NULL);
+	HWND hWnd = CreateWindowEx(
+		0,																	//拡張ウィンドウスタイル
+		WC_BASIC,															//登録されているクラス名
+		_T("Apprication"),													//ウィンドウ名
+		WS_OVERLAPPEDWINDOW | WS_CLIPCHILDREN | WS_VISIBLE,					//ウィンドウスタイル
+		CW_USEDEFAULT,														//ウィンドウの横方向の位置
+		CW_USEDEFAULT,														//ウィンドウの縦方向の位置
+		WINDOW_WIDTH,														//ウィンドウ幅
+		WINDOW_HEIGHT,														//ウィンドウ高さ
+		NULL,																//親ウィンドウまたはオーナーウィンドウのハンドル
+		NULL,																//メニューハンドルまたは子識別子
+		hInstance,															//アプリケーションのインスタンスのハンドル
+		NULL																//ウィンドウの作成データ
+		);
 
 	//--------------------------------
 	//DirectSoundデバイス作成
@@ -123,8 +137,9 @@ int _stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	//Xファイルのロード
 	//----------------------------------------------------
 	X_FILE xfile;
-	xfile.XfileLoader(direct3d.pDevice3D, _T("catsenkan.x"));
-
+	//Xファイルをロードします.
+	//xfile.XfileLoader(direct3d.pDevice3D, _T("catsenkan.x"));
+	xfile.XfileLoader(direct3d.pDevice3D, _T("tricycle.X"));
 
 	direct3d.pDevice3D->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
 	direct3d.pDevice3D->SetRenderState(D3DRS_LIGHTING, FALSE);
@@ -187,7 +202,14 @@ int _stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 //
 //				SetRenderState(direct3d.pDevice3D, RENDER_DEFAULT);
 //*/	
+				//
+
+				//光源
+				xfile.NatureLight(direct3d.pDevice3D);
+
+				//3Dのマテリアル等のセットアップ
 				xfile.SetupMatrices(direct3d.pDevice3D);
+				//描画
 				xfile.Render();
 
 				direct3d.pDevice3D->EndScene();
@@ -202,6 +224,6 @@ int _stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	}
 	
 	directInput.Release();
-
+	xfile.CleanUp();
 	return 0;
 }
