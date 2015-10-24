@@ -13,6 +13,12 @@
     <Filter Include="other">
       <UniqueIdentifier>{e200cccc-e500-498e-9f18-79f380dbd856}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game">
+      <UniqueIdentifier>{f80b5b90-ecff-436f-bf8b-0c1b0b153068}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Player">
+      <UniqueIdentifier>{a0dd4bde-1554-422a-8681-e535e139461b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Direct3D\direct3d.cpp">
@@ -42,6 +48,12 @@
     </ClCompile>
     <ClCompile Include="Direct3D\Xfile.cpp">
       <Filter>Direct3D</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameMain.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Player\Player.cpp">
+      <Filter>Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -75,6 +87,12 @@
     <ClInclude Include="Global.h" />
     <ClInclude Include="Direct3D\Xfile.h">
       <Filter>Direct3D</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameMain.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Player\Player.h">
+      <Filter>Player</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

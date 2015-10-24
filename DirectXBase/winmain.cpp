@@ -13,6 +13,7 @@
 //ウィンドウ幅高さの決定
 const int WINDOW_WIDTH = 1800;
 const int WINDOW_HEIGHT = 900;
+DWORD lasttime;
 
 //ウィンドウプロシージャ
 LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
@@ -111,7 +112,7 @@ int _stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	//directInput
 
 	DirectInput directInput;
-	directInput.Init(hWnd);
+	//directInput.Init(hWnd);
 
 	//--------------------------------------------------------------------------------------------
 	//テクスチャのロード
@@ -138,8 +139,13 @@ int _stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	//----------------------------------------------------
 	X_FILE xfile;
 	//Xファイルをロードします.
-	//xfile.XfileLoader(direct3d.pDevice3D, _T("catsenkan.x"));
-	xfile.XfileLoader(direct3d.pDevice3D, _T("tricycle.X"));
+	xfile.XfileLoader(direct3d.pDevice3D, _T("catsenkan.x"));
+	//xfile.XfileLoader(direct3d.pDevice3D, _T("catsenkan.X"));
+	
+	//----------------------------------------------------
+	//Playerのロード
+	//----------------------------------------------------
+	
 
 	direct3d.pDevice3D->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
 	direct3d.pDevice3D->SetRenderState(D3DRS_LIGHTING, FALSE);
@@ -148,6 +154,8 @@ int _stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	SetRenderState(direct3d.pDevice3D, RENDER_ALPHATEST);
 
 	MSG msg = {};
+
+	lasttime = timeGetTime();
 	while (msg.message != WM_QUIT)
 	{
 		// アプリケーションに送られてくるメッセージをメッセージキューから取得する
@@ -159,24 +167,11 @@ int _stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 		{
 			if (SUCCEEDED(direct3d.pDevice3D->BeginScene()))
 			{
-
 				//キー状態更新
 				//directInput.Update();
-
-
-
-				//---
-				//ここにゲーム処理を書くことになるはず
-				//--
-
-
-				//以下画面の描画処理
-
-				DWORD ClearColor = 0xff808080;//背景クリア色
+				DWORD BlackColor = 0xff000000;//背景黒色
 				//背景クリア
-				direct3d.pDevice3D->Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, ClearColor, 1.0f, 0);
-
-			
+				direct3d.pDevice3D->Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, BlackColor, 1.0f, 0);
 //
 //
 //				//デフォルト
@@ -202,16 +197,13 @@ int _stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 //
 //				SetRenderState(direct3d.pDevice3D, RENDER_DEFAULT);
 //*/	
-				//
-
+				
 				//光源
 				xfile.NatureLight(direct3d.pDevice3D);
-
 				//3Dのマテリアル等のセットアップ
-				xfile.SetupMatrices(direct3d.pDevice3D);
+				xfile.SetupMatrices(direct3d.pDevice3D,hWnd, lasttime);
 				//描画
-				xfile.Render();
-
+				//xfile.Render();
 				direct3d.pDevice3D->EndScene();
 			}
 
