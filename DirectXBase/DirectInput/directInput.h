@@ -50,7 +50,7 @@ public:
 	~DirectInput();
 
 	//初期化処理
-	HRESULT Init(HWND hWnd);
+	HRESULT Init();
 
 	//キー状態の更新処理
 	HRESULT Update();

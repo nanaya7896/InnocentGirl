@@ -22,8 +22,7 @@ class Direct3D
 {
 public:
 
-	LPDIRECT3D9	pD3D9 = NULL;				//Direct3Dデバイス生成用オブジェクト
-	LPDIRECT3DDEVICE9 pDevice3D = NULL;		//Direct3Dのデバイス　スプライトの表示やテクスチャのロード時に必要
+	
 
 	//コンストラクタ　デストラクタ
 	Direct3D();
@@ -31,4 +30,10 @@ public:
 
 	//関数定義
 	bool Create(HWND hWmd, int Width, int Height);
+	friend int _stdcall WinMain(HINSTANCE, HINSTANCE, LPSTR, int);
+
+protected:
+	static LPDIRECT3D9	pD3D9;				//Direct3Dデバイス生成用オブジェクト
+	static LPDIRECT3DDEVICE9 pDevice3D;		//Direct3Dのデバイス　スプライトの表示やテクスチャのロード時に必要
+
 };

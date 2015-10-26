@@ -2,15 +2,17 @@
 
 #include "direct3d.h"
 
-class Texture
+class Texture : public Direct3D
 {
 public:
-	IDirect3DTexture9* pTexture;
+	LPDIRECT3DTEXTURE9		pTexture;
 	//コンストラクタ デストラクタ
 	Texture();
+	Texture(const TCHAR* FileName);
 	~Texture();
 
-	bool Load(IDirect3DDevice9* pDevice, TCHAR* FileName);
+	void Load(const TCHAR* FileName);
 
+	LPDIRECT3DTEXTURE9 GetTexture();
 
 };

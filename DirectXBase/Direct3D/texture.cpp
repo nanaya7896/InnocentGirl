@@ -3,7 +3,13 @@
 //コンストラクタ
 Texture::Texture()
 {
-	pTexture = NULL;
+
+}
+
+Texture::Texture(const TCHAR*FileName)
+{
+	Load(FileName);
+
 }
 
 //デストラクタ
@@ -16,18 +22,21 @@ Texture::~Texture()
 	}
 }
 
-bool Texture::Load(IDirect3DDevice9* pDevice3D, TCHAR* FileName)
+void Texture::Load(const TCHAR* FileName)
 {
 	//画像読み込み
 	//DirectXやWindowsAPIの関数はHRESULTを結果に返す関数が多い
 	//FAILEDマクロで失敗したかの判断
 	//SUCEEDEDマクロで関数が成功したかの判断
-	if (FAILED(D3DXCreateTextureFromFile(pDevice3D, FileName, &pTexture)))
+	if (FAILED(D3DXCreateTextureFromFile(pDevice3D, FileName ,&pTexture)))
 	{
 		//読み込み失敗（ファイルが無い可能性が高い）
-		return false;
+		return;
 	}
 
-	//読み込み成功
-	return true;
+}
+
+LPDIRECT3DTEXTURE9 Texture::GetTexture()
+{
+	return pTexture;
 }

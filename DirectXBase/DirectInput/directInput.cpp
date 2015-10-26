@@ -31,9 +31,9 @@ DirectInput::~DirectInput()
 }
 
 //初期化
-HRESULT DirectInput::Init(HWND hwnd)
+HRESULT DirectInput::Init()
 {
-	hWnd = hwnd;
+
 
 	//DirectInputオブジェクトの作成
 	//hresultにはFAILED/SUCCEEDED等で真偽を確かめるのに使うもの

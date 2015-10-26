@@ -55,6 +55,9 @@
     <ClCompile Include="Player\Player.cpp">
       <Filter>Player</Filter>
     </ClCompile>
+    <ClCompile Include="Direct3D\Camera.cpp">
+      <Filter>Direct3D</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Direct3D\direct3d.h">
@@ -93,6 +96,9 @@
     </ClInclude>
     <ClInclude Include="Player\Player.h">
       <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Direct3D\Camera.h">
+      <Filter>Direct3D</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

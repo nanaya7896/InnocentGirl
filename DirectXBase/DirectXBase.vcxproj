@@ -84,6 +84,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Direct3D\Camera.cpp" />
     <ClCompile Include="Direct3D\direct3d.cpp" />
     <ClCompile Include="Direct3D\font.cpp" />
     <ClCompile Include="Direct3D\sprite.cpp" />
@@ -98,6 +99,7 @@
     <ClCompile Include="winmain.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Direct3D\Camera.h" />
     <ClInclude Include="Direct3D\direct3d.h" />
     <ClInclude Include="Direct3D\font.h" />
     <ClInclude Include="Direct3D\sprite.h" />

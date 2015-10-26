@@ -2,31 +2,35 @@
 
 #include"../Global.h"
 #include"../DirectInput/directInput.h"
-
-class X_FILE
+#include"direct3d.h"
+class X_FILE :public Direct3D
 {
 private:
 	
 
 public:
+	//メンバ変数
+	D3DXVECTOR3 pos;
+	D3DXVECTOR3 rota;
+	D3DXVECTOR3 scale;
+
+
+
 	X_FILE();
-
+	X_FILE(LPCWSTR FileName);
 	~X_FILE();
-	//Xファイル読み込み関数
-	BOOL XfileLoader(LPDIRECT3DDEVICE9 pD3D9 ,LPCWSTR name);
-	//Xファイルセット関数
-	BOOL SetupMatrices(LPDIRECT3DDEVICE9 pD3D9, HWND hWnd,DWORD lasttime);
-	//マテリアルの読み込み
-	//テクスチャの読み込み
-	BOOL MaterialRead(LPDIRECT3DDEVICE9 pD3D9);
 
-	
-	//環境光の設定
-	BOOL NatureLight(LPDIRECT3DDEVICE9 pD3D9);
+	//Xファイル読み込み関数
+	BOOL XfileLoader(LPCWSTR name);
+	//Xファイルセット関数
+	BOOL SetupMatrices(LPDIRECT3DDEVICE9 pD3D9,DWORD lasttime);
+
+
 	//Xファイル描画関数
-	BOOL Render(LPDIRECT3DDEVICE9 pD3D9);
+	void Render(D3DXVECTOR3 *pos, D3DXVECTOR3 *rota, D3DXVECTOR3 *scale, LPDIRECT3DTEXTURE9 pTex9);
 	//デバイス解放
 	void CleanUp();
+
 
 	DirectInput dInput;
 	
@@ -43,12 +47,12 @@ public:
 
 protected:
 	LPD3DXMESH              g_pMesh = NULL;
-	D3DMATERIAL9*			g_pMaterial=NULL;
-	LPDIRECT3DTEXTURE9*		g_pTexture = NULL;
+	
+	
 	D3DXVECTOR3 PlayerPos;
 	D3DXVECTOR3 PlayerAngel;
 	D3DXVECTOR3 PlayerVec;
-	D3DXMATERIAL* d3dxMaterials;
+	
 	//一時記憶用バッファ
 	LPD3DXBUFFER pD3DXMatrlBuffer;
 	//ビュー変換

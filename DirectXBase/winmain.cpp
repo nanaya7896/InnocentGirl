@@ -1,6 +1,9 @@
 //includeファイルとライブラリファイルを読み込んでます
-#include"Global.h"
+//ウィンドウ幅高さの決定
 
+
+
+#include"Global.h"
 #include "Direct3D/direct3d.h"
 #include "Direct3D/sprite.h"
 #include "Direct3D/texture.h"
@@ -9,10 +12,8 @@
 #include "DirectSound/soundbuffer.h"
 #include "DirectSound/wave.h"
 #include "DirectInput/directInput.h"
+#include"Direct3D\Camera.h"
 
-//ウィンドウ幅高さの決定
-const int WINDOW_WIDTH = 1800;
-const int WINDOW_HEIGHT = 900;
 DWORD lasttime;
 
 //ウィンドウプロシージャ
@@ -107,7 +108,7 @@ int _stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 
 	Direct3D direct3d;
 	direct3d.Create(hWnd, WINDOW_WIDTH, WINDOW_HEIGHT);
-
+	
 	//---------------------------------
 	//directInput
 
@@ -116,10 +117,8 @@ int _stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 
 	//--------------------------------------------------------------------------------------------
 	//テクスチャのロード
-	Texture texture;
+	Texture t_Player(_T("yukicyan.jpg"));
 	//画像は何か適当に用意してください
-	
-	
 	
 
 	//スプライトの作成
@@ -131,27 +130,27 @@ int _stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	sb[1].Play(true);
 	sb[2].Play(true);*/
 
-
-
+	
+	//----------------------------------------------------
+	//カメラのロード
+	//----------------------------------------------------
+	Camera camera;
+	
 
 	//----------------------------------------------------
 	//Xファイルのロード
 	//----------------------------------------------------
-	X_FILE xfile;
-	//Xファイルをロードします.
-	xfile.XfileLoader(direct3d.pDevice3D, _T("yukicyan.X"));
+	X_FILE xfile(_T("yukicyan.X"));
+
 	//xfile.XfileLoader(direct3d.pDevice3D, _T("catsenkan.X"));
-	xfile.MaterialRead(direct3d.pDevice3D);
 	//----------------------------------------------------
 	//Playerのロード
 	//----------------------------------------------------
 	
 
-	direct3d.pDevice3D->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
-	
-
+	/*direct3d.pDevice3D->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
 	direct3d.pDevice3D->SetRenderState(D3DRS_ZENABLE, TRUE);
-	SetRenderState(direct3d.pDevice3D, RENDER_ALPHATEST);
+	SetRenderState(direct3d.pDevice3D, RENDER_ALPHATEST);*/
 
 	MSG msg = {};
 
@@ -169,7 +168,7 @@ int _stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 			{
 				//キー状態更新
 				//directInput.Update();
-				DWORD BlackColor = 0xff000000;//背景黒色
+				DWORD BlackColor = 0x0000cc;//背景黒色
 				//背景クリア
 				direct3d.pDevice3D->Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, BlackColor, 1.0f, 0);
 //
@@ -197,14 +196,13 @@ int _stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 //
 //				SetRenderState(direct3d.pDevice3D, RENDER_DEFAULT);
 //*/	
-				
-				//光源
-				xfile.NatureLight(direct3d.pDevice3D);
-				
 				// 3Dのマテリアル等のセットアップ
-					xfile.SetupMatrices(direct3d.pDevice3D, hWnd, lasttime);
+					//xfile.SetupMatrices(direct3d.pDevice3D, hWnd, lasttime);
+
+					//カメラのポジションと角度
+					camera.Create(D3DXVECTOR3(0, 0, -100), D3DXVECTOR3(0, 0, 0));
 				//描画
-				xfile.Render(direct3d.pDevice3D);
+				xfile.Render(&D3DXVECTOR3(0,0,-50),&D3DXVECTOR3(0,0,0),&D3DXVECTOR3(5,5,5),t_Player.GetTexture());
 				direct3d.pDevice3D->EndScene();
 			}
 
@@ -217,6 +215,7 @@ int _stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	}
 	
 	directInput.Release();
-
+	direct3d.pDevice3D->Release();
+	direct3d.pD3D9->Release();
 	return 0;
 }
