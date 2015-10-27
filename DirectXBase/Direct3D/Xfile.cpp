@@ -44,52 +44,6 @@ void X_FILE::CleanUp()
 
 }
 
-BOOL X_FILE::SetupMatrices(LPDIRECT3DDEVICE9 pD3D9,DWORD lasttime)
-{
-	
-	dInput.Init();
-	
-	// モデルの移動
-	//	D3DXMatrixTranslation(&matWorld, 20.0f, 0.1f, 0.0f);
-	// ワールドマトリックスをDirectXに設定
-	//g_pd3dDevice->SetTransform(D3DTS_WORLD, &matWorld);
-	// ワールドマトリックスをDirectXに設定
-	//g_pd3dDevice->SetTransform(D3DTS_WORLD, &matWorld);
-	// Camera.
-	//カメラの位置	
-	DWORD curtime = timeGetTime();
-	looptime = ((float)lasttime - curtime )/ 1000.0f;
-
-	
-	if (dInput.KeyUp(DIK_W)==true)
-	{
-		PlayerVec.z = speed*looptime;
-	}
-	if (dInput.KeyUp(DIK_S)==true)
-	{
-		PlayerVec.z = -speed*looptime;
-	}
-	if (dInput.KeyUp(DIK_A)==true)
-	{
-		PlayerAngel.y -= anglesp*looptime;
-	}
-	if (dInput.KeyUp(DIK_D)==true)
-	{
-		PlayerAngel.y += anglesp*looptime;
-	}
-	if (PlayerAngel.y < 0)
-	{
-		PlayerAngel.y += D3DX_PI * 2;
-	}
-	if (PlayerAngel.y > 360)
-	{
-		PlayerAngel.y -= D3DX_PI * 2;
-	}
-
-	return TRUE;
-
-}
-
 void X_FILE::Render(D3DXVECTOR3 *pos, D3DXVECTOR3 *rota, D3DXVECTOR3 *scale, LPDIRECT3DTEXTURE9 pTex9)
 {
 	D3DXMATRIX *m_World = new D3DXMATRIX();

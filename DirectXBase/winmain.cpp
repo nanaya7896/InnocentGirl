@@ -13,9 +13,13 @@
 #include "DirectSound/wave.h"
 #include "DirectInput/directInput.h"
 #include"Direct3D\Camera.h"
-
+#include"Player/Player.h"
+#include"Game/Map.h"
+//#include"Game\Map.h"
 DWORD lasttime;
 
+D3DXVECTOR3 PlayerPos(0.0f,1.0f,0.0f);
+D3DXVECTOR3 PlayerAngle(0.0f,0.0f,0.0f);
 //ウィンドウプロシージャ
 LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
@@ -113,13 +117,30 @@ int _stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	//directInput
 
 	DirectInput directInput;
-	//directInput.Init(hWnd);
+	//directInput.Init();
+
+	//----------------------------------------------------
+	//Playerの初期化
+	//----------------------------------------------------
+	Player Pplayer;
 
 	//--------------------------------------------------------------------------------------------
-	//テクスチャのロード
+	//テクスチャのロード/Xファイルのロード
+	//主人公のロード
+	X_FILE xfile(_T("yukicyan2.X"));
+	//X_FILE xfloor1(_T("floor1.x"));
+	//X_FILE xfloor2(_T("floor2.x"));
+	//X_FILE xfloor3(_T("floor3.x"));
+	//X_FILE xfloor4(_T("floor4.x"));
 	Texture t_Player(_T("yukitxture.jpg"));
-	//画像は何か適当に用意してください
-	
+	//Mapのロード
+	Map map;
+	//Mapの読み込み
+	map.LoadBuldings();
+	/*Texture tfloor1(_T("floor1.bmp"));
+	Texture tfloor2(_T("floor2.bmp"));
+	Texture tfloor3(_T("floor3.bmp"));
+	Texture tfloor4(_T("floor4.bmp"));*/
 
 	//スプライトの作成
 	Sprite sprite[3];
@@ -136,11 +157,9 @@ int _stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	//----------------------------------------------------
 	Camera camera;
 	
+	
 
-	//----------------------------------------------------
-	//Xファイルのロード
-	//----------------------------------------------------
-	X_FILE xfile(_T("yukicyan2.X"));
+
 
 	//xfile.XfileLoader(direct3d.pDevice3D, _T("catsenkan.X"));
 	//----------------------------------------------------
@@ -171,6 +190,10 @@ int _stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 				DWORD BlackColor = 0x0000cc;//背景黒色
 				//背景クリア
 				direct3d.pDevice3D->Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, BlackColor, 1.0f, 0);
+
+				//プレイヤーの移動
+				PlayerPos = Pplayer.PlayerMove(lasttime, D3DXVECTOR3(PlayerPos.x, PlayerPos.y, PlayerPos.z));
+
 //
 //
 //				//デフォルト
@@ -198,11 +221,20 @@ int _stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 //*/	
 				// 3Dのマテリアル等のセットアップ
 					//xfile.SetupMatrices(direct3d.pDevice3D, hWnd, lasttime);
+				D3DXVECTOR3 viewVecE(0.0f, 1.0f, -2.0f);
+				D3DXVECTOR3 viewVecL(0.0f, 0.0f, 0.0f);
 
 					//カメラのポジションと角度
-					camera.Create(D3DXVECTOR3(0, 0,-100), D3DXVECTOR3(0, 0, 0));
+				camera.Create(D3DXVECTOR3(PlayerPos.x + viewVecE.x, PlayerPos.y + viewVecE.y, PlayerPos.z + viewVecE.z), D3DXVECTOR3(PlayerAngle.x + viewVecL.x, PlayerAngle.y + viewVecL.y, PlayerAngle.z + viewVecL.z));
+				
 				//描画
-				xfile.Render(&D3DXVECTOR3(0,0,0),&D3DXVECTOR3(180,60,0),&D3DXVECTOR3(1,1,1),t_Player.GetTexture());
+				xfile.Render(&D3DXVECTOR3(PlayerPos.x,PlayerPos.y,PlayerPos.z),&D3DXVECTOR3(200,0,0),&D3DXVECTOR3(0.01f,0.01f,0.01f),t_Player.GetTexture());
+				/*xfloor1.Render(&D3DXVECTOR3(-6, 0, 6), &D3DXVECTOR3(0, 0, 0), &D3DXVECTOR3(100, 100, 100), tfloor1.GetTexture());
+				xfloor2.Render(&D3DXVECTOR3(6, 0, 6), &D3DXVECTOR3(0, 0, 0), &D3DXVECTOR3(100, 100, 100), tfloor2.GetTexture());
+				xfloor3.Render(&D3DXVECTOR3(-6, 0, -6), &D3DXVECTOR3(0, 0, 0), &D3DXVECTOR3(100, 100, 100), tfloor3.GetTexture());
+				xfloor4.Render(&D3DXVECTOR3(-6, 0, -6), &D3DXVECTOR3(0, 0, 0), &D3DXVECTOR3(100, 100, 100), tfloor4.GetTexture());*/
+				//Map描画
+				map.MapRender();
 				direct3d.pDevice3D->EndScene();
 			}
 

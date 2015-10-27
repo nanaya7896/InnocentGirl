@@ -22,23 +22,19 @@ public:
 
 	//Xファイル読み込み関数
 	BOOL XfileLoader(LPCWSTR name);
-	//Xファイルセット関数
-	BOOL SetupMatrices(LPDIRECT3DDEVICE9 pD3D9,DWORD lasttime);
-
-
 	//Xファイル描画関数
 	void Render(D3DXVECTOR3 *pos, D3DXVECTOR3 *rota, D3DXVECTOR3 *scale, LPDIRECT3DTEXTURE9 pTex9);
 	//デバイス解放
 	void CleanUp();
 
 
-	DirectInput dInput;
+	
 	
 
 
 	float looptime=0.0f;
 	
-	float speed=5.0f;
+	float speed=2.0f;
 	//90度/s
 	float anglesp = D3DX_PI / 2;
 	DWORD MaterialNum = 0L;

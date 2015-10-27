@@ -264,7 +264,7 @@ bool DirectInput::KeyState(int code)
 	return false;
 }
 
-//位置フレーム前のキー状態
+//1フレーム前のキー状態
 bool DirectInput::KeyStatePreview(int code)
 {
 	if (code >= 0 && code < INPUT_BUFFER_SIZE)

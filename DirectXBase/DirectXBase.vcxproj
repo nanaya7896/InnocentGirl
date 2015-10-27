@@ -95,6 +95,7 @@
     <ClCompile Include="DirectSound\soundbuffer.cpp" />
     <ClCompile Include="DirectSound\wave.cpp" />
     <ClCompile Include="Game\GameMain.cpp" />
+    <ClCompile Include="Game\Map.cpp" />
     <ClCompile Include="Player\Player.cpp" />
     <ClCompile Include="winmain.cpp" />
   </ItemGroup>
@@ -110,6 +111,7 @@
     <ClInclude Include="DirectSound\soundbuffer.h" />
     <ClInclude Include="DirectSound\wave.h" />
     <ClInclude Include="Game\GameMain.h" />
+    <ClInclude Include="Game\Map.h" />
     <ClInclude Include="Global.h" />
     <ClInclude Include="other\MyVector.h" />
     <ClInclude Include="Player\Player.h" />
