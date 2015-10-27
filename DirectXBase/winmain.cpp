@@ -117,7 +117,7 @@ int _stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 
 	//--------------------------------------------------------------------------------------------
 	//テクスチャのロード
-	Texture t_Player(_T("yukicyan.jpg"));
+	Texture t_Player(_T("yukitxture.jpg"));
 	//画像は何か適当に用意してください
 	
 
@@ -140,7 +140,7 @@ int _stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	//----------------------------------------------------
 	//Xファイルのロード
 	//----------------------------------------------------
-	X_FILE xfile(_T("yukicyan.X"));
+	X_FILE xfile(_T("yukicyan2.X"));
 
 	//xfile.XfileLoader(direct3d.pDevice3D, _T("catsenkan.X"));
 	//----------------------------------------------------
@@ -200,9 +200,9 @@ int _stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 					//xfile.SetupMatrices(direct3d.pDevice3D, hWnd, lasttime);
 
 					//カメラのポジションと角度
-					camera.Create(D3DXVECTOR3(0, 0, -100), D3DXVECTOR3(0, 0, 0));
+					camera.Create(D3DXVECTOR3(0, 0,-100), D3DXVECTOR3(0, 0, 0));
 				//描画
-				xfile.Render(&D3DXVECTOR3(0,0,-50),&D3DXVECTOR3(0,0,0),&D3DXVECTOR3(5,5,5),t_Player.GetTexture());
+				xfile.Render(&D3DXVECTOR3(0,0,0),&D3DXVECTOR3(180,60,0),&D3DXVECTOR3(1,1,1),t_Player.GetTexture());
 				direct3d.pDevice3D->EndScene();
 			}
 
