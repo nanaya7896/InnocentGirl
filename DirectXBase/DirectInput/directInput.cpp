@@ -1,5 +1,13 @@
 #include "directInput.h"
 
+DirectInput & DirectInput::GetInstance()
+{
+	static DirectInput directInput;
+
+	return directInput;
+
+}
+
 //コンストラクタ
 DirectInput::DirectInput()
 {

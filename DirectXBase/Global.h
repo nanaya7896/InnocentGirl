@@ -2,7 +2,7 @@
 
 #define DIRECTSOUND_VERSION 0x800
 #define DIRECTINPUT_VERSION 0x800
-#define WINDOW_WIDTH  1800
+#define WINDOW_WIDTH  1600
 #define WINDOW_HEIGHT  900
 
 
@@ -24,6 +24,7 @@
 #include <vector>
 #include <strsafe.h>
 #include<string.h>
+#include<XInput.h>
 //Direct3D
 #include <d3d9.h>
 #include <d3dx9.h>

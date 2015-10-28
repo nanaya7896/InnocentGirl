@@ -12,9 +12,14 @@
 #include "DirectSound/soundbuffer.h"
 #include "DirectSound/wave.h"
 #include "DirectInput/directInput.h"
-#include"Direct3D\Camera.h"
+//#include"Direct3D\Camera.h"
 #include"Player/Player.h"
 #include"Game/Map.h"
+#include "Game/SceneChange.h"
+#include "Game/Title.h"
+#include "Game/Chapter.h"
+#include "Game/Chapter_GameOfTag.h"
+
 DWORD lasttime;
 
 D3DXVECTOR3 PlayerPos(0.0f,0.1f,0.0f);
@@ -115,8 +120,8 @@ int _stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	//---------------------------------
 	//directInput
 
-	DirectInput directInput;
-	//directInput.Init();
+		
+	DirectInput::GetInstance().Init();
 
 	//----------------------------------------------------
 	//Playerの初期化 主人公のロード
@@ -142,7 +147,7 @@ int _stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	//----------------------------------------------------
 	//カメラのロード
 	//----------------------------------------------------
-	Camera camera;
+//	Camera camera;
 	//xfile.XfileLoader(direct3d.pDevice3D, _T("catsenkan.X"));
 	//----------------------------------------------------
 	//Playerのロード
@@ -153,6 +158,11 @@ int _stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 
 	MSG msg = {};
 
+	//画面遷移
+	//SetRenderState(direct3d.pDevice3D, RENDER_DEFAULT);
+	SetRenderState(direct3d.pDevice3D, RENDER_ALPHATEST);
+	SceneChange::scenechange = new Title();	//タイトル
+	
 	lasttime = timeGetTime();
 	while (msg.message != WM_QUIT)
 	{
@@ -166,12 +176,20 @@ int _stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 			if (SUCCEEDED(direct3d.pDevice3D->BeginScene()))
 			{
 				//キー状態更新
-				//directInput.Update();
+				DirectInput::GetInstance().Update();
+				
+				
+				//SceneChange::scenechange->Update();
+				
 				DWORD BlackColor = 0x0000cc;//背景黒色
 				//背景クリア
 				direct3d.pDevice3D->Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, BlackColor, 1.0f, 0);
-				//プレイヤーの移動
-				PlayerPos = Pplayer.PlayerMove(lasttime, D3DXVECTOR3(PlayerPos.x, PlayerPos.y, PlayerPos.z));
+				////Map描画
+			
+				SceneChange::scenechange->Update();
+				SceneChange::scenechange->Draw();
+					//プレイヤーの移動
+				//PlayerPos = Pplayer.PlayerMove(lasttime, D3DXVECTOR3(PlayerPos.x, PlayerPos.y, PlayerPos.z));
 //
 //
 //				//デフォルト
@@ -198,22 +216,21 @@ int _stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 //				SetRenderState(direct3d.pDevice3D, RENDER_DEFAULT);	
 				// 3Dのマテリアル等のセットアップ
 					//xfile.SetupMatrices(direct3d.pDevice3D, hWnd, lasttime);
-				D3DXVECTOR3 viewVecE(0.0f, 0.5f, -1.5f);
-				D3DXVECTOR3 viewVecL(0.0f, 0.0f, 0.0f);
+				//D3DXVECTOR3 viewVecE(0.0f, 0.5f, -1.5f);
+				//D3DXVECTOR3 viewVecL(0.0f, 0.0f, 0.0f);
 				//カメラのポジションと角度
-				camera.Create(D3DXVECTOR3(PlayerPos.x + viewVecE.x, PlayerPos.y + viewVecE.y, PlayerPos.z + viewVecE.z), D3DXVECTOR3(PlayerAngle.x + viewVecL.x, PlayerAngle.y + viewVecL.y, PlayerAngle.z + viewVecL.z));
-				//描画
-				Pplayer.PlayerCreate(D3DXVECTOR3(PlayerPos.x,PlayerPos.y,PlayerPos.z));
-			
-				//Map描画
+				//camera.Create(D3DXVECTOR3(PlayerPos.x + viewVecE.x, PlayerPos.y + viewVecE.y, PlayerPos.z + viewVecE.z), D3DXVECTOR3(PlayerAngle.x + viewVecL.x, PlayerAngle.y + viewVecL.y, PlayerAngle.z + viewVecL.z));
+				////描画
+				//Pplayer.PlayerCreate(D3DXVECTOR3(PlayerPos.x,PlayerPos.y,PlayerPos.z));
 				map.MapRender();
+				
 				direct3d.pDevice3D->EndScene();
 			}
 			//描画反映
 			direct3d.pDevice3D->Present(NULL, NULL, NULL, NULL);		
 		}
 	}	
-	directInput.Release();
+	DirectInput::GetInstance().Release();
 	direct3d.pDevice3D->Release();
 	direct3d.pD3D9->Release();
 	return 0;

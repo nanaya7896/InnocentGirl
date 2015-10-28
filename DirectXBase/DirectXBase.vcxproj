@@ -94,10 +94,15 @@
     <ClCompile Include="DirectSound\directSound.cpp" />
     <ClCompile Include="DirectSound\soundbuffer.cpp" />
     <ClCompile Include="DirectSound\wave.cpp" />
-    <ClCompile Include="Game\GameMain.cpp" />
+    <ClCompile Include="Game\Chapter.cpp" />
+    <ClCompile Include="Game\Chapter_GameOfTag.cpp" />
+    <ClCompile Include="Game\GameMainTag.cpp" />
     <ClCompile Include="Game\Map.cpp" />
+    <ClCompile Include="Game\SceneChange.cpp" />
+    <ClCompile Include="Game\Title.cpp" />
     <ClCompile Include="Player\Player.cpp" />
     <ClCompile Include="winmain.cpp" />
+    <ClCompile Include="Xinput\Xinput.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Direct3D\Camera.h" />
@@ -110,11 +115,16 @@
     <ClInclude Include="DirectSound\directSound.h" />
     <ClInclude Include="DirectSound\soundbuffer.h" />
     <ClInclude Include="DirectSound\wave.h" />
-    <ClInclude Include="Game\GameMain.h" />
+    <ClInclude Include="Game\Chapter.h" />
+    <ClInclude Include="Game\Chapter_GameOfTag.h" />
+    <ClInclude Include="Game\GameMainTag.h" />
     <ClInclude Include="Game\Map.h" />
+    <ClInclude Include="Game\SceneChange.h" />
+    <ClInclude Include="Game\Title.h" />
     <ClInclude Include="Global.h" />
     <ClInclude Include="other\MyVector.h" />
     <ClInclude Include="Player\Player.h" />
+    <ClInclude Include="Xinput\Xinput.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\staticLiblary\MyLib\MyLib.vcxproj">

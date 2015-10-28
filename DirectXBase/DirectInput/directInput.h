@@ -6,13 +6,13 @@
 #define MOUSE_BUTTON_LEFT 0
 #define MOUSE_BUTTON_RIGHT 1
 #define MOUSE_BUTTON_MIDDLE 2
-
+#define INPUT_BUFFER_SIZE 256
 
 
 #include"../Global.h"
 #include "../other/MyVector.h"
 
-#define INPUT_BUFFER_SIZE 256
+
 
 
 class DirectInput
@@ -42,12 +42,12 @@ private:
 
 	HRESULT InitKey();//キーボードの初期化
 	HRESULT InitMouse();
-
-public:
-
 	//コンストラクタデストラクタ
 	DirectInput();
 	~DirectInput();
+public:
+
+	static DirectInput & GetInstance();
 
 	//初期化処理
 	HRESULT Init();

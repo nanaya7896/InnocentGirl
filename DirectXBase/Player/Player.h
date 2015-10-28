@@ -11,7 +11,6 @@ private:
 	float speed = 0.1f;
 	//90度/s
 	float anglesp = D3DX_PI / 2;
-	DirectInput dInput;
 	X_FILE Xplayer;
 	Texture Tplayer;
 public:
@@ -22,7 +21,7 @@ public:
 	HRESULT PlayerLoad();
 	void PlayerCreate(D3DXVECTOR3 pPos);
 	//プレイヤーの移動
-	D3DXVECTOR3 PlayerMove(DWORD lasttime, D3DXVECTOR3 pPos);
+	D3DXVECTOR3 PlayerMove(D3DXVECTOR3 pPos);
 
 
 protected:
