@@ -11,8 +11,8 @@ Player::~Player()
 
 HRESULT Player::PlayerLoad()
 {
-	Xplayer.XfileLoader(_T("xfile/yukicyan2.X"));
-	Tplayer.Load(_T("texture/yukitxture.jpg"));
+	Xplayer.XfileLoader(_T("xfile/yukicyan.X"));
+	Tplayer.Load(_T("texture/yukitxture2.jpg"));
 
 	if (Tplayer.pTexture == NULL)
 	{

@@ -195,20 +195,16 @@ int _stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 //				sprite[1].SetPos(500, 300);
 //				sprite[1].Draw(direct3d.pDevice3D, bomb_tex.pTexture);
 //
-//				SetRenderState(direct3d.pDevice3D, RENDER_DEFAULT);
-//*/	
+//				SetRenderState(direct3d.pDevice3D, RENDER_DEFAULT);	
 				// 3Dのマテリアル等のセットアップ
 					//xfile.SetupMatrices(direct3d.pDevice3D, hWnd, lasttime);
 				D3DXVECTOR3 viewVecE(0.0f, 0.5f, -1.5f);
 				D3DXVECTOR3 viewVecL(0.0f, 0.0f, 0.0f);
 				//カメラのポジションと角度
 				camera.Create(D3DXVECTOR3(PlayerPos.x + viewVecE.x, PlayerPos.y + viewVecE.y, PlayerPos.z + viewVecE.z), D3DXVECTOR3(PlayerAngle.x + viewVecL.x, PlayerAngle.y + viewVecL.y, PlayerAngle.z + viewVecL.z));
-				Pplayer.PlayerCreate(D3DXVECTOR3(PlayerPos.x,PlayerPos.y,PlayerPos.z));
 				//描画
-				/*xfloor1.Render(&D3DXVECTOR3(-6, 0, 6), &D3DXVECTOR3(0, 0, 0), &D3DXVECTOR3(100, 100, 100), tfloor1.GetTexture());
-				xfloor2.Render(&D3DXVECTOR3(6, 0, 6), &D3DXVECTOR3(0, 0, 0), &D3DXVECTOR3(100, 100, 100), tfloor2.GetTexture());
-				xfloor3.Render(&D3DXVECTOR3(-6, 0, -6), &D3DXVECTOR3(0, 0, 0), &D3DXVECTOR3(100, 100, 100), tfloor3.GetTexture());
-				xfloor4.Render(&D3DXVECTOR3(-6, 0, -6), &D3DXVECTOR3(0, 0, 0), &D3DXVECTOR3(100, 100, 100), tfloor4.GetTexture());*/
+				Pplayer.PlayerCreate(D3DXVECTOR3(PlayerPos.x,PlayerPos.y,PlayerPos.z));
+			
 				//Map描画
 				map.MapRender();
 				direct3d.pDevice3D->EndScene();

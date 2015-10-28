@@ -147,7 +147,7 @@ bool Direct3D::Create(HWND hWnd, int Width, int Height)
 
 	pDevice3D->SetLight(0, &light);
 	pDevice3D->LightEnable(0, true);
-	pDevice3D->SetRenderState(D3DRS_LIGHTING, false);
+	pDevice3D->SetRenderState(D3DRS_LIGHTING, true);
 	pDevice3D->SetRenderState(D3DRS_AMBIENT, 0xff030303);
 
 

@@ -35,12 +35,8 @@ void Camera::Create(D3DXVECTOR3 pos, D3DXVECTOR3 rota)
 
 	//射影行列をパイプラインに設定
 	pDevice3D->SetTransform(D3DTS_PROJECTION,&m_projection);
-	//環境光
-	//pDevice3D->SetRenderState(D3DRS_AMBIENT, 0xff030303);
 	
 	View();
-
-	
 }
 
 void Camera::View()

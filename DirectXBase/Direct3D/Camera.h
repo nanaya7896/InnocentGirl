@@ -29,4 +29,7 @@ public:
 
 	//ビューポートの設定
 	void SetViewPort(int x,int y,int width,int height);
+
+	//カメラの移動
+	D3DXVECTOR3 CmeraMove();
 };
