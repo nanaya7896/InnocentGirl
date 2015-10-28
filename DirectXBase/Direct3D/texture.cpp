@@ -22,7 +22,7 @@ Texture::~Texture()
 	}
 }
 
-void Texture::Load(const TCHAR* FileName)
+BOOL Texture::Load(const TCHAR* FileName)
 {
 	//画像読み込み
 	//DirectXやWindowsAPIの関数はHRESULTを結果に返す関数が多い
@@ -31,9 +31,10 @@ void Texture::Load(const TCHAR* FileName)
 	if (FAILED(D3DXCreateTextureFromFile(pDevice3D, FileName ,&pTexture)))
 	{
 		//読み込み失敗（ファイルが無い可能性が高い）
-		return;
+		return FALSE;
 	}
 
+	return TRUE;
 }
 
 LPDIRECT3DTEXTURE9 Texture::GetTexture()

@@ -15,10 +15,9 @@
 #include"Direct3D\Camera.h"
 #include"Player/Player.h"
 #include"Game/Map.h"
-//#include"Game\Map.h"
 DWORD lasttime;
 
-D3DXVECTOR3 PlayerPos(0.0f,1.0f,0.0f);
+D3DXVECTOR3 PlayerPos(0.0f,0.1f,0.0f);
 D3DXVECTOR3 PlayerAngle(0.0f,0.0f,0.0f);
 //ウィンドウプロシージャ
 LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
@@ -73,7 +72,7 @@ int _stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	HWND hWnd = CreateWindowEx(
 		0,																	//拡張ウィンドウスタイル
 		WC_BASIC,															//登録されているクラス名
-		_T("Apprication"),													//ウィンドウ名
+		_T("Innocent Girl"),													//ウィンドウ名
 		WS_OVERLAPPEDWINDOW | WS_CLIPCHILDREN | WS_VISIBLE,					//ウィンドウスタイル
 		CW_USEDEFAULT,														//ウィンドウの横方向の位置
 		CW_USEDEFAULT,														//ウィンドウの縦方向の位置
@@ -120,19 +119,11 @@ int _stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	//directInput.Init();
 
 	//----------------------------------------------------
-	//Playerの初期化
+	//Playerの初期化 主人公のロード
 	//----------------------------------------------------
 	Player Pplayer;
-
 	//--------------------------------------------------------------------------------------------
 	//テクスチャのロード/Xファイルのロード
-	//主人公のロード
-	X_FILE xfile(_T("yukicyan2.X"));
-	//X_FILE xfloor1(_T("floor1.x"));
-	//X_FILE xfloor2(_T("floor2.x"));
-	//X_FILE xfloor3(_T("floor3.x"));
-	//X_FILE xfloor4(_T("floor4.x"));
-	Texture t_Player(_T("yukitxture.jpg"));
 	//Mapのロード
 	Map map;
 	//Mapの読み込み
@@ -141,32 +132,21 @@ int _stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	Texture tfloor2(_T("floor2.bmp"));
 	Texture tfloor3(_T("floor3.bmp"));
 	Texture tfloor4(_T("floor4.bmp"));*/
-
 	//スプライトの作成
 	Sprite sprite[3];
 	//-------------------------------------------------------------------------------------------
-
 	//音声の再世
 	/*sb[0].Play(false);
 	sb[1].Play(true);
 	sb[2].Play(true);*/
-
-	
 	//----------------------------------------------------
 	//カメラのロード
 	//----------------------------------------------------
 	Camera camera;
-	
-	
-
-
-
 	//xfile.XfileLoader(direct3d.pDevice3D, _T("catsenkan.X"));
 	//----------------------------------------------------
 	//Playerのロード
 	//----------------------------------------------------
-	
-
 	/*direct3d.pDevice3D->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
 	direct3d.pDevice3D->SetRenderState(D3DRS_ZENABLE, TRUE);
 	SetRenderState(direct3d.pDevice3D, RENDER_ALPHATEST);*/
@@ -190,10 +170,8 @@ int _stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 				DWORD BlackColor = 0x0000cc;//背景黒色
 				//背景クリア
 				direct3d.pDevice3D->Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, BlackColor, 1.0f, 0);
-
 				//プレイヤーの移動
 				PlayerPos = Pplayer.PlayerMove(lasttime, D3DXVECTOR3(PlayerPos.x, PlayerPos.y, PlayerPos.z));
-
 //
 //
 //				//デフォルト
@@ -221,14 +199,12 @@ int _stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 //*/	
 				// 3Dのマテリアル等のセットアップ
 					//xfile.SetupMatrices(direct3d.pDevice3D, hWnd, lasttime);
-				D3DXVECTOR3 viewVecE(0.0f, 1.0f, -2.0f);
+				D3DXVECTOR3 viewVecE(0.0f, 0.5f, -1.5f);
 				D3DXVECTOR3 viewVecL(0.0f, 0.0f, 0.0f);
-
-					//カメラのポジションと角度
+				//カメラのポジションと角度
 				camera.Create(D3DXVECTOR3(PlayerPos.x + viewVecE.x, PlayerPos.y + viewVecE.y, PlayerPos.z + viewVecE.z), D3DXVECTOR3(PlayerAngle.x + viewVecL.x, PlayerAngle.y + viewVecL.y, PlayerAngle.z + viewVecL.z));
-				
+				Pplayer.PlayerCreate(D3DXVECTOR3(PlayerPos.x,PlayerPos.y,PlayerPos.z));
 				//描画
-				xfile.Render(&D3DXVECTOR3(PlayerPos.x,PlayerPos.y,PlayerPos.z),&D3DXVECTOR3(200,0,0),&D3DXVECTOR3(0.01f,0.01f,0.01f),t_Player.GetTexture());
 				/*xfloor1.Render(&D3DXVECTOR3(-6, 0, 6), &D3DXVECTOR3(0, 0, 0), &D3DXVECTOR3(100, 100, 100), tfloor1.GetTexture());
 				xfloor2.Render(&D3DXVECTOR3(6, 0, 6), &D3DXVECTOR3(0, 0, 0), &D3DXVECTOR3(100, 100, 100), tfloor2.GetTexture());
 				xfloor3.Render(&D3DXVECTOR3(-6, 0, -6), &D3DXVECTOR3(0, 0, 0), &D3DXVECTOR3(100, 100, 100), tfloor3.GetTexture());
@@ -237,15 +213,10 @@ int _stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 				map.MapRender();
 				direct3d.pDevice3D->EndScene();
 			}
-
-
 			//描画反映
-			direct3d.pDevice3D->Present(NULL, NULL, NULL, NULL);
-
-			
+			direct3d.pDevice3D->Present(NULL, NULL, NULL, NULL);		
 		}
-	}
-	
+	}	
 	directInput.Release();
 	direct3d.pDevice3D->Release();
 	direct3d.pD3D9->Release();

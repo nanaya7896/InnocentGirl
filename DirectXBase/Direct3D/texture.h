@@ -11,7 +11,7 @@ public:
 	Texture(const TCHAR* FileName);
 	~Texture();
 
-	void Load(const TCHAR* FileName);
+	BOOL Load(const TCHAR* FileName);
 
 	LPDIRECT3DTEXTURE9 GetTexture();
 

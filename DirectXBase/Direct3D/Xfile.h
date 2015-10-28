@@ -27,14 +27,9 @@ public:
 	//デバイス解放
 	void CleanUp();
 
-
-	
-	
-
-
 	float looptime=0.0f;
 	
-	float speed=2.0f;
+	float speed=0.2f;
 	//90度/s
 	float anglesp = D3DX_PI / 2;
 	DWORD MaterialNum = 0L;
