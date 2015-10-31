@@ -17,7 +17,8 @@ private:
 public:
 	//ƒƒ“ƒo•Ï”
 	Texture title_Background;
-	Texture title_bar[2];
+	Texture title_bar1;
+	Texture title_bar2;
 	Sprite stitle_bar;
 	Sprite stitle;
 

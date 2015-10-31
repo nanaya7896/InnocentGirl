@@ -77,7 +77,7 @@ int _stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	HWND hWnd = CreateWindowEx(
 		0,																	//拡張ウィンドウスタイル
 		WC_BASIC,															//登録されているクラス名
-		_T("Innocent Girl"),													//ウィンドウ名
+		_T("Inocent Girl"),													//ウィンドウ名
 		WS_OVERLAPPEDWINDOW | WS_CLIPCHILDREN | WS_VISIBLE,					//ウィンドウスタイル
 		CW_USEDEFAULT,														//ウィンドウの横方向の位置
 		CW_USEDEFAULT,														//ウィンドウの縦方向の位置
@@ -185,7 +185,7 @@ int _stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 				//背景クリア
 				direct3d.pDevice3D->Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, BlackColor, 1.0f, 0);
 				////Map描画
-			
+				
 				SceneChange::scenechange->Update();
 				SceneChange::scenechange->Draw();
 					//プレイヤーの移動
@@ -222,8 +222,9 @@ int _stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 				//camera.Create(D3DXVECTOR3(PlayerPos.x + viewVecE.x, PlayerPos.y + viewVecE.y, PlayerPos.z + viewVecE.z), D3DXVECTOR3(PlayerAngle.x + viewVecL.x, PlayerAngle.y + viewVecL.y, PlayerAngle.z + viewVecL.z));
 				////描画
 				//Pplayer.PlayerCreate(D3DXVECTOR3(PlayerPos.x,PlayerPos.y,PlayerPos.z));
-				map.MapRender();
+				//map.MapRender();
 				
+				map.MapRender();
 				direct3d.pDevice3D->EndScene();
 			}
 			//描画反映

@@ -45,20 +45,21 @@ void Title::Update()
 //ƒ^ƒCƒgƒ‹‰æ–Ê
 void Title::Draw()
 {
-	//”wŒi‚Ì•`‰æ
-	stitle.Draw(pDevice3D, title_Background.pTexture);
+	
 
 
 	if (TitleBlink==true)
 	{
 		//ƒ^ƒCƒgƒ‹•`‰æˆ—
-		stitle_bar.Draw(pDevice3D,title_bar[0].GetTexture());
+		stitle_bar.Draw(pDevice3D,title_bar1.GetTexture());
 	}
 	else if(TitleBlink==false)
 	{
 		//ƒ^ƒCƒgƒ‹‚É”’‚¢‰æ‘œ‚ğd‚Ë‚é
-		stitle_bar.Draw(pDevice3D,title_bar[1].GetTexture());
+		stitle_bar.Draw(pDevice3D,title_bar2.GetTexture());
 	}
+	//”wŒi‚Ì•`‰æ
+	stitle.Draw(pDevice3D, title_Background.pTexture);
 	
 
 }
@@ -72,9 +73,9 @@ void Title::Load()
 	//‰æ‘œ‚Ìc‰¡‚ÌƒTƒCƒYw’è
 	stitle.SetSize(1600, 900);
 	//press button‚Ì•`‰æ
-	title_bar[0].Load(_T("texture/start.png"));
+	title_bar1.Load(_T("texture/start.png"));
 	//”’‚¢‰æ‘œ‚Ì•`‰æ
-	title_bar[1].Load(_T("texture/aho.png"));
+	title_bar2.Load(_T("texture/aho.png"));
 	stitle_bar.SetPos(800, 700);
 	stitle_bar.SetSize(720, 200);
 

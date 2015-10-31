@@ -22,6 +22,9 @@
     <Filter Include="XInput">
       <UniqueIdentifier>{4af4e669-4784-4dec-80c6-3003a5ddc0e5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="DirectXAnimation">
+      <UniqueIdentifier>{6988da11-e0bc-4260-a302-a55b724200da}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Direct3D\direct3d.cpp">
@@ -78,6 +81,9 @@
     </ClCompile>
     <ClCompile Include="Game\Chapter_GameOfTag.cpp">
       <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectXAnimation\Animation3D.cpp">
+      <Filter>DirectXAnimation</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -138,6 +144,9 @@
     </ClInclude>
     <ClInclude Include="Game\GameMainTag.h">
       <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectXAnimation\Animation3D.h">
+      <Filter>DirectXAnimation</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

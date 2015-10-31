@@ -28,6 +28,7 @@
 //Direct3D
 #include <d3d9.h>
 #include <d3dx9.h>
+#include<d3dx9anim.h>
 #include <dinput.h>
 
 //ƒ‰ƒCƒuƒ‰ƒŠ‚Ì“Ç‚İ‚İ

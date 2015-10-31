@@ -26,12 +26,12 @@ void GameMainTag::Update()
 	
 	PlayerPos=player.PlayerMove(D3DXVECTOR3(PlayerPos.x, PlayerPos.y, PlayerPos.z));
 	camera.Create(D3DXVECTOR3(PlayerPos.x + viewVecE.x, PlayerPos.y + viewVecE.y, PlayerPos.z + viewVecE.z), D3DXVECTOR3(PlayerAngle.x + viewVecL.x, PlayerAngle.y + viewVecL.y, PlayerAngle.z + viewVecL.z));
-	player.PlayerCreate(D3DXVECTOR3(PlayerPos.x, PlayerPos.y, PlayerPos.z));
+	
 }
 
 void GameMainTag::Draw()
 {
-	
+	player.PlayerCreate(D3DXVECTOR3(PlayerPos.x, PlayerPos.y, PlayerPos.z));
 
 }
 
