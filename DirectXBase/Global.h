@@ -2,9 +2,11 @@
 
 #define DIRECTSOUND_VERSION 0x800
 #define DIRECTINPUT_VERSION 0x800
+//ウィンドウサイズ
 #define WINDOW_WIDTH  1600
 #define WINDOW_HEIGHT  900
-
+//delete用
+#define SAFE_DELETE_ARRAY(p){if(p){delete[] (p);(p)=NULL;}}
 
 
 #pragma comment(lib, "d3d9.lib")

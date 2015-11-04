@@ -94,7 +94,10 @@
     <ClCompile Include="DirectSound\directSound.cpp" />
     <ClCompile Include="DirectSound\soundbuffer.cpp" />
     <ClCompile Include="DirectSound\wave.cpp" />
-    <ClCompile Include="DirectXAnimation\Animation3D.cpp" />
+    <ClCompile Include="DirectXAnimation\AllocHierarchy.cpp" />
+    <ClCompile Include="DirectXAnimation\AnimationInstance.cpp" />
+    <ClCompile Include="DirectXAnimation\MultiAnimation.cpp" />
+    <ClCompile Include="DirectXAnimation\XfileAnimation.cpp" />
     <ClCompile Include="Game\Chapter.cpp" />
     <ClCompile Include="Game\Chapter_GameOfTag.cpp" />
     <ClCompile Include="Game\GameMainTag.cpp" />
@@ -116,7 +119,9 @@
     <ClInclude Include="DirectSound\directSound.h" />
     <ClInclude Include="DirectSound\soundbuffer.h" />
     <ClInclude Include="DirectSound\wave.h" />
-    <ClInclude Include="DirectXAnimation\Animation3D.h" />
+    <ClInclude Include="DirectXAnimation\MultiAnimation.h" />
+    <ClInclude Include="DirectXAnimation\MultiAnimationLib.h" />
+    <ClInclude Include="DirectXAnimation\XfileAnimation.h" />
     <ClInclude Include="Game\Chapter.h" />
     <ClInclude Include="Game\Chapter_GameOfTag.h" />
     <ClInclude Include="Game\GameMainTag.h" />

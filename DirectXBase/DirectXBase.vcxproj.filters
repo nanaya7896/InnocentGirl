@@ -82,7 +82,16 @@
     <ClCompile Include="Game\Chapter_GameOfTag.cpp">
       <Filter>Game</Filter>
     </ClCompile>
-    <ClCompile Include="DirectXAnimation\Animation3D.cpp">
+    <ClCompile Include="DirectXAnimation\AllocHierarchy.cpp">
+      <Filter>DirectXAnimation</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectXAnimation\AnimationInstance.cpp">
+      <Filter>DirectXAnimation</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectXAnimation\MultiAnimation.cpp">
+      <Filter>DirectXAnimation</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectXAnimation\XfileAnimation.cpp">
       <Filter>DirectXAnimation</Filter>
     </ClCompile>
   </ItemGroup>
@@ -145,7 +154,13 @@
     <ClInclude Include="Game\GameMainTag.h">
       <Filter>Game</Filter>
     </ClInclude>
-    <ClInclude Include="DirectXAnimation\Animation3D.h">
+    <ClInclude Include="DirectXAnimation\MultiAnimation.h">
+      <Filter>DirectXAnimation</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectXAnimation\MultiAnimationLib.h">
+      <Filter>DirectXAnimation</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectXAnimation\XfileAnimation.h">
       <Filter>DirectXAnimation</Filter>
     </ClInclude>
   </ItemGroup>
