@@ -20,7 +20,7 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v120</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -94,10 +94,8 @@
     <ClCompile Include="DirectSound\directSound.cpp" />
     <ClCompile Include="DirectSound\soundbuffer.cpp" />
     <ClCompile Include="DirectSound\wave.cpp" />
-    <ClCompile Include="DirectXAnimation\AllocHierarchy.cpp" />
-    <ClCompile Include="DirectXAnimation\AnimationInstance.cpp" />
-    <ClCompile Include="DirectXAnimation\MultiAnimation.cpp" />
-    <ClCompile Include="DirectXAnimation\XfileAnimation.cpp" />
+    <ClCompile Include="DirectXAnimation\AnimateObject.cpp" />
+    <ClCompile Include="DirectXAnimation\MyAllocateHierarchy.cpp" />
     <ClCompile Include="Game\Chapter.cpp" />
     <ClCompile Include="Game\Chapter_GameOfTag.cpp" />
     <ClCompile Include="Game\GameMainTag.cpp" />
@@ -119,9 +117,8 @@
     <ClInclude Include="DirectSound\directSound.h" />
     <ClInclude Include="DirectSound\soundbuffer.h" />
     <ClInclude Include="DirectSound\wave.h" />
-    <ClInclude Include="DirectXAnimation\MultiAnimation.h" />
-    <ClInclude Include="DirectXAnimation\MultiAnimationLib.h" />
-    <ClInclude Include="DirectXAnimation\XfileAnimation.h" />
+    <ClInclude Include="DirectXAnimation\AnimateObject.h" />
+    <ClInclude Include="DirectXAnimation\MyAllocateHierarchy.h" />
     <ClInclude Include="Game\Chapter.h" />
     <ClInclude Include="Game\Chapter_GameOfTag.h" />
     <ClInclude Include="Game\GameMainTag.h" />

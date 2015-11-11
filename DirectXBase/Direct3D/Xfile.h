@@ -3,7 +3,10 @@
 #include"../Global.h"
 #include"../DirectInput/directInput.h"
 #include"direct3d.h"
-class X_FILE :public Direct3D
+#include"../DirectXAnimation/MyAllocateHierarchy.h"
+#include"../DirectXAnimation/AnimateObject.h"
+
+class X_FILE :public Direct3D 
 {
 private:
 	

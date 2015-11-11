@@ -1,7 +1,7 @@
 #include "direct3d.h"
 LPDIRECT3D9 Direct3D::pD3D9=NULL;
 LPDIRECT3DDEVICE9 Direct3D::pDevice3D=NULL;
-
+D3DXMATRIX Direct3D::d3dMat;
 
 DWORD FloatToDWORD(float v) { return *((DWORD *)&v); }
 ////コンストラクタ

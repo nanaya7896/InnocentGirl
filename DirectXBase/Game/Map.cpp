@@ -14,28 +14,29 @@ Map::~Map()
 
 HRESULT Map::LoadBuldings()
 {
-		Building buildings[MAXBUILDING] = {
-			{ xfloor1.XfileLoader(_T("xfile/floor1.x")), tfloor1.Load(_T("texture/floor1.bmp")) },
-			{ xfloor2.XfileLoader(_T("xfile/floor2.x")), tfloor2.Load(_T("texture/floor2.bmp")) },
-			{ xfloor3.XfileLoader(_T("xfile/floor3.x")), tfloor3.Load(_T("texture/floor3.bmp")) },
-			{ xfloor4.XfileLoader(_T("xfile/floor4.x")), tfloor4.Load(_T("texture/floor4.bmp")) },
-			{ xroof1.XfileLoader(_T("xfile/roof1.x"))   , troof1.Load(_T("roof1.bmp"))},
-				{ xroof2.XfileLoader(_T("xfile/roof2.x")), troof2.Load(_T("roof2.bmp"))},
-				{ xroof3.XfileLoader(_T("xfile/roof3.x")), troof3.Load(_T("roof3.bmp")) },
-				{ xroof4.XfileLoader(_T("xfile/roof4.x")), troof4.Load(_T("roof4.bmp")) },
-				{ xpaneln1.XfileLoader(_T("xfile/paneln1.x")),tpanel1.Load(_T("texture/panel1.bmp"))},
-				{ xpaneln2.XfileLoader(_T("xfile/paneln2.x")), tpanel1.Load(_T("texture/panel1.bmp")) },
-				{ xpanels1.XfileLoader(_T("xfile/panels1.x")), tpanel2.Load(_T("texture/panel2.bmp")) },
-				{ xpanels2.XfileLoader(_T("xfile/panels2.x")), tpanel2.Load(_T("texture/panel2.bmp")) },
-				{ xpanelw1.XfileLoader(_T("xfile/panelw1.x")), tpanel3.Load(_T("texture/panel3.bmp")) },
-				{ xpanelw2.XfileLoader(_T("xfile/panelw2.x")), tpanel3.Load(_T("texture/panel3.bmp")) },
-				{ xpanele1.XfileLoader(_T("xfile/panele1.x")), tpanel4.Load(_T("texture/panel4.bmp")) },
-				{ xpanele2.XfileLoader(_T("xfile/panele2.x")), tpanel4.Load(_T("texture/panel4.bmp")) },
-				{ xhouse.XfileLoader(_T("xfile/house.x")),thouse.Load(_T("texture/house.bmp"))},
-				{ xleaf.XfileLoader(_T("xfile/leaf.x")), tleaf.Load(_T("texture/leaf.bmp")) },
-				{ xtree.XfileLoader(_T("xfile/tree.x")), ttree.Load(_T("texture/tree.bmp")) },
-				{ xball.XfileLoader(_T("xfile/ball.x")), tball.Load(_T("texture/ball.bmp")) },
-		};
+	Building buildings[MAXBUILDING] = {
+		{ xfloor1.XfileLoader(L"xfile/floor1.x"), tfloor1.Load(_T("texture/floor1.bmp")) },
+		{ xfloor2.XfileLoader(L"xfile/floor2.x"), tfloor2.Load(_T("texture/floor2.bmp")) },
+		{ xfloor3.XfileLoader(L"xfile/floor3.x"), tfloor3.Load(_T("texture/floor3.bmp")) },
+		{ xfloor4.XfileLoader(L"xfile/floor4.x"), tfloor4.Load(_T("texture/floor4.bmp")) },
+		{ xroof1.XfileLoader(L"xfile/roof1.x"), troof1.Load(_T("roof1.bmp")) },
+		{ xroof2.XfileLoader(L"xfile/roof2.x"), troof2.Load(_T("roof2.bmp")) },
+		{ xroof3.XfileLoader(L"xfile/roof3.x"), troof3.Load(_T("roof3.bmp")) },
+		{ xroof4.XfileLoader(L"xfile/roof4.x"), troof4.Load(_T("roof4.bmp")) },
+		{ xpaneln1.XfileLoader(L"xfile/paneln1.x"), tpanel1.Load(_T("texture/panel1.bmp")) },
+		{ xpaneln2.XfileLoader(L"xfile/paneln2.x"), tpanel1.Load(_T("texture/panel1.bmp")) },
+		{ xpanels1.XfileLoader(L"xfile/panels1.x"), tpanel2.Load(_T("texture/panel2.bmp")) },
+		{ xpanels2.XfileLoader(L"xfile/panels2.x"), tpanel2.Load(_T("texture/panel2.bmp")) },
+		{ xpanelw1.XfileLoader(L"xfile/panelw1.x"), tpanel3.Load(_T("texture/panel3.bmp")) },
+		{ xpanelw2.XfileLoader(L"xfile/panelw2.x"), tpanel3.Load(_T("texture/panel3.bmp")) },
+		{ xpanele1.XfileLoader(L"xfile/panele1.x"), tpanel4.Load(_T("texture/panel4.bmp")) },
+		{ xpanele2.XfileLoader(L"xfile/panele2.x"), tpanel4.Load(_T("texture/panel4.bmp")) },
+		{ xhouse.XfileLoader(L"xfile/house.x"), thouse.Load(_T("texture/house.bmp")) },
+		{ xleaf.XfileLoader(L"xfile/leaf.x"), tleaf.Load(_T("texture/leaf.bmp")) },
+		{ xtree.XfileLoader(L"xfile/tree.x"), ttree.Load(_T("texture/tree.bmp")) },
+		{ xball.XfileLoader(L"xfile/ball.x"), tball.Load(_T("texture/ball.bmp")) },
+	};
+
 
 		
 	return S_OK;

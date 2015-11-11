@@ -3,7 +3,11 @@
 #include"../DirectInput/directInput.h"
 #include"../Direct3D/Xfile.h"
 #include"../Direct3D/Texture.h"
-class Player
+#include"../DirectXAnimation/MyAllocateHierarchy.h"
+#include"../DirectXAnimation/AnimateObject.h"
+
+
+class Player : public Direct3D
 {
 private:
 	float looptime = 0.0f;
@@ -13,6 +17,9 @@ private:
 	float anglesp = D3DX_PI / 2;
 	X_FILE Xplayer;
 	Texture Tplayer;
+
+	MyAllocateHierarchy mah;
+	CSkinMesh cskinMesh;
 public:
 	
 	Player();

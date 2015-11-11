@@ -5,9 +5,14 @@
 //ウィンドウサイズ
 #define WINDOW_WIDTH  1600
 #define WINDOW_HEIGHT  900
-//delete用
+//シンボル定義およびマクロ
 #define SAFE_DELETE_ARRAY(p){if(p){delete[] (p);(p)=NULL;}}
-
+#define SAFE_DELETE(p)		{if(p){delete(p);(p)=NULL;}}
+#define SAFE_RELEASE(p)		{if(p){(p)->Release();(p)=NULL;}}
+//FPS(1秒 = 1000/FPSミリ秒)
+#define FPS 60
+//アニメーションコントローラーのスピード
+#define SKIN_ANIME_SPEED 60.0f / 4800.0f
 
 #pragma comment(lib, "d3d9.lib")
 #pragma comment(lib, "d3dx9.lib")
@@ -27,6 +32,11 @@
 #include <strsafe.h>
 #include<string.h>
 #include<XInput.h>
+#include<map>
+#include<string>
+#include<list>
+#include<iostream>
+#include<sstream>
 //Direct3D
 #include <d3d9.h>
 #include <d3dx9.h>

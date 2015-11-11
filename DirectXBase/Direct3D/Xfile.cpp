@@ -16,8 +16,10 @@ X_FILE::~X_FILE()
 	{
 		g_pMesh->Release();
 	}
-	
-	pD3DXMatrlBuffer->Release();
+	if (pD3DXMatrlBuffer != NULL)
+	{
+		pD3DXMatrlBuffer->Release();
+	}
 }
 
 
@@ -25,7 +27,7 @@ X_FILE::~X_FILE()
 BOOL X_FILE::XfileLoader(LPCWSTR name)
 {
 
-	D3DXLoadMeshFromX(name, D3DXMESH_SYSTEMMEM,pDevice3D,
+	D3DXLoadMeshFromXW(name, D3DXMESH_SYSTEMMEM,pDevice3D,
 		NULL, &pD3DXMatrlBuffer, NULL, &MaterialNum, &g_pMesh);
 	//‚à‚µXƒtƒ@ƒCƒ‹‚ª‚È‚¯‚ê‚Î
 	if (g_pMesh == NULL)
@@ -34,6 +36,7 @@ BOOL X_FILE::XfileLoader(LPCWSTR name)
 		//false‚ð•Ô‚·
 		return FALSE;
 	}
+	
 	
 	return TRUE;
 

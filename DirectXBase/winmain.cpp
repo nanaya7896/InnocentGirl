@@ -1,8 +1,6 @@
 //includeファイルとライブラリファイルを読み込んでます
 //ウィンドウ幅高さの決定
 
-
-
 #include"Global.h"
 #include "Direct3D/direct3d.h"
 #include "Direct3D/sprite.h"
@@ -19,6 +17,8 @@
 #include "Game/Title.h"
 #include "Game/Chapter.h"
 #include "Game/Chapter_GameOfTag.h"
+#include"DirectXAnimation/AnimateObject.h"
+#include"DirectXAnimation/MyAllocateHierarchy.h"
 
 DWORD lasttime;
 
@@ -155,6 +155,12 @@ int _stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	/*direct3d.pDevice3D->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
 	direct3d.pDevice3D->SetRenderState(D3DRS_ZENABLE, TRUE);
 	SetRenderState(direct3d.pDevice3D, RENDER_ALPHATEST);*/
+
+	//スキンメッシュ用クラス
+	CSkinMesh m_CSkinMesh;
+	//データのロード
+	m_CSkinMesh.Init(direct3d.pDevice3D,"");
+	D3DXMatrixIdentity(&direct3d.d3dMat);
 
 	MSG msg = {};
 

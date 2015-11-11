@@ -35,5 +35,6 @@ public:
 protected:
 	static LPDIRECT3D9	pD3D9;				//Direct3Dデバイス生成用オブジェクト
 	static LPDIRECT3DDEVICE9 pDevice3D;		//Direct3Dのデバイス　スプライトの表示やテクスチャのロード時に必要
-
+	//行列に必要
+	static D3DXMATRIX d3dMat;
 };

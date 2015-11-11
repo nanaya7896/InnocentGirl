@@ -82,16 +82,10 @@
     <ClCompile Include="Game\Chapter_GameOfTag.cpp">
       <Filter>Game</Filter>
     </ClCompile>
-    <ClCompile Include="DirectXAnimation\AllocHierarchy.cpp">
+    <ClCompile Include="DirectXAnimation\MyAllocateHierarchy.cpp">
       <Filter>DirectXAnimation</Filter>
     </ClCompile>
-    <ClCompile Include="DirectXAnimation\AnimationInstance.cpp">
-      <Filter>DirectXAnimation</Filter>
-    </ClCompile>
-    <ClCompile Include="DirectXAnimation\MultiAnimation.cpp">
-      <Filter>DirectXAnimation</Filter>
-    </ClCompile>
-    <ClCompile Include="DirectXAnimation\XfileAnimation.cpp">
+    <ClCompile Include="DirectXAnimation\AnimateObject.cpp">
       <Filter>DirectXAnimation</Filter>
     </ClCompile>
   </ItemGroup>
@@ -154,13 +148,10 @@
     <ClInclude Include="Game\GameMainTag.h">
       <Filter>Game</Filter>
     </ClInclude>
-    <ClInclude Include="DirectXAnimation\MultiAnimation.h">
+    <ClInclude Include="DirectXAnimation\MyAllocateHierarchy.h">
       <Filter>DirectXAnimation</Filter>
     </ClInclude>
-    <ClInclude Include="DirectXAnimation\MultiAnimationLib.h">
-      <Filter>DirectXAnimation</Filter>
-    </ClInclude>
-    <ClInclude Include="DirectXAnimation\XfileAnimation.h">
+    <ClInclude Include="DirectXAnimation\AnimateObject.h">
       <Filter>DirectXAnimation</Filter>
     </ClInclude>
   </ItemGroup>

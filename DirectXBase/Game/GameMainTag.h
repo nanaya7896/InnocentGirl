@@ -7,14 +7,26 @@
 #include"../Player/Player.h"
 #include"../Direct3D/Camera.h"
 #include "SceneChange.h"
-
+#include"../DirectXAnimation/MyAllocateHierarchy.h"
+#include"../DirectXAnimation/AnimateObject.h"
+#include"../Direct3D/font.h"
 class GameMainTag :public SceneChange,Direct3D
 {
 private:
-	
-public:
+	//プレイヤーインスタンス
 	Player player;
+	//カメラインスタンス
 	Camera camera;
+	//アニメーションインスタンス
+	MyAllocateHierarchy mah;
+	//メッシュインスタンス
+	CSkinMesh cskinMesh;
+	//テキストインスタンス
+	DirectXText timeText;
+	int time;
+	int timeframe;
+public:
+
 
 	//コンストラクタ
 	GameMainTag();
