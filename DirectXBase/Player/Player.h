@@ -20,6 +20,9 @@ private:
 
 	MyAllocateHierarchy mah;
 	CSkinMesh cskinMesh;
+	
+	//プレイヤーのヨー回転(y軸中心)
+	double ridianYaw = 0.0;
 public:
 	
 	Player();
@@ -29,7 +32,8 @@ public:
 	void PlayerCreate(D3DXVECTOR3 pPos);
 	//プレイヤーの移動
 	D3DXVECTOR3 PlayerMove(D3DXVECTOR3 pPos);
-
+	//ラジアンの角度を変える関数
+	D3DXVECTOR3 YRotation();
 
 protected:
 

@@ -96,6 +96,7 @@
     <ClCompile Include="DirectSound\wave.cpp" />
     <ClCompile Include="DirectXAnimation\AnimateObject.cpp" />
     <ClCompile Include="DirectXAnimation\MyAllocateHierarchy.cpp" />
+    <ClCompile Include="Enemy\Enemy.cpp" />
     <ClCompile Include="Game\Chapter.cpp" />
     <ClCompile Include="Game\Chapter_GameOfTag.cpp" />
     <ClCompile Include="Game\GameMainTag.cpp" />
@@ -119,6 +120,7 @@
     <ClInclude Include="DirectSound\wave.h" />
     <ClInclude Include="DirectXAnimation\AnimateObject.h" />
     <ClInclude Include="DirectXAnimation\MyAllocateHierarchy.h" />
+    <ClInclude Include="Enemy\Enemy.h" />
     <ClInclude Include="Game\Chapter.h" />
     <ClInclude Include="Game\Chapter_GameOfTag.h" />
     <ClInclude Include="Game\GameMainTag.h" />

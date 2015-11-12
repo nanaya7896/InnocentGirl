@@ -25,6 +25,9 @@
     <Filter Include="DirectXAnimation">
       <UniqueIdentifier>{6988da11-e0bc-4260-a302-a55b724200da}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Enemy">
+      <UniqueIdentifier>{0a68bc2d-50be-43e4-9741-076244425eec}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Direct3D\direct3d.cpp">
@@ -87,6 +90,9 @@
     </ClCompile>
     <ClCompile Include="DirectXAnimation\AnimateObject.cpp">
       <Filter>DirectXAnimation</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy\Enemy.cpp">
+      <Filter>Enemy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -153,6 +159,9 @@
     </ClInclude>
     <ClInclude Include="DirectXAnimation\AnimateObject.h">
       <Filter>DirectXAnimation</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy\Enemy.h">
+      <Filter>Enemy</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

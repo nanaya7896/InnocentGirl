@@ -17,8 +17,8 @@
 #include "Game/Title.h"
 #include "Game/Chapter.h"
 #include "Game/Chapter_GameOfTag.h"
-#include"DirectXAnimation/AnimateObject.h"
-#include"DirectXAnimation/MyAllocateHierarchy.h"
+//#include"DirectXAnimation/AnimateObject.h"
+//#include"DirectXAnimation/MyAllocateHierarchy.h"
 
 DWORD lasttime;
 
@@ -157,17 +157,17 @@ int _stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	SetRenderState(direct3d.pDevice3D, RENDER_ALPHATEST);*/
 
 	//スキンメッシュ用クラス
-	CSkinMesh m_CSkinMesh;
+	//CSkinMesh m_CSkinMesh;
 	//データのロード
-	m_CSkinMesh.Init(direct3d.pDevice3D,"");
-	D3DXMatrixIdentity(&direct3d.d3dMat);
+	//m_CSkinMesh.Init(direct3d.pDevice3D,"");
+	//D3DXMatrixIdentity(&direct3d.d3dMat);
 
 	MSG msg = {};
 
 	//画面遷移
 	//SetRenderState(direct3d.pDevice3D, RENDER_DEFAULT);
 	SetRenderState(direct3d.pDevice3D, RENDER_ALPHATEST);
-	SceneChange::scenechange = new Title();	//タイトル
+	SceneChange::scenechange = new GameMainTag();	//タイトル
 	
 	lasttime = timeGetTime();
 	while (msg.message != WM_QUIT)

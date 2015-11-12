@@ -15,12 +15,10 @@ class Map
 {
 private:
 	//Textureのインスタンス生成
-	Texture tfloor1;
-	Texture tfloor2;
-	Texture tfloor3;
-	Texture tfloor4;
-	Texture troof1;
-	Texture troof2;
+	Texture tfloor[8];
+	Texture tfloorGround[11];
+	Texture tpanelSky[4];
+	Texture tpanelSun;
 	Texture troof3;
 	Texture troof4;
 	Texture tpanel1;
@@ -33,16 +31,8 @@ private:
 	Texture thouse;
 
 	//Xfileのインスタンス生成
-	X_FILE xfloor1;
-	X_FILE xfloor2;
-	X_FILE xfloor3;
-	X_FILE xfloor4;
-	X_FILE xroof1;
-	X_FILE xroof2;
-	X_FILE xroof3;
-	X_FILE xroof4;
-	X_FILE xpaneln1;
-	X_FILE xpaneln2;
+	X_FILE xfloor;
+	X_FILE xpanelSky;
 	X_FILE xpanels1;
 	X_FILE xpanels2;
 	X_FILE xpanelw1;

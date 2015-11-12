@@ -15,7 +15,7 @@ HRESULT Player::PlayerLoad()
 	//Tplayer.Load("texture/yukitxture2.jpg");
 	Xplayer.XfileLoader(L"xfile/Tiny.x");
 	Tplayer.Load("texture/Tiny_skin.dds");
-	cskinMesh.Init(pDevice3D,"xfile/Tiny.x");
+	//cskinMesh.Init(pDevice3D,"xfile/Tiny.x");
 	D3DXMatrixIdentity(&d3dMat);
 	if (Tplayer.pTexture == NULL)
 	{
@@ -31,11 +31,17 @@ void Player::PlayerCreate(D3DXVECTOR3 pPos)
 
 D3DXVECTOR3 Player::PlayerMove(D3DXVECTOR3 pPos)
 {
-	DirectInput::GetInstance().Init();
-	DirectInput::GetInstance().Update();
-	cskinMesh.Update(d3dMat);
-	cskinMesh.Draw(pDevice3D);
 
+	//cskinMesh.Update(d3dMat);
+	//cskinMesh.Draw(pDevice3D);
+	if (DirectInput::GetInstance().KeyDown(DIK_F) || DirectInput::GetInstance().KeyState(DIK_F))
+	{
+		speed = 0.23f;
+	}
+	else
+	{
+		speed = 0.1f;
+	}
 
 
 	//è„à⁄ìÆ
@@ -78,4 +84,5 @@ D3DXVECTOR3 Player::PlayerMove(D3DXVECTOR3 pPos)
 		pPos.x += speed;
 	}
 	return pPos;
+	
 }

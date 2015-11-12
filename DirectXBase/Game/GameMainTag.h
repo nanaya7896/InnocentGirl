@@ -13,6 +13,10 @@
 class GameMainTag :public SceneChange,Direct3D
 {
 private:
+	//テクスチャインスタンス
+	Texture timeTexture[10];
+	//スプライトインスタンス
+	Sprite timeSprite[2];
 	//プレイヤーインスタンス
 	Player player;
 	//カメラインスタンス
@@ -23,8 +27,13 @@ private:
 	CSkinMesh cskinMesh;
 	//テキストインスタンス
 	DirectXText timeText;
+	//時間用メンバ変数
 	int time;
 	int timeframe;
+	//time10の位
+	int tentime=9;
+	//time1の位
+	int onetime=0;
 public:
 
 
@@ -38,6 +47,9 @@ public:
 	void Draw();
 
 	void Load();
+
+	//当たり判定関数
+	HRESULT Player_HitBox();
 protected:
 	D3DXVECTOR3 PlayerPos;
 	D3DXVECTOR3 PlayerAngle;
