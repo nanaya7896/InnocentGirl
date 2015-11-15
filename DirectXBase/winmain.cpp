@@ -191,7 +191,7 @@ int _stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 				//”wŒiƒNƒŠƒA
 				direct3d.pDevice3D->Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, BlackColor, 1.0f, 0);
 				////Map•`‰æ
-				
+				map.MapRender();
 				SceneChange::scenechange->Update();
 				SceneChange::scenechange->Draw();
 					//ƒvƒŒƒCƒ„[‚ÌˆÚ“®
@@ -230,7 +230,7 @@ int _stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 				//Pplayer.PlayerCreate(D3DXVECTOR3(PlayerPos.x,PlayerPos.y,PlayerPos.z));
 				//map.MapRender();
 				
-				map.MapRender();
+				
 				direct3d.pDevice3D->EndScene();
 			}
 			//•`‰æ”½‰f

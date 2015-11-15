@@ -37,10 +37,10 @@ public:
 	float anglesp = D3DX_PI / 2;
 	DWORD MaterialNum = 0L;
 
-	
+	LPD3DXMESH              g_pMesh = NULL;
 
 protected:
-	LPD3DXMESH              g_pMesh = NULL;
+	
 	
 	
 	D3DXVECTOR3 PlayerPos;

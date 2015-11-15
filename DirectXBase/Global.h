@@ -14,7 +14,7 @@
 #define SKIN_ANIME_SPEED 60.0f / 4800.0f
 
 //ウィンドウサイズ
-const int WINDOW_WIDTH = 1600;
+const int WINDOW_WIDTH = 900;
 const int WINDOW_HEIGHT = 900;
 
 #pragma comment(lib, "d3d9.lib")

@@ -6,6 +6,7 @@
 #include "../DirectInput\directInput.h"
 #include"../Player/Player.h"
 #include"../Direct3D/Camera.h"
+#include"Map.h"
 #include "SceneChange.h"
 #include"../DirectXAnimation/MyAllocateHierarchy.h"
 #include"../DirectXAnimation/AnimateObject.h"

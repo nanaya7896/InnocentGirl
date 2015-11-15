@@ -3,15 +3,17 @@
 #include"../Direct3D/Xfile.h"
 #include"../Direct3D/texture.h"
 
-struct Building
+struct BoundingBox
 {
-	BOOL xname;
-	BOOL texturename;
+	D3DXVECTOR3 minv;	//最少頂点
+	D3DXVECTOR3 maxv;	//最大頂点
+
+
 };
 
-const int MAXBUILDING = 25;
 
-class Map
+
+class Map : public X_FILE
 {
 private:
 	//Textureのインスタンス生成
@@ -19,30 +21,9 @@ private:
 	Texture tfloorGround[11];
 	Texture tpanelSky[4];
 	Texture tpanelSun;
-	Texture troof3;
-	Texture troof4;
-	Texture tpanel1;
-	Texture tpanel2;
-	Texture tpanel3;
-	Texture tpanel4;
-	Texture tball;
-	Texture tleaf;
-	Texture ttree;
-	Texture thouse;
+	Texture tBuil[4];
+	BoundingBox buildingsbox[5];
 
-	//Xfileのインスタンス生成
-	X_FILE xfloor;
-	X_FILE xpanelSky;
-	X_FILE xpanels1;
-	X_FILE xpanels2;
-	X_FILE xpanelw1;
-	X_FILE xpanelw2;
-	X_FILE xpanele1;
-	X_FILE xpanele2;
-	X_FILE xhouse;
-	X_FILE xball;
-	X_FILE xtree;
-	X_FILE xleaf;
 
 public:
 	//コンストラクタ
@@ -50,13 +31,24 @@ public:
 	//デストラクタ
 	~Map();
 	
+	//メンバ関数
 	HRESULT LoadBuldings();
 	void MapRender();
+	BOOL HitTikei(D3DXVECTOR3 *pmina,D3DXVECTOR3 *pmaxa);
 
 
+	//メンバ変数
+	DWORD numv[50], stride[50];
+	LPDIRECT3DVERTEXBUFFER9 pvb9;
+	BYTE *pvertices;
+	HRESULT hr[50];
+	D3DXVECTOR3 lminv, lmaxv;
+	//Xfileのインスタンス生成
+	X_FILE xfloor;
+	X_FILE xpanelSky;
+	X_FILE xBuil[4];
 protected:
-
-
+	int i = 0;
 
 
 };

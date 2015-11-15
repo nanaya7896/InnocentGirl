@@ -2,6 +2,7 @@
 
 Player::Player()
 {
+	mypos.y = 1.0f;
 	PlayerLoad();
 }
 Player::~Player()
@@ -34,6 +35,7 @@ D3DXVECTOR3 Player::PlayerMove(D3DXVECTOR3 pPos)
 
 	//cskinMesh.Update(d3dMat);
 	//cskinMesh.Draw(pDevice3D);
+	
 	if (DirectInput::GetInstance().KeyDown(DIK_F) || DirectInput::GetInstance().KeyState(DIK_F))
 	{
 		speed = 0.23f;
@@ -43,46 +45,56 @@ D3DXVECTOR3 Player::PlayerMove(D3DXVECTOR3 pPos)
 		speed = 0.1f;
 	}
 
+	
+	
+	
+		//è„à⁄ìÆ
+		if (DirectInput::GetInstance().KeyDown(DIK_W))
+		{
+			mypos.z=pPos.z+ speed;
+		}
+		else if (DirectInput::GetInstance().KeyStatePreview(DIK_W))
+		{
+			mypos.z=pPos.z + speed;
+		}
 
-	//è„à⁄ìÆ
-	if (DirectInput::GetInstance().KeyDown(DIK_W))
-	{
-		pPos.z += speed;
-	}
-	else if (DirectInput::GetInstance().KeyStatePreview(DIK_W))
-	{
-		pPos.z += speed;
-	}
+		//â∫à⁄ìÆ
+		if (DirectInput::GetInstance().KeyDown(DIK_S))
+		{
+			mypos.z=pPos.z - speed;
+		}
+		else if (DirectInput::GetInstance().KeyStatePreview(DIK_S))
+		{
+			mypos.z=pPos.z -speed;
+		}
 
-	//â∫à⁄ìÆ
-	if (DirectInput::GetInstance().KeyDown(DIK_S))
-	{
-		pPos.z -= speed;
-	}
-	else if (DirectInput::GetInstance().KeyStatePreview(DIK_S))
-	{
-		pPos.z -= speed;
-	}
+		//âEà⁄ìÆ
+		if (DirectInput::GetInstance().KeyDown(DIK_A))
+		{
+			mypos.x=pPos.x - speed;
+		}
+		else if (DirectInput::GetInstance().KeyStatePreview(DIK_A))
+		{
+			mypos.x=pPos.x - speed;
+		}
 
-	//âEà⁄ìÆ
-	if (DirectInput::GetInstance().KeyDown(DIK_A))
-	{
-		pPos.x -= speed;
-	}
-	else if (DirectInput::GetInstance().KeyStatePreview(DIK_A))
-	{
-		pPos.x -= speed;
-	}
+		//ç∂à⁄ìÆ
+		if (DirectInput::GetInstance().KeyDown(DIK_D))
+		{
+			mypos.x=pPos.x + speed;
+		}
+		else if (DirectInput::GetInstance().KeyStatePreview(DIK_D))
+		{
+			mypos.x=pPos.x + speed;
+		}
+		D3DXVECTOR3 mina(pPos.x - 0.5f, pPos.y - 0.5f, pPos.z - 0.5f);
+		D3DXVECTOR3 maxa(pPos.x + 0.5f, pPos.y + 0.5f, pPos.z + 0.5f);
+		if (HitTikei(&mina, &maxa) == FALSE)
+		{
+			pPos=mypos;
+		}
 
-	//ç∂à⁄ìÆ
-	if (DirectInput::GetInstance().KeyDown(DIK_D))
-	{
-		pPos.x += speed;
-	}
-	else if (DirectInput::GetInstance().KeyStatePreview(DIK_D))
-	{
-		pPos.x += speed;
-	}
+	
 	return pPos;
 	
 }

@@ -3,11 +3,12 @@
 #include"../DirectInput/directInput.h"
 #include"../Direct3D/Xfile.h"
 #include"../Direct3D/Texture.h"
+#include"../Game/Map.h"
 #include"../DirectXAnimation/MyAllocateHierarchy.h"
 #include"../DirectXAnimation/AnimateObject.h"
 
 
-class Player : public Direct3D
+class Player : public Map
 {
 private:
 	float looptime = 0.0f;
@@ -34,7 +35,8 @@ public:
 	D3DXVECTOR3 PlayerMove(D3DXVECTOR3 pPos);
 	//ƒ‰ƒWƒAƒ“‚ÌŠp“x‚ğ•Ï‚¦‚éŠÖ”
 	D3DXVECTOR3 YRotation();
-
+	D3DXVECTOR3 mypos;
+	
 protected:
 
 
