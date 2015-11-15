@@ -222,22 +222,6 @@ void Map::MapRender()
 			i = 0;
 		}
 	
-	////ê≥ñ ìÒíiñ⁄
-	//xpanelSky.Render(&D3DXVECTOR3(0, 18, 72), &D3DXVECTOR3(0, 300.029f, 0), &D3DXVECTOR3(1, 1, 1), tpanelSky[1].GetTexture());
-	//xpanelSky.Render(&D3DXVECTOR3(12, 18, 72), &D3DXVECTOR3(0, 300.029f, 0), &D3DXVECTOR3(1, 1, 1), tpanelSky[0].GetTexture());
-	//xpanelSky.Render(&D3DXVECTOR3(24, 18, 72), &D3DXVECTOR3(0, 300.029f, 0), &D3DXVECTOR3(1, 1, 1), tpanelSky[2].GetTexture());
-	//xpanelSky.Render(&D3DXVECTOR3(36, 18, 72), &D3DXVECTOR3(0, 300.029f, 0), &D3DXVECTOR3(1, 1, 1), tpanelSky[1].GetTexture());
-	//xpanelSky.Render(&D3DXVECTOR3(-12, 18, 72), &D3DXVECTOR3(0, 300.029f, 0), &D3DXVECTOR3(1, 1, 1), tpanelSky[2].GetTexture());
-	//xpanelSky.Render(&D3DXVECTOR3(-24, 18, 72), &D3DXVECTOR3(0, 300.029f, 0), &D3DXVECTOR3(1, 1, 1), tpanelSky[1].GetTexture());
-	//xpanelSky.Render(&D3DXVECTOR3(-36, 18, 72), &D3DXVECTOR3(0, 300.029f, 0), &D3DXVECTOR3(1, 1, 1), tpanelSky[1].GetTexture());
-	////ê≥ñ éOíiñ⁄
-	//xpanelSky.Render(&D3DXVECTOR3(0, 30, 72), &D3DXVECTOR3(0, 300.029f, 0), &D3DXVECTOR3(1, 1, 1), tpanelSky[0].GetTexture());
-	//xpanelSky.Render(&D3DXVECTOR3(12, 30, 72), &D3DXVECTOR3(0, 300.029f, 0), &D3DXVECTOR3(1, 1, 1), tpanelSky[1].GetTexture());
-	//xpanelSky.Render(&D3DXVECTOR3(24, 30, 72), &D3DXVECTOR3(0, 300.029f, 0), &D3DXVECTOR3(1, 1, 1), tpanelSky[1].GetTexture());
-	//xpanelSky.Render(&D3DXVECTOR3(36, 30, 72), &D3DXVECTOR3(0, 300.029f, 0), &D3DXVECTOR3(1, 1, 1), tpanelSky[1].GetTexture());
-	//xpanelSky.Render(&D3DXVECTOR3(-12, 30, 72), &D3DXVECTOR3(0, 300.029f, 0), &D3DXVECTOR3(1, 1, 1), tpanelSky[2].GetTexture());
-	//xpanelSky.Render(&D3DXVECTOR3(-24, 30, 72), &D3DXVECTOR3(0, 300.029f, 0), &D3DXVECTOR3(1, 1, 1), tpanelSky[1].GetTexture());
-	//xpanelSky.Render(&D3DXVECTOR3(-36, 30, 72), &D3DXVECTOR3(0, 300.029f, 0), &D3DXVECTOR3(1, 1, 1), tpanelSky[2].GetTexture());
 	
 	//îwñ 
 	for (float wally = 6.0f; wally < 31.0f; wally += 12.0f)

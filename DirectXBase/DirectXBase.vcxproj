@@ -132,11 +132,6 @@
     <ClInclude Include="Player\Player.h" />
     <ClInclude Include="Xinput\Xinput.h" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\staticLiblary\MyLib\MyLib.vcxproj">
-      <Project>{d1416f10-6ef8-482e-b4d1-f4e78caa69e9}</Project>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
