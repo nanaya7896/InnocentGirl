@@ -25,7 +25,7 @@ public:
 	void Create(D3DXVECTOR3 pos, D3DXVECTOR3 rota);
 
 	//撮影
-	void View();
+	void View(D3DXVECTOR3 pos, D3DXVECTOR3 rota);
 
 	//ビューポートの設定
 	void SetViewPort(int x,int y,int width,int height);

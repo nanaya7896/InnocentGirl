@@ -36,10 +36,10 @@ void Camera::Create(D3DXVECTOR3 pos, D3DXVECTOR3 rota)
 	//射影行列をパイプラインに設定
 	pDevice3D->SetTransform(D3DTS_PROJECTION,&m_projection);
 	
-	View();
+	View(pos,rota);
 }
 
-void Camera::View()
+void Camera::View(D3DXVECTOR3 pos, D3DXVECTOR3 rota)
 {
 	D3DXMATRIX *m_temp = new D3DXMATRIX;
 	D3DXMatrixIdentity(&m_view);

@@ -2,7 +2,7 @@
 
 Player::Player()
 {
-	mypos.y = 1.0f;
+	mypos.y = 0.5f;
 	PlayerLoad();
 }
 Player::~Player()
@@ -25,9 +25,10 @@ HRESULT Player::PlayerLoad()
 	return S_OK;
 }
 
-void Player::PlayerCreate(D3DXVECTOR3 pPos)
+void Player::PlayerCreate(D3DXVECTOR3 pPos,D3DXVECTOR3 pAng)
 {
-	Xplayer.Render(&D3DXVECTOR3(pPos.x,pPos.y,pPos.z),&D3DXVECTOR3(200,0,0),&D3DXVECTOR3(0.001f,0.001f,0.001f), Tplayer.GetTexture());
+	
+	Xplayer.Render(&D3DXVECTOR3(pPos.x,pPos.y,pPos.z),&D3DXVECTOR3(pAng.x-(D3DX_PI/2.0f),pAng.y,pAng.z),&D3DXVECTOR3(0.001f,0.001f,0.001f), Tplayer.GetTexture());
 }
 
 D3DXVECTOR3 Player::PlayerMove(D3DXVECTOR3 pPos)
@@ -87,14 +88,40 @@ D3DXVECTOR3 Player::PlayerMove(D3DXVECTOR3 pPos)
 		{
 			mypos.x=pPos.x + speed;
 		}
-		D3DXVECTOR3 mina(pPos.x - 0.5f, pPos.y - 0.5f, pPos.z - 0.5f);
-		D3DXVECTOR3 maxa(pPos.x + 0.5f, pPos.y + 0.5f, pPos.z + 0.5f);
+		D3DXVECTOR3 mina(mypos.x - 0.5f, mypos.y - 0.5f, mypos.z - 0.5f);
+		D3DXVECTOR3 maxa(mypos.x + 0.5f, mypos.y + 0.5f, mypos.z + 0.5f);
 		if (HitTikei(&mina, &maxa) == FALSE)
 		{
 			pPos=mypos;
+		}
+		if (pEnemy.EneymHit(&mina, &maxa) == TRUE)
+		{
+			return D3DXVECTOR3(1,1,1);
+			/*delete scenechange;
+			scenechange = new GameOver;*/
 		}
 
 	
 	return pPos;
 	
+}
+
+
+D3DXVECTOR3 Player::PlayerCameraMove(D3DXVECTOR3 pAng)
+{
+	if (DirectInput::GetInstance().KeyDown(DIK_LEFT))
+	{
+		pAng.y += 1.0f;
+	}
+	else if (DirectInput::GetInstance().KeyState(DIK_LEFT))
+	{
+		pAng.y -= cosf(1.0f);
+		
+	}
+	if(DirectInput::GetInstance().KeyDown(DIK_RIGHT))
+	{
+		pAng.y += cosf(1.0f);
+	}
+
+	return pAng;
 }

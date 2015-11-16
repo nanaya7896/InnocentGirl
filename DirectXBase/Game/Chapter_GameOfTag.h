@@ -7,6 +7,7 @@
 #include "../Direct3D/direct3d.h"
 #include "../DirectInput\directInput.h"
 #include"GameMainTag.h"
+#include"../Enemy/Enemy.h"
 class CGameOfTag : public SceneChange ,Direct3D
 {
 private:
