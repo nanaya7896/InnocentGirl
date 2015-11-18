@@ -21,7 +21,13 @@ public:
 	Sprite onigo_hitori_sprite[2];
 	Sprite onigo_tomodati_sprite[2];
 	
-
+	//背景テクスチャとスプライトインスタンス
+	Texture t_bgcgo;
+	Sprite s_bgcgo;
+	//操作説明
+	Texture t_Info;
+	Sprite s_Info;
+	bool sousaflag;
 
 	bool onigo_flag = false;
 

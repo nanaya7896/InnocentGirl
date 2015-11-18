@@ -22,6 +22,10 @@ public:
 	Sprite chapter_sprite_onigo;
 	Sprite chapter_sprite_dodge;
 	Sprite chapter_sprite_marker;
+
+	//背景テクスチャ、スプライト読み込み
+	Texture t_bgChapter;
+	Sprite s_bgChapter;
 	bool chapter_flag;
 
 	//コンストラクタ

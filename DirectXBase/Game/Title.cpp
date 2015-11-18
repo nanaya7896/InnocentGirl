@@ -67,7 +67,7 @@ void Title::Draw()
 void Title::Load()
 {
 	//背景の読み込み
-	title_Background.Load(_T("texture/title_kari.png"));
+	title_Background.Load(_T("texture/taitoru.png"));
 	//画像の場所指定
 	stitle.SetPos(800, 450);
 	//画像の縦横のサイズ指定

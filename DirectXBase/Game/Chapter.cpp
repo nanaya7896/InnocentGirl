@@ -60,6 +60,8 @@ void Chapter::Draw()
 	chapter_sprite_onigo.Draw(pDevice3D, chapter_texture_onigo.pTexture);	//鬼ごっこ
 	chapter_sprite_dodge.Draw(pDevice3D, chapter_texture_dodge.pTexture);	//ドッヂボール
 	chapter_sprite_marker.Draw(pDevice3D, chapter_texture_marker.pTexture);	//マーカー
+	//背景描画
+	s_bgChapter.Draw(pDevice3D, t_bgChapter.GetTexture());
 }
 
 void Chapter::Load()
@@ -78,5 +80,12 @@ void Chapter::Load()
 	chapter_texture_marker.Load(_T("texture/ma-ka-.png"));
 	chapter_sprite_marker.SetPos(70, y);
 	chapter_sprite_marker.SetSize(130, 130);
+
+	//背景読み込み
+	t_bgChapter.Load(_T("texture/taitoru2.png"));
+	//画像の場所指定
+	s_bgChapter.SetPos(800, 450);
+	//画像の縦横のサイズ指定
+	s_bgChapter.SetSize(1600, 900);
 
 }

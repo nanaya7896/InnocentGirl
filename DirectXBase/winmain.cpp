@@ -179,7 +179,7 @@ int _stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	//画面遷移
 	//SetRenderState(direct3d.pDevice3D, RENDER_DEFAULT);
 	SetRenderState(direct3d.pDevice3D, RENDER_ALPHATEST);
-	SceneChange::scenechange = new GameMainTag();	//タイトル
+	SceneChange::scenechange = new Title();	//タイトル
 	DirectXText fps;
 	fps.Create(direct3d.pDevice3D, 32);
 	lasttime = timeGetTime();
