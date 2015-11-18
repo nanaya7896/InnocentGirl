@@ -6,6 +6,7 @@
 #include"../Direct3D/sprite.h"
 #include"../DirectInput/directInput.h"
 #include"Chapter.h"
+#include"Result.h"
 //派生クラス:タイトル	基底クラス:SceneChange　
 class Title : public SceneChange,Direct3D
 {

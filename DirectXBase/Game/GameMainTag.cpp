@@ -46,13 +46,13 @@ void GameMainTag::Update()
 	if (player.Hit == true)
 	{
 		delete scenechange;
-		scenechange = new Title();
+		scenechange = new Gameover();
 	}
 	//ƒ^ƒCƒ€‚ª‚X‚O•bŒo‰ß‚µ‚½‚Æ‚«
-	if (tentime == 0 && onetime == 0)
+	if (tentime == 0 && onetime == 0 && player.Hit==false)
 	{
 		delete scenechange;
-		scenechange = new Title();
+		scenechange =new CResult();
 	}
 
 	

@@ -100,7 +100,9 @@
     <ClCompile Include="Game\Chapter.cpp" />
     <ClCompile Include="Game\Chapter_GameOfTag.cpp" />
     <ClCompile Include="Game\GameMainTag.cpp" />
+    <ClCompile Include="Game\Gameover.cpp" />
     <ClCompile Include="Game\Map.cpp" />
+    <ClCompile Include="Game\Result.cpp" />
     <ClCompile Include="Game\SceneChange.cpp" />
     <ClCompile Include="Game\Title.cpp" />
     <ClCompile Include="Player\Player.cpp" />
@@ -124,7 +126,9 @@
     <ClInclude Include="Game\Chapter.h" />
     <ClInclude Include="Game\Chapter_GameOfTag.h" />
     <ClInclude Include="Game\GameMainTag.h" />
+    <ClInclude Include="Game\Gameover.h" />
     <ClInclude Include="Game\Map.h" />
+    <ClInclude Include="Game\Result.h" />
     <ClInclude Include="Game\SceneChange.h" />
     <ClInclude Include="Game\Title.h" />
     <ClInclude Include="Global.h" />
@@ -132,6 +136,9 @@
     <ClInclude Include="Player\Player.h" />
     <ClInclude Include="random.h" />
     <ClInclude Include="Xinput\Xinput.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

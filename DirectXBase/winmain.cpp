@@ -17,6 +17,8 @@
 #include "Game/Title.h"
 #include "Game/Chapter.h"
 #include "Game/Chapter_GameOfTag.h"
+#include"Game/Result.h"
+#include"Game/Gameover.h"
 //#include"DirectXAnimation/AnimateObject.h"
 //#include"DirectXAnimation/MyAllocateHierarchy.h"
 
