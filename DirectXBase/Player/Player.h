@@ -37,7 +37,9 @@ public:
 	//ƒ‰ƒWƒAƒ“‚ÌŠp“x‚ğ•Ï‚¦‚éŠÖ”
 	D3DXVECTOR3 YRotation();
 	D3DXVECTOR3 mypos;
-	
+	D3DXVECTOR3 maxa;//(mypos.x + 0.5f, mypos.y + 0.5f, mypos.z + 0.5f);
+	D3DXVECTOR3 mina;// (mypos.x - 0.5f, mypos.y - 0.5f, mypos.z - 0.5f);
+	bool Hit;
 protected:
 
 

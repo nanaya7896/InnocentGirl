@@ -6,7 +6,7 @@ D3DXVECTOR3 viewVecE(0.0f, 0.5f, -1.5f);
 GameMainTag::GameMainTag()
 {
 	PlayerPos.x = 0.0f;
-	PlayerPos.y = 1.0f;
+	PlayerPos.y = 0.5f;
 	PlayerPos.z = 0.0f;
 	PlayerAngle.x=0.0f;
 	PlayerAngle.y=0.0f;
@@ -16,7 +16,7 @@ GameMainTag::GameMainTag()
 	timeframe = 0;
 	Load();
 	camera = new Camera();
-	CameraPosition = D3DXVECTOR3(PlayerPos.x, PlayerPos.y, PlayerPos.z - 1.5f);
+	CameraPosition = D3DXVECTOR3(PlayerPos.x, PlayerPos.y, PlayerPos.z - 3.0f);
 }
 
 //デストラクタ
@@ -29,22 +29,39 @@ void GameMainTag::Update()
 {
 
 	
-	PlayerPos=player.PlayerMove(D3DXVECTOR3(PlayerPos.x, PlayerPos.y, PlayerPos.z));
+	PlayerPos=player.PlayerMove(PlayerPos);
 	PlayerAngle= player.PlayerCameraMove(PlayerAngle);
 
-	CameraPosition.x = PlayerPos.x - 1.5f*sinf(PlayerAngle.y);
-	CameraPosition.z = PlayerPos.z - 1.5f*cosf(PlayerAngle.y);
+	CameraPosition.x = PlayerPos.x - (3.0f*sinf(PlayerAngle.y));
+	CameraPosition.z = PlayerPos.z -( 3.0f*cosf(PlayerAngle.y));
 
 
-	camera->View(CameraPosition, D3DXVECTOR3(PlayerAngle.x +D3DXToRadian(5), PlayerAngle.y, PlayerAngle.z));
+	camera->View(CameraPosition, PlayerAngle);
+
+	//敵の移動判定とかのアップデート
+	gmtEnemy.Update();
 	//制限時間管理用フレーム
 	timeframe++;
+	//敵にぶつかったときの処理
+	if (player.Hit == true)
+	{
+		delete scenechange;
+		scenechange = new Title();
+	}
+	//タイムが９０秒経過したとき
+	if (tentime == 0 && onetime == 0)
+	{
+		delete scenechange;
+		scenechange = new Title();
+	}
+
+	
 }
 
 void GameMainTag::Draw()
 {
 
-	player.PlayerCreate(D3DXVECTOR3(PlayerPos.x, PlayerPos.y, PlayerPos.z),D3DXVECTOR3(PlayerAngle.x,PlayerAngle.y,PlayerAngle.z));
+	player.PlayerCreate(PlayerPos,PlayerAngle);
 	gmtEnemy.Draw();
 	//制限時間
 	if (timeframe >= 60)
@@ -64,6 +81,7 @@ void GameMainTag::Draw()
 	timeSprite[0].Draw(pDevice3D, timeTexture[onetime].pTexture);
 	timeSprite[1].Draw(pDevice3D, timeTexture[tentime].pTexture);
 
+	
 }
 
 void GameMainTag::Load()
@@ -85,8 +103,7 @@ void GameMainTag::Load()
 		timeSprite[1].SetPos(770,100);
 		timeSprite[1].SetSize(128,128);
 
-		//カメラの生成
-		//camera.Create(D3DXVECTOR3(PlayerPos.x + viewVecE.x, PlayerPos.y + viewVecE.y, PlayerPos.z + viewVecE.z), D3DXVECTOR3(PlayerAngle.x, PlayerAngle.y, PlayerAngle.z));
+		
 		
 }
 

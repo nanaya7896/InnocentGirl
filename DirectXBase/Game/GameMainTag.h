@@ -12,6 +12,8 @@
 #include"../DirectXAnimation/AnimateObject.h"
 #include"../Direct3D/font.h"
 #include"../Enemy/Enemy.h"
+#include"Title.h"
+
 class GameMainTag :public SceneChange,Direct3D
 {
 private:

@@ -22,7 +22,7 @@
 
 DWORD lasttime;
 
-D3DXVECTOR3 PlayerPos(0.0f,0.1f,0.0f);
+D3DXVECTOR3 PlayerPos(0.0f,0.0f,0.0f);
 D3DXVECTOR3 PlayerAngle(0.0f,0.0f,0.0f);
 //ウィンドウプロシージャ
 LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
