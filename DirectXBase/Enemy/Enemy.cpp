@@ -5,13 +5,21 @@ EnemyBox Enemy::em[30];
 //コンストラクタ
 Enemy::Enemy()
 {
+	//敵が動き続ける時間
 	EnemyMoveFrame = 0;
+	//敵が動くフラグ
+	EnemyMoveFlag = true;
+	//Enemyロード関数
 	Load();
+	//敵初期値ポジションの設定
 	for (int i = 0; i < MAX_ENEMY; i++)
 	{
+		//-60から60の座標間でランダム生成
 		EnemyPos[i] = D3DXVECTOR3(Random(-60.0f, 60.0f), 0.5f, Random(-60.0f, 60.0f));
+		//敵が一番最初向いている角度
+		EnemyAngle[i] = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	}
-	EnemyAngle = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+	
 }
 
 
@@ -25,7 +33,7 @@ Enemy::~Enemy()
 
 void Enemy::Update()
 {
-
+	//敵が動き続けるフレーム数
 	EnemyMoveFrame++;
 
 }
@@ -35,13 +43,34 @@ void Enemy::Draw()
 {
 	for (int i = 0; i < MAX_ENEMY; i++)
 	{
-		
-		if (EnemyMoveFrame > 10)
-	{
-			EnemyMove();
+		//EnemySearch();
+
+
+		//もし敵の行動フラグが立っていたら
+		if (EnemyMoveFlag == true)
+		{
+			//敵の行動フラグをfalseにする
+			EnemyMoveFlag = false;
+				//敵の行動関数
+			
+				EnemyMove();
+		}
+		//もし敵が180f(3s)動き続けたら
+		if (EnemyMoveFrame >= 180)
+		{
+			//新しい行動を入れるためのフラグをtrueへ
+			EnemyMoveFlag = true;
+			//フレームを初期値に戻す
 			EnemyMoveFrame = 0;
-	}
-		x_Enemy.Render(&EnemyPos[i], &EnemyAngle, &D3DXVECTOR3(1.0f, 1.0f, 1.0f), t_Enemy.GetTexture());
+		}
+
+
+		//行動関数から得た値を敵のPosにたす
+			EnemyPos[i] += EMoveSpeed[i];
+			EnemyAngle[i] += EnemyMoveAngleSpeed[i];
+			//敵の描画
+		x_Enemy.Render(&EnemyPos[i], &EnemyAngle[i], &D3DXVECTOR3(1.0f, 1.0f, 1.0f), t_Enemy.GetTexture());
+		//境界線ボックスの生成
 		numv[i] = x_Enemy.g_pMesh->GetNumVertices();
 		stride[i] = D3DXGetFVFVertexSize(x_Enemy.g_pMesh->GetFVF());
 		hr[i] = x_Enemy.g_pMesh->GetVertexBuffer(&pvb9);
@@ -59,7 +88,7 @@ void Enemy::Draw()
 		{
 			return;
 		}
-
+		//境界ボックスの範囲を設定
 		em[i].minv = EnemyPos[i] - D3DXVECTOR3(1.0f, 1.0f, 1.0f);
 		em[i].maxv = EnemyPos[i] + D3DXVECTOR3(1.0f, 1.0f, 1.0f);
 		pvb9->Unlock();
@@ -68,13 +97,16 @@ void Enemy::Draw()
 
 void Enemy::Load()
 {
+	//テクスチャとXファイルの読み込み
 	t_Enemy.Load("texture/teki1.bmp");
 	x_Enemy.XfileLoader(L"xfile/teki1.x");
+	//行列の初期化
 	D3DXMatrixIdentity(&d3dMat);
 
 
 }
 
+//衝突判定関数
 BOOL Enemy::EneymHit(D3DXVECTOR3 *pmin, D3DXVECTOR3 *pmax)
 {
 	D3DXVECTOR3 *Emin, *Emax;
@@ -91,59 +123,80 @@ BOOL Enemy::EneymHit(D3DXVECTOR3 *pmin, D3DXVECTOR3 *pmax)
 	return FALSE;
 }
 
+//敵の行動関数
 void Enemy::EnemyMove()
 {
 	
-	
-	
 		for (int i = 0; i < MAX_ENEMY; i++)
 		{
-
-			int EnemyCheck = Random(0, 4);
-		//	if (TransformEnemy == false)
-			//{
+			//0から4の間で値を生成
+			int EnemyCheck = Random(0, 6);
+			//敵の行動を選択
 				switch (EnemyCheck)
 				{
 				case 0:
-					EMoveSpeed.x = 1.0f;
+					//x軸に0.01f動く
+					EnemyMoveAngleSpeed[i].y = 0.0f;
+					EMoveSpeed[i].x =0.01f;
 					break;
 				case 1:
-					EMoveSpeed.x = -1.0f;
+					//x軸に-0.01f動く
+					EnemyMoveAngleSpeed[i].y = 0.0f;
+					EMoveSpeed[i].x = -0.01f;
 					break;
 				case 2:
-					EMoveSpeed.z = 1.0f;
+					//z軸に0.01f動く
+					EnemyMoveAngleSpeed[i].y = 0.0f;
+					EMoveSpeed[i].z = 0.01f;
 					break;
 				case 3:
-					EMoveSpeed.z = -1.0f;
+					//z軸に-0.01f動く
+					EnemyMoveAngleSpeed[i].y = 0.0f;
+					EMoveSpeed[i].z = -0.01f;
 					break;
 				case 4:
+					//向きを変える
+					EnemyMoveAngleSpeed[i].y = -0.01f;
+					EMoveSpeed[i].x = 0.0f;
+					EMoveSpeed[i].z = 0.0f;
+					break;
+				case 5:
+					//向きを変える
+					EnemyMoveAngleSpeed[i].y = 0.01f;
+					EMoveSpeed[i].x = 0.0f;
+					EMoveSpeed[i].z = 0.0f;
+					break;
+				case 6:
+					//何もしない
+					EMoveSpeed[i].x = 0.0f;
+					EMoveSpeed[i].z = 0.0f;
+					EnemyMoveAngleSpeed[i].y = 0.0f;
 					break;
 				}
-			//}
-			EnemyPos[i] += EMoveSpeed;
+			
+		
 
 		}
 	
 
 }
 
-BOOL Enemy::EnemyProbe(float *pfoundangley)
+float Enemy::EnemySearch(D3DXVECTOR3 pPos)
 {
-	//D3DXVECTOR3 probevec1(0.0f, 0.0f, 1.0f);
-	//D3DXVECTOR3 probevec2;
-	//D3DXMATRIXA16 matWorld;
-	//45度の視野を4.5度単位で探索
-	/*for (int i = -5; i < 6; i++)
+	for (int i = 0; i < MAX_ENEMY; i++)
 	{
-		EnemyAngle.y + D3DX_PI / 40 * i;
-		if (D3DXBoxBoundProbe(&mina, &maxa, &EnemyPos, &EnemyAngle) == TRUE)
-		{
-			*pfoundangley = EnemyAngle.y + D3DX_PI / 40 * i;
-			return TRUE;
-		}
 
-	}*/
-	return FALSE;
+		//Playerと敵との距離
+		PlayerEnemyDistance[i].x = pPos.x - EnemyPos[i].x;
+		PlayerEnemyDistance[i].y = 0.0f;
+		PlayerEnemyDistance[i].z = pPos.z - EnemyPos[i].z;
+
+		//三平方の定理
+		AutoMoveSpeed = sqrtf(pow(PlayerEnemyDistance[i].x,2 )+ pow(PlayerEnemyDistance[i].z,2));
+
+	}
+
+	return AutoMoveSpeed;
 
 
 }

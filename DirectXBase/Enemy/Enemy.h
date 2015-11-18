@@ -28,18 +28,25 @@ private:
 	//敵の場所
 	D3DXVECTOR3 EnemyPos[30];
 	//敵の向いている方向
-	D3DXVECTOR3 EnemyAngle;
+	D3DXVECTOR3 EnemyAngle[30];
 	//敵の移動スピード
-	D3DXVECTOR3 EMoveSpeed;
-
+	D3DXVECTOR3 EMoveSpeed[30];
+	//敵の向きを変えるスピード関数
+	D3DXVECTOR3 EnemyMoveAngleSpeed[30];
 	//敵の最大出現数
 	const int MAX_ENEMY = 30;
 	
+	D3DXVECTOR3 PlayerEnemyDistance[30];
+	float AutoMoveSpeed;
+	bool ModeChange[30];
 	//敵の移動制御用フレーム
 	int EnemyMoveFrame;
+	
 
 	//エネミーの自動移動かプレイヤー追いかけるかの判定
 	bool TransformEnemy[30];
+
+	bool EnemyMoveFlag;
 
 public:
 
@@ -57,7 +64,7 @@ public:
 
 	void Load();
 
-	BOOL EnemyProbe(float *pfoundangley);
+	float EnemySearch(D3DXVECTOR3 pPos);
 
 	BOOL EneymHit(D3DXVECTOR3 *pmin,D3DXVECTOR3 *pmax);
 

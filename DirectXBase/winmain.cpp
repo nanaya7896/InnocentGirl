@@ -22,8 +22,18 @@
 
 DWORD lasttime;
 
-D3DXVECTOR3 PlayerPos(0.0f,0.0f,0.0f);
-D3DXVECTOR3 PlayerAngle(0.0f,0.0f,0.0f);
+//FPS管理用変数
+//測定開始時刻
+static int mStartTime;
+//カウンタ
+static int mCount;
+//FPS
+static float mFps;
+//平均をとるサンプル
+static const int N = 60;
+
+void Wait();
+
 //ウィンドウプロシージャ
 LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
@@ -168,7 +178,8 @@ int _stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	//SetRenderState(direct3d.pDevice3D, RENDER_DEFAULT);
 	SetRenderState(direct3d.pDevice3D, RENDER_ALPHATEST);
 	SceneChange::scenechange = new GameMainTag();	//タイトル
-	
+	DirectXText fps;
+	fps.Create(direct3d.pDevice3D, 32);
 	lasttime = timeGetTime();
 	while (msg.message != WM_QUIT)
 	{
@@ -179,6 +190,17 @@ int _stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 		// メッセージ処理をしていないとき
 		else
 		{
+			if (mCount == 0)
+			{
+				mStartTime = timeGetTime();
+			}
+			if (mCount == N)
+			{
+				int t = timeGetTime();
+				mFps = 1000.0f / ((t - mStartTime) / (float)N);
+				mCount = 0;
+				mStartTime = t;
+			}
 			if (SUCCEEDED(direct3d.pDevice3D->BeginScene()))
 			{
 				//キー状態更新
@@ -229,10 +251,13 @@ int _stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 				////描画
 				//Pplayer.PlayerCreate(D3DXVECTOR3(PlayerPos.x,PlayerPos.y,PlayerPos.z));
 				//map.MapRender();
-				
+				fps.Draw(D3DXCOLOR(255, 255, 255, 10), 20, 20, _T("%.1f"), mFps);
 				
 				direct3d.pDevice3D->EndScene();
 			}
+
+			mCount++;
+			Wait();
 			//描画反映
 			direct3d.pDevice3D->Present(NULL, NULL, NULL, NULL);		
 		}
@@ -241,4 +266,14 @@ int _stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	direct3d.pDevice3D->Release();
 	direct3d.pD3D9->Release();
 	return 0;
+}
+
+void Wait()
+{
+	int tookTime = timeGetTime() - mStartTime;
+	int waitTime = mCount * 1000 / FPS - tookTime;
+	if (waitTime > 0)
+	{
+		Sleep(waitTime);
+	}
 }
