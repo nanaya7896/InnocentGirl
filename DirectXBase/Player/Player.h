@@ -21,6 +21,10 @@ private:
 	Enemy pEnemy;
 	MyAllocateHierarchy mah;
 	CSkinMesh cskinMesh;
+
+	int RunFrame;
+	bool RunFlag;
+
 	//プレイヤーのヨー回転(y軸中心)
 	double ridianYaw =  0.0f;
 public:

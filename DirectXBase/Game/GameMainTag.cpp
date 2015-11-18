@@ -39,7 +39,7 @@ void GameMainTag::Update()
 	camera->View(CameraPosition, PlayerAngle);
 
 	//敵の移動判定とかのアップデート
-	gmtEnemy.Update();
+	gmtEnemy.Update(PlayerPos);
 	//制限時間管理用フレーム
 	timeframe++;
 	//敵にぶつかったときの処理

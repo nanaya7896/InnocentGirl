@@ -319,7 +319,7 @@ void Map::MapRender()
 	//ビルの描画
 	
 	//灰色のビル
-	xBuil[0].Render(&D3DXVECTOR3(30.0f, 0.1f, -50.0f), &D3DXVECTOR3(4.69999790f, 0, 0), &D3DXVECTOR3(0.1f, 0.1f, 0.1f), tBuil[0].GetTexture());
+	xBuil[0].Render(&D3DXVECTOR3(30.0f, 0.1f, -50.0f), &D3DXVECTOR3(4.69999790f, 0, 0), &D3DXVECTOR3(0.1f, 0.1f, 0.2f), tBuil[0].GetTexture());
 	numv[108] = xBuil[0].g_pMesh->GetNumVertices();
 	stride[108] = D3DXGetFVFVertexSize(xBuil[0].g_pMesh->GetFVF());
 	hr[108] = xBuil[0].g_pMesh->GetVertexBuffer(&pvb9);
@@ -343,7 +343,7 @@ void Map::MapRender()
 	
 
 
-	xBuil[0].Render(&D3DXVECTOR3(30.0f, 0.1f, 36.0f), &D3DXVECTOR3(4.69999790f, 0, 0), &D3DXVECTOR3(0.1f, 0.1f, 0.1f), tBuil[0].GetTexture());
+	xBuil[0].Render(&D3DXVECTOR3(30.0f, 0.1f, 36.0f), &D3DXVECTOR3(4.69999790f, 0, 0), &D3DXVECTOR3(0.1f, 0.1f, 0.2f), tBuil[0].GetTexture());
 	numv[109] = xBuil[0].g_pMesh->GetNumVertices();
 	stride[109] = D3DXGetFVFVertexSize(xBuil[0].g_pMesh->GetFVF());
 	hr[109] = xBuil[0].g_pMesh->GetVertexBuffer(&pvb9);
@@ -365,7 +365,7 @@ void Map::MapRender()
 	buildingsbox[109].maxv = D3DXVECTOR3(30.0f, 0.1f, 36.0f) + D3DXVECTOR3(3.0f, 3.0f, 3.0f);
 	pvb9->Unlock();
 
-	xBuil[0].Render(&D3DXVECTOR3(-30.0f, 0.1f, -12.0f), &D3DXVECTOR3(4.69999790f, 0, 0), &D3DXVECTOR3(0.1f, 0.1f, 0.1f), tBuil[0].GetTexture());
+	xBuil[0].Render(&D3DXVECTOR3(-30.0f, 0.1f, -24.0f), &D3DXVECTOR3(4.69999790f, 0, 0), &D3DXVECTOR3(0.1f, 0.1f, 0.1f), tBuil[0].GetTexture());
 	numv[110] = xBuil[0].g_pMesh->GetNumVertices();
 	stride[110] = D3DXGetFVFVertexSize(xBuil[0].g_pMesh->GetFVF());
 	hr[110] = xBuil[0].g_pMesh->GetVertexBuffer(&pvb9);
@@ -383,8 +383,8 @@ void Map::MapRender()
 	{
 		return;
 	}
-	buildingsbox[110].minv = D3DXVECTOR3(-30.0f, 0.1f, -12.0f) - D3DXVECTOR3(3.0f, 3.0f, 3.0f);
-	buildingsbox[110].maxv = D3DXVECTOR3(-30.0f, 0.1f, -12.0f) + D3DXVECTOR3(3.0f, 3.0f, 3.0f);
+	buildingsbox[110].minv = D3DXVECTOR3(-30.0f, 0.1f, -24.0f) - D3DXVECTOR3(3.0f, 3.0f, 3.0f);
+	buildingsbox[110].maxv = D3DXVECTOR3(-30.0f, 0.1f, -24.0f) + D3DXVECTOR3(3.0f, 3.0f, 3.0f);
 	pvb9->Unlock();
 	//クリーム色のビル
 	xBuil[1].Render(&D3DXVECTOR3(12.0f, 0.1f, -24.0f), &D3DXVECTOR3(-1.60000026f, 0, -7.89999485f), &D3DXVECTOR3(0.1f, 0.1f, 0.1f), tBuil[1].GetTexture());
@@ -409,7 +409,7 @@ void Map::MapRender()
 	buildingsbox[111].maxv = D3DXVECTOR3(12.0f, 0.1f, -24.0f) + D3DXVECTOR3(3.0f, 3.0f, 3.0f);
 	pvb9->Unlock();
 
-	xBuil[1].Render(&D3DXVECTOR3(-30.0f, 0.1f, 12.0f), &D3DXVECTOR3(-1.60000026f, 0, -7.89999485f), &D3DXVECTOR3(0.1f, 0.1f, 0.1f), tBuil[1].GetTexture());
+	xBuil[1].Render(&D3DXVECTOR3(-30.0f, 0.1f, 12.0f), &D3DXVECTOR3(-1.60000026f, 0, -7.89999485f), &D3DXVECTOR3(0.1f, 0.1f, 0.2f), tBuil[1].GetTexture());
 	numv[112] = xBuil[1].g_pMesh->GetNumVertices();
 	stride[112] = D3DXGetFVFVertexSize(xBuil[1].g_pMesh->GetFVF());
 	hr[112] = xBuil[1].g_pMesh->GetVertexBuffer(&pvb9);
@@ -431,7 +431,7 @@ void Map::MapRender()
 	buildingsbox[112].maxv = D3DXVECTOR3(-30.0f, 0.1f, 12.0f) + D3DXVECTOR3(3.0f, 3.0f, 3.0f);
 	pvb9->Unlock();
 	//赤道色のビル
-	xBuil[2].Render(&D3DXVECTOR3(12.0f, 0.1f, 36.0f), &D3DXVECTOR3(-1.60000026f, 0, -4.69999790f), &D3DXVECTOR3(0.1f, 0.1f, 0.1f), tBuil[2].GetTexture());
+	xBuil[2].Render(&D3DXVECTOR3(12.0f, 0.1f, 36.0f), &D3DXVECTOR3(-1.60000026f, 0, -4.69999790f), &D3DXVECTOR3(0.1f, 0.1f, 0.2f), tBuil[2].GetTexture());
 	numv[113] = xBuil[2].g_pMesh->GetNumVertices();
 	stride[113] = D3DXGetFVFVertexSize(xBuil[2].g_pMesh->GetFVF());
 	hr[113] = xBuil[2].g_pMesh->GetVertexBuffer(&pvb9);
@@ -453,7 +453,7 @@ void Map::MapRender()
 	buildingsbox[113].maxv = D3DXVECTOR3(12.0f, 0.1f, 36.0f) + D3DXVECTOR3(3.0f, 3.0f, 4.0f);
 	pvb9->Unlock();
 
-	xBuil[2].Render(&D3DXVECTOR3(-12.0f, 0.1f, 12.0f), &D3DXVECTOR3(-1.60000026f, 0, -4.69999790f), &D3DXVECTOR3(0.1f, 0.1f, 0.1f), tBuil[2].GetTexture());
+	xBuil[2].Render(&D3DXVECTOR3(-12.0f, 0.1f, 24.0f), &D3DXVECTOR3(-1.60000026f, 0, -4.69999790f), &D3DXVECTOR3(0.1f, 0.1f, 0.1f), tBuil[2].GetTexture());
 	numv[114] = xBuil[2].g_pMesh->GetNumVertices();
 	stride[114] = D3DXGetFVFVertexSize(xBuil[2].g_pMesh->GetFVF());
 	hr[114] = xBuil[2].g_pMesh->GetVertexBuffer(&pvb9);
@@ -471,8 +471,8 @@ void Map::MapRender()
 	{
 		return;
 	}
-	buildingsbox[114].minv = D3DXVECTOR3(-12.0f, 0.1f, 12.0f) - D3DXVECTOR3(3.0f, 3.0f, 4.0f);
-	buildingsbox[114].maxv = D3DXVECTOR3(-12.0f, 0.1f, 12.0f) + D3DXVECTOR3(3.0f, 3.0f, 4.0f);
+	buildingsbox[114].minv = D3DXVECTOR3(-12.0f, 0.1f, 24.0f) - D3DXVECTOR3(4.0f, 3.0f, 4.0f);
+	buildingsbox[114].maxv = D3DXVECTOR3(-12.0f, 0.1f, 24.0f) + D3DXVECTOR3(4.0f, 3.0f, 4.0f);
 	pvb9->Unlock();
 
 	

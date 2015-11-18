@@ -8,7 +8,7 @@ Enemy::Enemy()
 	//敵が動き続ける時間
 	EnemyMoveFrame = 0;
 	//敵が動くフラグ
-	EnemyMoveFlag = true;
+	
 	//Enemyロード関数
 	Load();
 	//敵初期値ポジションの設定
@@ -18,6 +18,8 @@ Enemy::Enemy()
 		EnemyPos[i] = D3DXVECTOR3(Random(-60.0f, 60.0f), 0.5f, Random(-60.0f, 60.0f));
 		//敵が一番最初向いている角度
 		EnemyAngle[i] = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+		TransformEnemy[i] = false;
+		EnemyMoveFlag[i] = true;
 	}
 	
 }
@@ -31,10 +33,77 @@ Enemy::~Enemy()
 }
 
 
-void Enemy::Update()
+void Enemy::Update(D3DXVECTOR3 pPos)
 {
 	//敵が動き続けるフレーム数
 	EnemyMoveFrame++;
+	for (int i = 0; i < MAX_ENEMY; i++)
+	{
+		
+
+	
+		if (pPos.x - EnemyPos[i].x <= 5.0f &&pPos.x - EnemyPos[i].x >= -5.0f || pPos.z - EnemyPos[i].z <= 5.0f &&pPos.z - EnemyPos[i].z >= -5.0f)
+		{
+			AutoMove[i] = EnemySearch(pPos);
+			TransformEnemy[i] = true;
+			EnemyMoveFlag[i] = false;
+		}
+		else
+		{
+			TransformEnemy[i] = false;
+		}
+
+		//もし敵の行動フラグが立っていたら
+		if (EnemyMoveFlag[i] == true)
+		{
+			//敵の行動フラグをfalseにする
+			EnemyMoveFlag[i] = false;
+			//敵の行動関数
+			EnemyMove();
+			TransformEnemy[i] = false;
+		}
+		//もし敵が180f(3s)動き続けたら
+		if (EnemyMoveFrame >= 180 && TransformEnemy[i]==false)
+		{
+			//新しい行動を入れるためのフラグをtrueへ
+			EnemyMoveFlag[i] = true;
+			//フレームを初期値に戻す
+			EnemyMoveFrame = 0;
+		}
+
+		if (TransformEnemy[i] == false)
+		{
+			//行動関数から得た値を敵のPosにたす
+			EnemyPos[i] += EMoveSpeed[i];
+			EnemyAngle[i] += EnemyMoveAngleSpeed[i];
+		}
+		else if(TransformEnemy[i]==true)
+		{
+			if (AutoMove[i] != 0)
+			{
+				if (PlayerEnemyDistance[i].x >= 0 && PlayerEnemyDistance[i].x < 5.0f && PlayerEnemyDistance[i].z >= 0 && PlayerEnemyDistance[i].z < 5.0f)
+				{
+					EnemyPos[i].x += 0.1f;
+					EnemyPos[i].z += 0.1f;
+				}
+				else if (PlayerEnemyDistance[i].x < 0 && PlayerEnemyDistance[i].x > -5.0f && PlayerEnemyDistance[i].z > 0 && PlayerEnemyDistance[i].z < 5.0f)
+				{
+					EnemyPos[i].x -= 0.1f;
+					EnemyPos[i].z += 0.1f;
+				}
+				else if (PlayerEnemyDistance[i].x < 0 && PlayerEnemyDistance[i].x > -5.0f && PlayerEnemyDistance[i].z < 0 && PlayerEnemyDistance[i].z >- 5.0f)
+				{
+					EnemyPos[i].x -= 0.1f;
+					EnemyPos[i].z -= 0.1f;
+				}
+				else if (PlayerEnemyDistance[i].x >= 0 && PlayerEnemyDistance[i].x < 5.0f && PlayerEnemyDistance[i].z < 0 && PlayerEnemyDistance[i].z >- 5.0f)
+				{
+					EnemyPos[i].x += 0.1f;
+					EnemyPos[i].z -= 0.1f;
+				}
+			}
+		}
+	}
 
 }
 
@@ -43,31 +112,6 @@ void Enemy::Draw()
 {
 	for (int i = 0; i < MAX_ENEMY; i++)
 	{
-		//EnemySearch();
-
-
-		//もし敵の行動フラグが立っていたら
-		if (EnemyMoveFlag == true)
-		{
-			//敵の行動フラグをfalseにする
-			EnemyMoveFlag = false;
-				//敵の行動関数
-			
-				EnemyMove();
-		}
-		//もし敵が180f(3s)動き続けたら
-		if (EnemyMoveFrame >= 180)
-		{
-			//新しい行動を入れるためのフラグをtrueへ
-			EnemyMoveFlag = true;
-			//フレームを初期値に戻す
-			EnemyMoveFrame = 0;
-		}
-
-
-		//行動関数から得た値を敵のPosにたす
-			EnemyPos[i] += EMoveSpeed[i];
-			EnemyAngle[i] += EnemyMoveAngleSpeed[i];
 			//敵の描画
 		x_Enemy.Render(&EnemyPos[i], &EnemyAngle[i], &D3DXVECTOR3(1.0f, 1.0f, 1.0f), t_Enemy.GetTexture());
 		//境界線ボックスの生成
@@ -130,7 +174,7 @@ void Enemy::EnemyMove()
 		for (int i = 0; i < MAX_ENEMY; i++)
 		{
 			//0から4の間で値を生成
-			int EnemyCheck = Random(0, 6);
+			int EnemyCheck = (int)Random((int)0, (int)6);
 			//敵の行動を選択
 				switch (EnemyCheck)
 				{

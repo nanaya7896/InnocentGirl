@@ -4,6 +4,8 @@ Player::Player()
 {
 	Hit = false;
 	mypos.y = 0.5f;
+	RunFrame = 0;
+	RunFlag = true;
 	//maxa(mypos.x + 0.5f, mypos.y + 0.5f, mypos.z + 0.5f);
 	//D3DXVECTOR3 mina(mypos.x - 0.5f, mypos.y - 0.5f, mypos.z - 0.5f);
 
@@ -40,10 +42,23 @@ D3DXVECTOR3 Player::PlayerMove(D3DXVECTOR3 pPos)
 
 	//cskinMesh.Update(d3dMat);
 	//cskinMesh.Draw(pDevice3D);
+	if (RunFrame >= 120)
+	{
+		RunFlag = false;
+	}
+	if (RunFrame >= 360)
+	{
+		RunFlag = true;
+	}
 	
+
 	if (DirectInput::GetInstance().KeyDown(DIK_F) || DirectInput::GetInstance().KeyState(DIK_F))
 	{
-		speed = 0.23f;
+		if (RunFlag == true)
+		{
+			speed = 0.15f;
+			RunFrame++;
+		}
 	}
 	else
 	{

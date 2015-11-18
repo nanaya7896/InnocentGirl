@@ -38,7 +38,7 @@ private:
 	
 	D3DXVECTOR3 PlayerEnemyDistance[30];
 	float AutoMoveSpeed;
-	bool ModeChange[30];
+	float AutoMove[30];
 	//敵の移動制御用フレーム
 	int EnemyMoveFrame;
 	
@@ -46,7 +46,7 @@ private:
 	//エネミーの自動移動かプレイヤー追いかけるかの判定
 	bool TransformEnemy[30];
 
-	bool EnemyMoveFlag;
+	bool EnemyMoveFlag[30];
 
 public:
 
@@ -58,7 +58,7 @@ public:
 	//仮想化デストラクタ
 	virtual ~Enemy();
 
-	void Update();
+	void Update(D3DXVECTOR3 pPos);
 
 	void Draw();
 
