@@ -26,27 +26,34 @@ private:
 	//メンバ変数
 	DWORD numv[31], stride[31];
 	//敵の場所
-	D3DXVECTOR3 EnemyPos[30];
+	D3DXVECTOR3 EnemyPos[31];
 	//敵の向いている方向
-	D3DXVECTOR3 EnemyAngle[30];
+	D3DXVECTOR3 EnemyAngle[31];
 	//敵の移動スピード
-	D3DXVECTOR3 EMoveSpeed[30];
+	D3DXVECTOR3 EMoveSpeed[31];
 	//敵の向きを変えるスピード関数
-	D3DXVECTOR3 EnemyMoveAngleSpeed[30];
+	D3DXVECTOR3 EnemyMoveAngleSpeed[31];
 	//敵の最大出現数
-	const int MAX_ENEMY = 30;
+	const int MAX_ENEMY = 31;
 	
-	D3DXVECTOR3 PlayerEnemyDistance[30];
+	//プレイヤーとユキちゃんの距離の差を保存する
+	D3DXVECTOR3 PlayerEnemyDistance[31];
+	//三平方の定理で求めた対象物との距離差
 	float AutoMoveSpeed;
-	float AutoMove[30];
+	//行動する象限を判断する関数
+	float AutoMove[31];
 	//敵の移動制御用フレーム
 	int EnemyMoveFrame;
 	
 
+	//追跡者フラグ
+	bool SearcherFlag[31];
+	//追跡者移動制御フレーム
+	int SearcherFrame;
 	//エネミーの自動移動かプレイヤー追いかけるかの判定
-	bool TransformEnemy[30];
+	bool TransformEnemy[31];
 
-	bool EnemyMoveFlag[30];
+	bool EnemyMoveFlag[31];
 
 public:
 
@@ -70,11 +77,13 @@ public:
 
 	void EnemyMove();
 
+	//追跡者の移動関数
+	void SerachMove();
 	//ランダムで値を生成するヘルパー関数
 	float Random(float min, float max);
 
 protected:
-	static EnemyBox em[30];
+	static EnemyBox em[31];
 
 
 

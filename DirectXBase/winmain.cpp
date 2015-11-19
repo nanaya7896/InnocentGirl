@@ -273,7 +273,7 @@ int _stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 void Wait()
 {
 	int tookTime = timeGetTime() - mStartTime;
-	int waitTime = mCount * 1000 / FPS - tookTime;
+	int waitTime =( mCount * 1000 / FPS) - tookTime;
 	if (waitTime > 0)
 	{
 		Sleep(waitTime);

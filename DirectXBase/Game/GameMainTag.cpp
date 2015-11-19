@@ -33,7 +33,7 @@ void GameMainTag::Update()
 	PlayerAngle= player.PlayerCameraMove(PlayerAngle);
 
 	CameraPosition.x = PlayerPos.x - (3.0f*sinf(PlayerAngle.y));
-	CameraPosition.z = PlayerPos.z -( 3.0f*cosf(PlayerAngle.y));
+	CameraPosition.z = PlayerPos.z - (3.0f*cosf(PlayerAngle.y));
 
 
 	camera->View(CameraPosition, PlayerAngle);

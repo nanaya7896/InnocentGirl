@@ -140,7 +140,8 @@ bool Direct3D::Create(HWND hWnd, int Width, int Height)
 	ZeroMemory(&light, sizeof(D3DLIGHT9));
 
 	light.Type = D3DLIGHT_DIRECTIONAL;
-	light.Direction = D3DXVECTOR3(1, -1, 1);
+	//light.Type = D3DLIGHT_SPOT;
+	light.Direction = D3DXVECTOR3(1, 40, 1);
 	light.Diffuse.r = 1.0f;
 	light.Diffuse.g = 1.0f;
 	light.Diffuse.b = 1.0f;
