@@ -2,7 +2,7 @@
 #include"../Global.h"
 #include"../Direct3D/Xfile.h"
 #include"../Direct3D/texture.h"
-#include"../Enemy/Enemy.h"
+//#include"../Enemy/Enemy.h"
 struct BoundingBox
 {
 	D3DXVECTOR3 minv;	//最少頂点
@@ -25,7 +25,7 @@ private:
 	X_FILE xpanelSky;
 	X_FILE xBuil[4];
 	//Enemyのインスタンス生成
-	Enemy Cem;
+	//Enemy Cem;
 	//メンバ変数
 	DWORD numv[150], stride[150];
 	LPDIRECT3DVERTEXBUFFER9 pvb9;
@@ -45,7 +45,7 @@ public:
 	void MapRender();
 	BOOL HitTikei(D3DXVECTOR3 *pmina,D3DXVECTOR3 *pmaxa);
 
-
+	BOOL HitETikei(D3DXVECTOR3 *emina, D3DXVECTOR3 *emaxa);
 	
 
 protected:

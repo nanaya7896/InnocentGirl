@@ -474,32 +474,6 @@ void Map::MapRender()
 	buildingsbox[114].minv = D3DXVECTOR3(-12.0f, 0.1f, 24.0f) - D3DXVECTOR3(4.0f, 3.0f, 4.0f);
 	buildingsbox[114].maxv = D3DXVECTOR3(-12.0f, 0.1f, 24.0f) + D3DXVECTOR3(4.0f, 3.0f, 4.0f);
 	pvb9->Unlock();
-
-	
-	
-	/*for (int i = 0; i < 3; i++)
-	{
-		numv[1 + i] = xBuil[i].g_pMesh->GetNumVertices();
-		stride[1 + i] = xBuil[i].g_pMesh->GetFVF();
-		hr[1 + i] = xBuil[i].g_pMesh->GetVertexBuffer(&pvb9);
-		if (FAILED(hr))
-		{
-			return;
-		}
-		hr[1 + i] = pvb9->Lock(0, 0, (VOID**)&pvertices, 0);
-		if (FAILED(hr))
-		{
-			return;
-		}
-		hr[1 + i] = D3DXComputeBoundingBox((D3DXVECTOR3*)pvertices, numv[0], stride[0], &lminv, &lmaxv);
-		if (FAILED(hr))
-		{
-			return;
-		}
-		buildingsbox[1 + i].minv = xBuil[i].pos + lminv;
-		buildingsbox[1 + i].maxv = xBuil[i].pos + lmaxv;
-		pvb9->Unlock();
-	}*/
 }
 
 
@@ -517,5 +491,25 @@ BOOL Map::HitTikei(D3DXVECTOR3 *pmina, D3DXVECTOR3 *pmaxa)
 		}
 	}
 	return FALSE;
+
+}
+
+BOOL Map::HitETikei(D3DXVECTOR3 *emina, D3DXVECTOR3 *emaxa)
+{
+	for (int i = 0; i < 115; i++)
+	{
+		D3DXVECTOR3 *eminb, *emaxb;
+		eminb = &buildingsbox[i].minv;
+		emaxb = &buildingsbox[i].maxv;
+
+		if ((emina->x < emaxb->x) && (emaxa->x > eminb->x) && (emina->y <emaxb->y) && (emaxa->y > eminb->y) && (emina->z < emaxb->z) && (emaxa->z > eminb->z))
+		{
+			return TRUE;
+		}
+	}
+	return FALSE;
+
+
+
 
 }

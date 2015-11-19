@@ -3,8 +3,7 @@
 #include"../Direct3D/direct3d.h"
 #include"../Direct3D/Xfile.h"
 #include"../Direct3D/texture.h"
-
-
+#include"../Game/Map.h"
 
 struct EnemyBox{
 	D3DXVECTOR3 minv;
@@ -16,8 +15,9 @@ class Enemy : public Direct3D
 private:
 	Texture t_Enemy;
 	X_FILE x_Enemy;
+	Map eMap;
 
-	
+
 	//境界ボックス生成用変数
 	LPDIRECT3DVERTEXBUFFER9 pvb9;
 	BYTE *pvertices;
@@ -44,7 +44,7 @@ private:
 	float AutoMove[31];
 	//敵の移動制御用フレーム
 	int EnemyMoveFrame;
-	
+	bool MapHit[31];
 
 	//追跡者フラグ
 	bool SearcherFlag[31];
@@ -54,7 +54,8 @@ private:
 	bool TransformEnemy[31];
 
 	bool EnemyMoveFlag[31];
-
+	D3DXVECTOR3 maxe;//(mypos.x + 0.5f, mypos.y + 0.5f, mypos.z + 0.5f);
+	D3DXVECTOR3 mine;// (mypos.x - 0.5f, mypos.y - 0.5f, mypos.z - 0.5f);
 public:
 
 	

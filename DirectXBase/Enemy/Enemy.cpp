@@ -17,9 +17,10 @@ Enemy::Enemy()
 		PlayerEnemyDistance[i] = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 		AutoMove[i]=0.0f;
 		//-60から60の座標間でランダム生成
-		EnemyPos[i] = D3DXVECTOR3(Random(-60.0f, 60.0f), 0.5f, Random(-60.0f,60.0f));
+		EnemyPos[i] = D3DXVECTOR3(Random(-60.0f, 60.0f), 0.7f, Random(-60.0f,60.0f));
 		//敵が一番最初向いている角度
 		EnemyAngle[i] = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+		MapHit[i] = false;
 		if (i <= 29)
 		{
 			TransformEnemy[i] = false;
@@ -115,18 +116,34 @@ void Enemy::Update(D3DXVECTOR3 pPos)
 				}
 			}
 		}
-		else if(SearcherFlag[i]==true)
+		else if(SearcherFlag[i]==true &&MapHit[i]==false)
 		{
-
-			
 			SerachMove();
-				
-			
+		}
+		
+		maxe.x = EnemyPos[i].x + 0.7f;
+		maxe.y = EnemyPos[i].y + 0.7f;
+		maxe.z = EnemyPos[i].z + 0.7f;
+		mine.x = EnemyPos[i].x - 0.7f;
+		mine.y = EnemyPos[i].y - 0.7f;
+		mine.z = EnemyPos[i].z - 0.7f;
+
+
+		if (eMap.HitETikei(&mine, &maxe) == TRUE)
+		{
+			MapHit[i] = true;
+		}
+		else
+		{
+			MapHit[i] = false;
 		}
 		if (TransformEnemy[i] == false)
 		{
 			//行動関数から得た値を敵のPosにたす
-			EnemyPos[i] += EMoveSpeed[i];
+			if (MapHit[i] == false)
+			{
+				EnemyPos[i] += EMoveSpeed[i];
+			}
 			EnemyAngle[i] += EnemyMoveAngleSpeed[i];
 		}
 	}
