@@ -27,6 +27,7 @@ private:
 	Player player;
 	//カメラインスタンス
 	Camera *camera;
+	Camera *camera2;
 	//アニメーションインスタンス
 	MyAllocateHierarchy mah;
 	//メッシュインスタンス
@@ -56,8 +57,7 @@ public:
 
 	void Load();
 
-	//当たり判定関数
-	HRESULT Player_HitBox();
+
 protected:
 	D3DXVECTOR3 PlayerPos;
 	D3DXVECTOR3 PlayerAngle;

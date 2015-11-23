@@ -15,7 +15,12 @@ GameMainTag::GameMainTag()
 	time = 90;
 	timeframe = 0;
 	Load();
+
 	camera = new Camera();
+	camera2 = new Camera(D3DXVECTOR3(0,0,-10),D3DXVECTOR3(0,0,0));
+//	camera[0]->SetViewPort();
+//	camera[1]->SetViewPort2();
+	
 	CameraPosition = D3DXVECTOR3(PlayerPos.x, PlayerPos.y, PlayerPos.z - 3.0f);
 }
 
@@ -23,6 +28,7 @@ GameMainTag::GameMainTag()
 GameMainTag::~GameMainTag()
 {
 	delete camera;
+	delete camera2;
 }
 
 void GameMainTag::Update()
@@ -37,7 +43,7 @@ void GameMainTag::Update()
 
 
 	camera->View(CameraPosition, PlayerAngle);
-
+camera2->View2(D3DXVECTOR3(0, 1, -5.0f), D3DXVECTOR3(0, 0, 0));
 	//敵の移動判定とかのアップデート
 	gmtEnemy.Update(PlayerPos);
 	//制限時間管理用フレーム
@@ -107,14 +113,3 @@ void GameMainTag::Load()
 		
 }
 
-HRESULT GameMainTag::Player_HitBox()
-{
-	/*if ()
-	{
-		return E_FAIL;
-	}*/
-
-
-
-	return S_OK;
-}

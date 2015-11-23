@@ -30,7 +30,7 @@ void CResult::Update()
 //ゲーム開始の際に行う準備
 void CResult::Load()
 {
-	randomNum = Random(1, 3);
+	randomNum = Random(float(1.0f), float(3.0f));
 	//テクスチャ　スプライトの準備
 	yukiR1Tex.Load(_T("texture/yuki-R1.png"));          //画像（ユキ１）の読み込み
 	yukiR2Tex.Load(_T("texture/yuki-R2.png"));          //画像（ユキ２）の読み込み

@@ -22,7 +22,7 @@ HRESULT Player::PlayerLoad()
 	Tplayer.Load("texture/yukitxture2.jpg");
 	Xplayer.XfileLoader(L"xfile/yukicyan.X");
 	//Tplayer.Load("texture/Tiny_skin.dds");
-	//cskinMesh.Init(pDevice3D,"xfile/Tiny.x");
+	//cskinMesh.Init(pDevice3D,"xfile/Y-runstart-P.X");
 	D3DXMatrixIdentity(&d3dMat);
 	if (Tplayer.pTexture == NULL)
 	{

@@ -169,9 +169,9 @@ int _stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	SetRenderState(direct3d.pDevice3D, RENDER_ALPHATEST);*/
 
 	//スキンメッシュ用クラス
-	//CSkinMesh m_CSkinMesh;
+	CSkinMesh m_CSkinMesh;
 	//データのロード
-	//m_CSkinMesh.Init(direct3d.pDevice3D,"");
+	//m_CSkinMesh.Init(direct3d.pDevice3D,"Y-runstart-P.X");
 	//D3DXMatrixIdentity(&direct3d.d3dMat);
 
 	MSG msg = {};
