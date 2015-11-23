@@ -11,13 +11,16 @@ GameMainTag::GameMainTag()
 	PlayerAngle.x=0.0f;
 	PlayerAngle.y=0.0f;
 	PlayerAngle.z =0.0f;
+	PlayerSpeed.x = 0.0f;
+	PlayerSpeed.y = 0.0f;
+	PlayerSpeed.z = 0.0f;
 	timeText.Create(pDevice3D,64);
 	time = 90;
 	timeframe = 0;
 	Load();
 
 	camera = new Camera();
-	camera2 = new Camera(D3DXVECTOR3(0,0,-10),D3DXVECTOR3(0,0,0));
+//	camera2 = new Camera(D3DXVECTOR3(0,0,-10),D3DXVECTOR3(0,0,0));
 //	camera[0]->SetViewPort();
 //	camera[1]->SetViewPort2();
 	
@@ -28,22 +31,20 @@ GameMainTag::GameMainTag()
 GameMainTag::~GameMainTag()
 {
 	delete camera;
-	delete camera2;
+//	delete camera2;
 }
 
 void GameMainTag::Update()
 {
-
+	PlayerAngle = player.PlayerCameraMove(PlayerAngle);
+	PlayerPos=player.PlayerMove(PlayerPos,PlayerAngle);
 	
-	PlayerPos=player.PlayerMove(PlayerPos);
-	PlayerAngle= player.PlayerCameraMove(PlayerAngle);
-
 	CameraPosition.x = PlayerPos.x - (3.0f*sinf(PlayerAngle.y));
 	CameraPosition.z = PlayerPos.z - (3.0f*cosf(PlayerAngle.y));
 
 
 	camera->View(CameraPosition, PlayerAngle);
-camera2->View2(D3DXVECTOR3(0, 1, -5.0f), D3DXVECTOR3(0, 0, 0));
+//camera2->View2(D3DXVECTOR3(0, 1, -5.0f), D3DXVECTOR3(0, 0, 0));
 	//敵の移動判定とかのアップデート
 	gmtEnemy.Update(PlayerPos);
 	//制限時間管理用フレーム

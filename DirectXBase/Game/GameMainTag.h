@@ -61,5 +61,6 @@ public:
 protected:
 	D3DXVECTOR3 PlayerPos;
 	D3DXVECTOR3 PlayerAngle;
+	D3DXVECTOR3 PlayerSpeed;
 
 };

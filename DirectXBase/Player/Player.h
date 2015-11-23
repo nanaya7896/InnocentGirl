@@ -35,7 +35,7 @@ public:
 	HRESULT PlayerLoad();
 	void PlayerCreate(D3DXVECTOR3 pPos,D3DXVECTOR3 pAng);
 	//プレイヤーの移動
-	D3DXVECTOR3 PlayerMove(D3DXVECTOR3 pPos);
+	D3DXVECTOR3 PlayerMove(D3DXVECTOR3 pPos,D3DXVECTOR3 pAng);
 	//カメラの視点変更
 	D3DXVECTOR3 PlayerCameraMove(D3DXVECTOR3 pAng);
 	//ラジアンの角度を変える関数

@@ -152,7 +152,7 @@ void Camera::SetViewPort()
 	//•`‰æ
 
 		//‰Eã
-	pDevice3D->SetViewport(&viewData2);
+	//pDevice3D->SetViewport(&viewData2);
 		pDevice3D->Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, 0x00cccc, 1.0f, 0);
 	//•`‰æ
 	/*pDevice3D->SetViewport(&viewPort[num]);
@@ -183,7 +183,7 @@ void Camera::SetViewPort2()
 	//•`‰æ
 
 	//‰Eã
-	pDevice3D->SetViewport(&viewData2);
+	//pDevice3D->SetViewport(&viewData2);
 	pDevice3D->Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, 0x00cccc, 1.0f, 0);
 	//•`‰æ
 	/*pDevice3D->SetViewport(&viewPort[num]);
@@ -191,7 +191,7 @@ void Camera::SetViewPort2()
 
 
 	//aspect = (float)viewData1.Width / (float)viewData1.Height;
-	aspect1 = (float)viewData2.Width / (float)viewData2.Height;
+	//aspect1 = (float)viewData2.Width / (float)viewData2.Height;
 }
 
 

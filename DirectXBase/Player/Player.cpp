@@ -2,13 +2,11 @@
 
 Player::Player()
 {
+
 	Hit = false;
 	mypos.y = 0.0f;
 	RunFrame = 0;
 	RunFlag = true;
-	//maxa(mypos.x + 0.5f, mypos.y + 0.5f, mypos.z + 0.5f);
-	//D3DXVECTOR3 mina(mypos.x - 0.5f, mypos.y - 0.5f, mypos.z - 0.5f);
-
 	PlayerLoad();
 }
 Player::~Player()
@@ -37,11 +35,11 @@ void Player::PlayerCreate(D3DXVECTOR3 pPos,D3DXVECTOR3 pAng)
 	Xplayer.Render(&D3DXVECTOR3(pPos.x,pPos.y,pPos.z),&D3DXVECTOR3(pAng.x-(D3DX_PI/2.0f),pAng.y,pAng.z),&D3DXVECTOR3(0.02f,0.02f,0.02f), Tplayer.GetTexture());
 }
 
-D3DXVECTOR3 Player::PlayerMove(D3DXVECTOR3 pPos)
+D3DXVECTOR3 Player::PlayerMove(D3DXVECTOR3 pPos,D3DXVECTOR3 pAng)
 {
 
-	//cskinMesh.Update(d3dMat);
-	//cskinMesh.Draw(pDevice3D);
+
+
 	if (RunFrame >= 120)
 	{
 		RunFlag = false;
@@ -65,47 +63,59 @@ D3DXVECTOR3 Player::PlayerMove(D3DXVECTOR3 pPos)
 		speed = 0.1f;
 	}
 
+
 	
 	
 	
 		//è„à⁄ìÆ
 		if (DirectInput::GetInstance().KeyDown(DIK_W))
 		{
-			mypos.z=pPos.z+ speed;
+			mypos.x = pPos.x + (sin(pAng.y)*speed);
+			mypos.z = pPos.z + (cos(pAng.y)*speed);
+			
 		}
 		else if (DirectInput::GetInstance().KeyStatePreview(DIK_W))
 		{
-			mypos.z=pPos.z + speed;
+			mypos.x = pPos.x + (sin(pAng.y)*speed);
+			mypos.z = pPos.z + (cos(pAng.y)*speed);
 		}
 
 		//â∫à⁄ìÆ
 		if (DirectInput::GetInstance().KeyDown(DIK_S))
 		{
-			mypos.z=pPos.z - speed;
+			//mypos.z=pPos.z - speed;
+			mypos.x = pPos.x - (sin(pAng.y)*speed);
+			mypos.z = pPos.z - (cos(pAng.y)*speed);
 		}
 		else if (DirectInput::GetInstance().KeyStatePreview(DIK_S))
 		{
-			mypos.z=pPos.z -speed;
+			mypos.x = pPos.x - (sin(pAng.y)*speed);
+			mypos.z = pPos.z - (cos(pAng.y)*speed);
 		}
 
 		//âEà⁄ìÆ
 		if (DirectInput::GetInstance().KeyDown(DIK_A))
 		{
-			mypos.x=pPos.x - speed;
+			//mypos.x=pPos.x - speed;
+			mypos.x = pPos.x -+ (cos(pAng.y)*speed);
+			mypos.z = pPos.z - (sin(pAng.y)*speed);
 		}
 		else if (DirectInput::GetInstance().KeyStatePreview(DIK_A))
 		{
-			mypos.x=pPos.x - speed;
+			mypos.x = pPos.x - (cos(pAng.y)*speed);
+			mypos.z = pPos.z + (sin(pAng.y)*speed);
 		}
 
 		//ç∂à⁄ìÆ
 		if (DirectInput::GetInstance().KeyDown(DIK_D))
 		{
-			mypos.x=pPos.x + speed;
+			mypos.x = pPos.x + (cos(pAng.y)*speed);
+			mypos.z = pPos.z - (sin(pAng.y)*speed);
 		}
 		else if (DirectInput::GetInstance().KeyStatePreview(DIK_D))
 		{
-			mypos.x=pPos.x + speed;
+			mypos.x = pPos.x + (cos(pAng.y)*speed);
+			mypos.z = pPos.z - (sin(pAng.y)*speed);
 		}
 		maxa.x = mypos.x + 0.5f;
 		maxa.y = mypos.y + 0.5f;
