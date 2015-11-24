@@ -27,7 +27,6 @@ private:
 	Player player;
 	//カメラインスタンス
 	Camera *camera;
-	Camera *camera2;
 	//アニメーションインスタンス
 	MyAllocateHierarchy mah;
 	//メッシュインスタンス

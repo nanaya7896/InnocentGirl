@@ -23,7 +23,8 @@ void CGameOfTag::Update()
 	if (DirectInput::GetInstance().KeyDown(DIK_SPACE) && sousaflag == true)
 	{ 
 		delete scenechange;
-		scenechange = new GameMainTag();
+		//scenechange = new GameMainTag();
+		scenechange = new GameMainTag2P();
 	}
 	if (DirectInput::GetInstance().KeyDown(DIK_LEFT)&&sousaflag==false)
 	{

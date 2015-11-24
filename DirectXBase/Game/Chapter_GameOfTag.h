@@ -8,6 +8,9 @@
 #include "../DirectInput\directInput.h"
 #include"GameMainTag.h"
 #include"../Enemy/Enemy.h"
+#include"GameMainTag2P.h"
+
+
 class CGameOfTag : public SceneChange ,Direct3D
 {
 private:

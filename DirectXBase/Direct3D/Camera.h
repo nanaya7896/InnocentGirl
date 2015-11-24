@@ -1,8 +1,11 @@
+#pragma once
+
 #include"../Global.h"
 #include"direct3d.h"
 
-const D3DVIEWPORT9 viewData1 = { 0, 0, WINDOW_WIDTH , WINDOW_HEIGHT, 0.0f, 1.0f };
-//const D3DVIEWPORT9 viewData2 = { WINDOW_WIDTH / 2, 0, WINDOW_WIDTH / 2, WINDOW_HEIGHT, 0.0f, 1.0f };
+
+
+
 class Camera: public Direct3D
 {
 private:
@@ -13,8 +16,8 @@ private:
 public:
 
 	//メンバ変数
-	D3DXVECTOR3 pos[2];
-	D3DXVECTOR3 rota[2];
+	D3DXVECTOR3 pos;
+	D3DXVECTOR3 rota;
 	//D3DVIEWPORT9 viewPort[2];
 
 	//コンストラクタ
@@ -31,12 +34,14 @@ public:
 	void View(D3DXVECTOR3 pos, D3DXVECTOR3 rota);
 	void View2(D3DXVECTOR3 pos, D3DXVECTOR3 rota);
 	//ビューポートの設定int x,int y,int width,int height,int num
-	void SetViewPort();
+	void SetViewPort(int x, int y, int width, int height);
 	void SetViewPort2();
 	//カメラの移動
 	D3DXVECTOR3 CmeraMove();
 
-
+	//2人対戦用カメラの関数
+	HRESULT Camera2P();
+	void Camera2PUpdate();
 	
 protected:
 	//メンバ変数

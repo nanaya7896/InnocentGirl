@@ -16,6 +16,4 @@ SceneChange::~SceneChange()
 {
 
 
-
-
 }

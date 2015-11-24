@@ -51,3 +51,4 @@ const int WINDOW_HEIGHT = 900;
 
 //ƒ‰ƒCƒuƒ‰ƒŠ‚Ì“Ç‚İ‚İ
 //#include"LMath.h"
+

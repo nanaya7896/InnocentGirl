@@ -5,7 +5,8 @@ BoundingBox Map::buildingsbox[150];
 //コンストラクタ
 Map::Map()
 {
-	
+
+	LoadBuldings();
 }
 //
 Map::~Map()

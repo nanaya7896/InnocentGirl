@@ -100,6 +100,9 @@
     <ClCompile Include="Game\Gameover.cpp">
       <Filter>Game</Filter>
     </ClCompile>
+    <ClCompile Include="Game\GameMainTag2P.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Direct3D\direct3d.h">
@@ -174,6 +177,9 @@
       <Filter>Game</Filter>
     </ClInclude>
     <ClInclude Include="Game\Gameover.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameMainTag2P.h">
       <Filter>Game</Filter>
     </ClInclude>
   </ItemGroup>
