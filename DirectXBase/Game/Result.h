@@ -57,7 +57,7 @@ private:
 
 	Texture gameclear3;
 	Sprite gameclearSprite3;
-	
+	CSound wave[2];
 
 	int randomNum;    //ƒ‰ƒ“ƒ_ƒ€•Ï”Ši”[—p
 public:

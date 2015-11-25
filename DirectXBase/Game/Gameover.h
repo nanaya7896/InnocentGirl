@@ -57,7 +57,7 @@ private:
 	Texture gameover4;
 	Sprite gameoverSprite4;
 
-
+	CSound wave[2];
 public:
 	//ƒtƒ‰ƒO
 	bool go_marker_flag;

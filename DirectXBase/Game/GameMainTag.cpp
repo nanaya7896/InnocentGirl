@@ -49,12 +49,14 @@ void GameMainTag::Update()
 	//“G‚É‚Ô‚Â‚©‚Á‚½‚Æ‚«‚Ìˆ—
 	if (player.Hit == true)
 	{
+		wave[0].Stop();
 		delete scenechange;
 		scenechange = new Gameover();
 	}
 	//ƒ^ƒCƒ€‚ª‚X‚O•bŒo‰ß‚µ‚½‚Æ‚«
 	if (tentime == 0 && onetime == 0 && player.Hit==false)
 	{
+		wave[0].Stop();
 		delete scenechange;
 		scenechange =new CResult();
 	}

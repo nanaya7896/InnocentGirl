@@ -115,6 +115,7 @@ void GameMainTag2P::Update()
 	
 	if (player[1].Hit == true && player[0].Hit == true)
 	{
+		wave[0].Stop();
 		camera1[0].SetViewPort(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
 		delete scenechange;
 		scenechange = new Gameover();
@@ -122,6 +123,7 @@ void GameMainTag2P::Update()
 	//ƒ^ƒCƒ€‚ª‚X‚O•bŒo‰ß‚µ‚½‚Æ‚«
 	if (tentime2 == 0 && onetime2 == 0 && (player[0].Hit == false || player[1].Hit == false))
 	{
+		wave[0].Stop();
 		delete scenechange;
 		scenechange = new CResult();
 	}

@@ -17,9 +17,9 @@ Enemy::Enemy()
 		PlayerEnemyDistance[i] = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 		AutoMove[i]=0.0f;
 		//-60から60の座標間でランダム生成
-		EnemyPos[i] = D3DXVECTOR3(Random(-60.0f, 60.0f), 0.7f, Random(-60.0f,60.0f));
+		EnemyPos[i] = D3DXVECTOR3(Random(-60.0f, 60.0f), 0.2f, Random(-60.0f,60.0f));
 		//敵が一番最初向いている角度
-		EnemyAngle[i] = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+		EnemyAngle[i] = D3DXVECTOR3(0.0f - (D3DX_PI / 2.0f), 0.0f, 0.0f);
 		MapHit[i] = false;
 		if (i <= 29)
 		{
@@ -157,7 +157,7 @@ void Enemy::Draw()
 	for (int i = 0; i < MAX_ENEMY; i++)
 	{
 			//敵の描画
-		x_Enemy.Render(&EnemyPos[i], &EnemyAngle[i], &D3DXVECTOR3(1.0f, 1.0f, 1.0f), t_Enemy.GetTexture());
+		x_Enemy.Render(&EnemyPos[i], &EnemyAngle[i], &D3DXVECTOR3(0.05f, 0.05f, 0.05f), t_Enemy.GetTexture());
 		//境界線ボックスの生成
 		numv[i] = x_Enemy.g_pMesh->GetNumVertices();
 		stride[i] = D3DXGetFVFVertexSize(x_Enemy.g_pMesh->GetFVF());
@@ -187,7 +187,7 @@ void Enemy::Load()
 {
 	//テクスチャとXファイルの読み込み
 	t_Enemy.Load("texture/teki1.bmp");
-	x_Enemy.XfileLoader(L"xfile/teki1.x");
+	x_Enemy.XfileLoader(L"xfile/zombie-kari.X");
 
 	//行列の初期化
 	D3DXMatrixIdentity(&d3dMat);

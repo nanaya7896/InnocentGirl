@@ -8,6 +8,7 @@ CResult::CResult()
 	//pInput = NULL;
 	randomNum = 0;
 	Load();
+	wave[0].Play(false);
 }
 
 //デストラクタ
@@ -22,6 +23,8 @@ void CResult::Update()
 {
 	if (pJoypad->isPushed(Joypad::Button::B) || DirectInput::GetInstance().KeyDown(DIK_RETURN))
 	{
+		wave[0].Stop();
+		wave[1].Play(false);
 		delete scenechange;
 		scenechange = new Chapter();
 		return;
@@ -51,6 +54,9 @@ void CResult::Load()
 	gameclearSprite2.SetSize(GAMECLEAR2_SPRITE_SIZE_X, GAMECLEAR2_SPRITE_SIZE_Y);//スプライトのサイズ設定
 	gameclearSprite3.SetSize(GAMECLEAR3_SPRITE_SIZE_X, GAMECLEAR3_SPRITE_SIZE_Y);//スプライトのサイズ設定
 
+	//wavファイル読み込み
+	wave[0].Load(_T("BGM/rizaruto.wav"));
+	wave[1].Load(_T("BGM/kettei.wav"));
 }
 
 void CResult::Draw()
