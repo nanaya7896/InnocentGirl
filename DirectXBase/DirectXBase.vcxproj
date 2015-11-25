@@ -91,9 +91,7 @@
     <ClCompile Include="Direct3D\texture.cpp" />
     <ClCompile Include="Direct3D\Xfile.cpp" />
     <ClCompile Include="DirectInput\directInput.cpp" />
-    <ClCompile Include="DirectSound\directSound.cpp" />
-    <ClCompile Include="DirectSound\soundbuffer.cpp" />
-    <ClCompile Include="DirectSound\wave.cpp" />
+    <ClCompile Include="DirectSound\dxsound.cpp" />
     <ClCompile Include="DirectXAnimation\AnimateObject.cpp" />
     <ClCompile Include="DirectXAnimation\MyAllocateHierarchy.cpp" />
     <ClCompile Include="Enemy\Enemy.cpp" />
@@ -118,9 +116,7 @@
     <ClInclude Include="Direct3D\texture.h" />
     <ClInclude Include="Direct3D\Xfile.h" />
     <ClInclude Include="DirectInput\directInput.h" />
-    <ClInclude Include="DirectSound\directSound.h" />
-    <ClInclude Include="DirectSound\soundbuffer.h" />
-    <ClInclude Include="DirectSound\wave.h" />
+    <ClInclude Include="DirectSound\dxsound.h" />
     <ClInclude Include="DirectXAnimation\AnimateObject.h" />
     <ClInclude Include="DirectXAnimation\MyAllocateHierarchy.h" />
     <ClInclude Include="Enemy\Enemy.h" />

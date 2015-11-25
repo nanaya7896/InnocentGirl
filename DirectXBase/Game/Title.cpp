@@ -4,6 +4,7 @@
 Title::Title()
 {
 	Load();
+	wave[0].Play(true);
 }
 
 //デストラクタ
@@ -34,6 +35,9 @@ void Title::Update()
 	//もしリターンキーが押された場合
 	if (DirectInput::GetInstance().KeyDown(DIK_RETURN) == true)
 	{
+		wave[0].Stop();
+		//ＳＥ「決定音」
+		wave[1].Play(false);
 		//現在のシーンのメモリを解放
 		delete scenechange;
 		//次のシーン:チャプターのメモリをシーンチェンジに入れる
@@ -80,5 +84,7 @@ void Title::Load()
 	stitle_bar.SetSize(720, 200);
 
 	TitleBlink = false;
-
+	//wavファイル読み込み
+	wave[0].Load(_T("BGM/taitoru.wav"));
+	wave[1].Load(_T("BGM/kettei.wav"));
 }

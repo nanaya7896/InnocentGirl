@@ -3,6 +3,7 @@
 #include "../Direct3D/direct3d.h"
 #include "../Direct3D/sprite.h"
 #include "../Direct3D/texture.h"
+#include"../DirectSound/dxsound.h"
 #include"../Global.h"
 #include "../DirectInput/directInput.h"
 #include"SceneChange.h"

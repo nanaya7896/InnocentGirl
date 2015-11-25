@@ -22,14 +22,15 @@ public:
 	Texture title_bar2;
 	Sprite stitle_bar;
 	Sprite stitle;
-
+	//サウンド読み込み
+	CSound wave[2];
 	bool TitleBlink;
 
 	//コンストラクタ
 	Title();
 	//デストラクタ
 	~Title();
-
+	
 	//メンバ関数
 	void Update();
 	void Draw();

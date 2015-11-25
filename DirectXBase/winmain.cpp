@@ -6,9 +6,7 @@
 #include "Direct3D/sprite.h"
 #include "Direct3D/texture.h"
 #include"Direct3D\Xfile.h"
-#include "DirectSound/directSound.h"
-#include "DirectSound/soundbuffer.h"
-#include "DirectSound/wave.h"
+#include"DirectSound/dxsound.h"
 #include "DirectInput/directInput.h"
 //#include"Direct3D\Camera.h"
 #include"Player/Player.h"
@@ -102,26 +100,8 @@ int _stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 		);
 
 	//--------------------------------
-	//DirectSoundデバイス作成
-	DirectSound directSound;
-	directSound.Create(hWnd);
-
-	//wavファイル読み込み
-	Wave wave[3];
-	//wavファイルは何か適当に用意してください
-
-	wave[0].Load(_T("katana.wav"));
-	wave[1].Load(_T("bomb.wav"));
-	wave[2].Load(_T("battle.wav"));
-	//ファイル読み込みはここまで
-
-	//セカンダリバッファの作成　読み込んだと音データをコピー
-	SoundBuffer sb[3];
-	for (int i = 0; i < 3; i++)
-	{
-		sb[i].Create(directSound.pDirectSound8, wave[i].WaveFormat, wave[i].WaveData, wave[i].DataSize);
-
-	}
+	//DirectSoundデバイスの設定
+	CSound sound(hWnd);
 
 	//--------------------------------
 	//direct3D

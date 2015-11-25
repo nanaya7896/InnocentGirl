@@ -7,6 +7,7 @@
 #include "../DirectInput\directInput.h"
 #include"Chapter_GameOfTag.h"
 #include "SceneChange.h"
+#include "../DirectSound/dxsound.h"
 
 //派生クラス:Chapter 基底クラス:SceneChange,Direct3D
 class Chapter :public SceneChange,Direct3D
@@ -28,6 +29,7 @@ public:
 	Sprite s_bgChapter;
 	bool chapter_flag;
 
+	CSound wave[3];
 	//コンストラクタ
 	Chapter();
 	//デストラクタ

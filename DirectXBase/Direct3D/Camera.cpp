@@ -178,19 +178,6 @@ HRESULT Camera::Camera2P()
 {
 
 
-	//pDevice3D->SetRenderState(D3DRS_LIGHTING, FALSE);
-	//pDevice3D->SetRenderState(D3DRS_DITHERENABLE, TRUE);
-	//pDevice3D->SetRenderState(D3DRS_ZENABLE, TRUE);
-	//pDevice3D->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
-	//pDevice3D->SetRenderState(D3DRS_AMBIENT, 0x33333333);
-	//pDevice3D->SetRenderState(D3DRS_NORMALIZENORMALS, TRUE);
-	//pDevice3D->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
-	//pDevice3D->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
-	//pDevice3D->SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);
-	//pDevice3D->SetSamplerState(0, D3DSAMP_MAGFILTER, D3DTEXF_LINEAR);
-	//pDevice3D->SetSamplerState(0, D3DSAMP_MINFILTER, D3DTEXF_LINEAR);
-	//ƒrƒ…[s—ñ‚Ìì¬
-
 	//for (int i = 0, count = sizeof(g_view) / sizeof(g_view[0]); i < count; i++)
 	//{
 		D3DXMatrixLookAtLH(&g_view[0].matView, &g_view[0].vEyePt, &g_view[0].vLookatPt, &g_view[0].vUpVec);

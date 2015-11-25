@@ -23,7 +23,7 @@ public:
 	Sprite onigo_chapter_sprite;
 	Sprite onigo_hitori_sprite[2];
 	Sprite onigo_tomodati_sprite[2];
-	
+	CSound wave[3];
 	//背景テクスチャとスプライトインスタンス
 	Texture t_bgcgo;
 	Sprite s_bgcgo;

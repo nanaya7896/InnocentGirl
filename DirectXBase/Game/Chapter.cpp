@@ -5,6 +5,7 @@
 Chapter::Chapter()
 {
 	Load();
+	wave[0].Play(false);
 }
 
 //デストラクタ
@@ -23,7 +24,9 @@ void Chapter::Update()
 		if (y >= 400)
 		{
 			y -= 300;
+
 		}
+		wave[2].Play(false);
 	}
 	//↓キーが押されたとき
 	else if (DirectInput::GetInstance().KeyDown(DIK_DOWN))
@@ -32,6 +35,7 @@ void Chapter::Update()
 		{
 			y += 300;
 		}
+		wave[2].Play(false);
 	}
 
 	if (y > 700)
@@ -48,9 +52,12 @@ void Chapter::Update()
 	//Chapterおにごっこに画面遷移
 	if (/*pJoypad->isPushed(Joypad::Button::Start) == true || */DirectInput::GetInstance().KeyDown(DIK_RETURN))
 	{
+
+		wave[0].Stop();
+		wave[1].Play(false);
 		delete scenechange;
 		scenechange = new CGameOfTag();		//チャプター選択
-
+		
 	}
 
 }
@@ -88,4 +95,8 @@ void Chapter::Load()
 	//画像の縦横のサイズ指定
 	s_bgChapter.SetSize(1600, 900);
 
+	//wavファイル読み込み
+	wave[0].Load(_T("BGM/taitoru.wav"));
+	wave[1].Load(_T("BGM/kettei.wav"));
+	wave[2].Load(_T("BGM/ka-soruidou.wav"));
 }

@@ -36,7 +36,7 @@ private:
 	//プレイヤーインスタンス
 	Player *player;
 	//enemyのインスタンス
-	Enemy *gmtEnemy2;
+	Enemy *enemy2;
 	//１Pの構造体
 	pCameraInfo1P pInfo1P;
 	//２Pの構造体

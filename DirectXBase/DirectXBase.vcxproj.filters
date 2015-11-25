@@ -39,15 +39,6 @@
     <ClCompile Include="Direct3D\texture.cpp">
       <Filter>Direct3D</Filter>
     </ClCompile>
-    <ClCompile Include="DirectSound\directSound.cpp">
-      <Filter>DirctSound</Filter>
-    </ClCompile>
-    <ClCompile Include="DirectSound\soundbuffer.cpp">
-      <Filter>DirctSound</Filter>
-    </ClCompile>
-    <ClCompile Include="DirectSound\wave.cpp">
-      <Filter>DirctSound</Filter>
-    </ClCompile>
     <ClCompile Include="winmain.cpp" />
     <ClCompile Include="DirectInput\directInput.cpp">
       <Filter>DirectInput</Filter>
@@ -103,6 +94,9 @@
     <ClCompile Include="Game\GameMainTag2P.cpp">
       <Filter>Game</Filter>
     </ClCompile>
+    <ClCompile Include="DirectSound\dxsound.cpp">
+      <Filter>DirctSound</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Direct3D\direct3d.h">
@@ -113,15 +107,6 @@
     </ClInclude>
     <ClInclude Include="Direct3D\texture.h">
       <Filter>Direct3D</Filter>
-    </ClInclude>
-    <ClInclude Include="DirectSound\directSound.h">
-      <Filter>DirctSound</Filter>
-    </ClInclude>
-    <ClInclude Include="DirectSound\soundbuffer.h">
-      <Filter>DirctSound</Filter>
-    </ClInclude>
-    <ClInclude Include="DirectSound\wave.h">
-      <Filter>DirctSound</Filter>
     </ClInclude>
     <ClInclude Include="DirectInput\directInput.h">
       <Filter>DirectInput</Filter>
@@ -181,6 +166,9 @@
     </ClInclude>
     <ClInclude Include="Game\GameMainTag2P.h">
       <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectSound\dxsound.h">
+      <Filter>DirctSound</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
