@@ -16,8 +16,8 @@ D3DVIEWPORT9 g_port[] = {
 };
 
 MY_VIEW g_view[] = {
-	{ D3DXVECTOR3(0.0f, 1.0f, 10.0f), D3DXVECTOR3(0.0f , 0.0f, 0.0f), D3DXVECTOR3(0.0f, 1.0f, 0.0f) },
-	{ D3DXVECTOR3(0.0f, 1.0f, -10.0f), D3DXVECTOR3(0.0f - (D3DX_PI / 2.0f), 0.0f, 0.0f), D3DXVECTOR3(0.0f, 1.0f, 0.0f) }
+	{ D3DXVECTOR3(0.0f, 1.0f, 30.0f), D3DXVECTOR3(0.0f , 0.0f, 0.0f), D3DXVECTOR3(0.0f, 1.0f, 0.0f) },
+	{ D3DXVECTOR3(0.0f, 1.0f, -30.0f), D3DXVECTOR3(0.0f - (D3DX_PI / 2.0f), 0.0f, 0.0f), D3DXVECTOR3(0.0f, 1.0f, 0.0f) }
 };
 
 //コンストラクタ
@@ -225,5 +225,5 @@ void Camera::Camera2PUpdate()
 	//カメラの座標を変更（ビュー行列）
 //pDevice3D->SetTransform(D3DTS_VIEW, &g_view[1].matView);
 	//描画領域にした所を任意の色でクリア
-	//pDevice3D->Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER,D3DXCOLOR(10.0f,255,255,255), 1.0f, 0);
+	pDevice3D->Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER,D3DXCOLOR(10.0f,255,255,255), 1.0f, 0);
 }

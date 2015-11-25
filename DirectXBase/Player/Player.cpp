@@ -265,3 +265,30 @@ D3DXVECTOR3 Player::PlayerCameraMove(D3DXVECTOR3 pAng)
 
 	return pAng;
 }
+
+D3DXVECTOR3 Player::PlayerCameraMove2P(D3DXVECTOR3 pAng)
+{
+	//âEÇå¸Ç≠
+	if (DirectInput::GetInstance().KeyDown(DIK_Z))
+	{
+		pAng.y -= 0.1f;
+	}
+	else if (DirectInput::GetInstance().KeyState(DIK_X))
+	{
+		pAng.y -= 0.1f;
+
+	}
+	//ç∂Çå¸Ç≠
+	if (DirectInput::GetInstance().KeyDown(DIK_C))
+	{
+		pAng.y += 0.1f;
+	}
+	else if (DirectInput::GetInstance().KeyState(DIK_V))
+	{
+		pAng.y += 0.1f;
+
+	}
+
+
+	return pAng;
+}

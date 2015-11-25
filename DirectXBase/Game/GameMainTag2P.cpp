@@ -45,11 +45,11 @@ GameMainTag2P::~GameMainTag2P()
 void GameMainTag2P::Init()
 {
 	PlayerPos1P.x = 0.0f;
-	PlayerPos1P.y = 3.0f;
-	PlayerPos1P.z = -30.0f;
+	PlayerPos1P.y = 0.0f;
+	PlayerPos1P.z = 0.0f;
 	PlayerPos2P.x = 0.0f;
-	PlayerPos2P.y = 3.0f;
-	PlayerPos2P.z = 30.0f;
+	PlayerPos2P.y = 0.0f;
+	PlayerPos2P.z = 00.0f;
 	PlayerAngle1P = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	PlayerAngle2P = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	pInfo1P.CameraPos1P = D3DXVECTOR3(PlayerPos1P.x, 1.0f, PlayerPos1P.z-3.0f);
@@ -81,32 +81,35 @@ void GameMainTag2P::Update()
 {
 	
 	camera1[0].Camera1PUpdate();
+	
 	map2P->MapRender();
 	player[0].PlayerCreate(PlayerPos1P, PlayerAngle1P);
+
+	
 	PlayerAngle1P = player[0].PlayerCameraMove(PlayerAngle1P);
 	PlayerPos1P = player[0].PlayerMove(PlayerPos1P, PlayerAngle1P);
 
-	
+
 	pInfo1P.CameraPos1P.x = PlayerPos1P.x - (3.0f*sinf(PlayerAngle1P.y));
 	pInfo1P.CameraPos1P.z = PlayerPos1P.z - (3.0f*cosf(PlayerAngle1P.y));
-
-	camera1[0].View1P(pInfo1P.CameraPos1P, PlayerAngle1P);
 	
 
+	camera1[1].View2P(pInfo2P.CameraPos2P, PlayerAngle2P);
 	camera1[1].Camera2PUpdate();
+	map2P->MapRender();
 	//camera1P.View1P(pInfo1P.CameraPos1P, PlayerAngle1P);
 	player[1].PlayerCreate2P(PlayerPos2P, PlayerAngle2P);
 	
-
-	PlayerAngle2P = player[1].PlayerCameraMove(PlayerAngle2P);
+	PlayerAngle2P = player[1].PlayerCameraMove2P(PlayerAngle2P);
 	PlayerPos2P = player[1].PlayerMove2P(PlayerPos2P, PlayerAngle2P);
 	pInfo2P.CameraPos2P.x = PlayerPos2P.x - (3.0f*sinf(PlayerAngle2P.y));
 	pInfo2P.CameraPos2P.z = PlayerPos2P.z - (3.0f*cosf(PlayerAngle2P.y));
-	//	camera1P.Camera1PUpdate();
-	camera1[1].View2P(pInfo2P.CameraPos2P, PlayerAngle2P);
 
+	//	camera1P.Camera1PUpdate();
 	
 
+	
+	camera1[0].View1P(pInfo1P.CameraPos1P, PlayerAngle1P);
 	
 
 //	camera2P.Camera2PUpdate();

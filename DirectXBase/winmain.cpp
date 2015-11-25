@@ -197,7 +197,7 @@ int _stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 				//”wŒiƒNƒŠƒA
 				direct3d.pDevice3D->Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, BlackColor, 1.0f, 0);
 				////Map•`‰æ
-				map.MapRender();
+				//map.MapRender();
 			//	m_CSkinMesh.Draw(direct3d.pDevice3D);
 				SceneChange::scenechange->Update();
 				SceneChange::scenechange->Draw();

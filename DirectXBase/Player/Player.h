@@ -44,6 +44,7 @@ public:
 	D3DXVECTOR3 PlayerMove2P(D3DXVECTOR3 pPos, D3DXVECTOR3 pAng);
 	//カメラの視点変更
 	D3DXVECTOR3 PlayerCameraMove(D3DXVECTOR3 pAng);
+	D3DXVECTOR3 PlayerCameraMove2P(D3DXVECTOR3 pAng);
 	//ラジアンの角度を変える関数
 	D3DXVECTOR3 YRotation();
 	D3DXVECTOR3 mypos;
