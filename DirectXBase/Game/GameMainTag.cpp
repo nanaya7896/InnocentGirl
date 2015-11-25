@@ -21,6 +21,8 @@ GameMainTag::GameMainTag()
 
 	camera = new Camera();
 	CameraPosition = D3DXVECTOR3(PlayerPos.x, PlayerPos.y, PlayerPos.z - 3.0f);
+
+	wave[0].Play(false);
 }
 
 //デストラクタ
@@ -105,7 +107,9 @@ void GameMainTag::Load()
 		timeSprite[1].SetPos(770,100);
 		timeSprite[1].SetSize(128,128);
 
-		
+		//wavファイル読み込み
+		wave[0].Load(_T("BGM/game.wav"));
+		wave[1].Load(_T("BGM/z_taoreru.wav"));
 		
 }
 

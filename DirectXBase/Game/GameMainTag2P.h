@@ -40,6 +40,8 @@ private:
 	pCameraInfo1P pInfo1P;
 	//‚QP‚Ì\‘¢‘Ì
 	pCameraInfo2P pInfo2P;
+	//wave“Ç‚İ‚İ
+	CSound wave[2];
 	//ŠÔ—pƒƒ“ƒo•Ï”
 	int timeframe2;
 	//time10‚ÌˆÊ

@@ -20,6 +20,7 @@
 //#include"DirectXAnimation/AnimateObject.h"
 //#include"DirectXAnimation/MyAllocateHierarchy.h"
 
+
 DWORD lasttime;
 
 //FPS管理用変数
@@ -67,6 +68,7 @@ int _stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 		0,																										//同上
 		hInstance,																								//クラスを作成するインスタンスのハンドル
 		(HICON)LoadImage(NULL, MAKEINTRESOURCE(IDI_APPLICATION),IMAGE_ICON,0,0,LR_DEFAULTSIZE | LR_SHARED),		//アイコンのハンドル
+		//(HICON)LoadImage(NULL, "ico/yuki-R1.ico", IMAGE_ICON, 0, 0, LR_DEFAULTSIZE | LR_SHARED),		//アイコンのハンドル
 		(HCURSOR)LoadImage(NULL, MAKEINTRESOURCE(IDC_ARROW), IMAGE_CURSOR, 0, 0, LR_DEFAULTSIZE | LR_SHARED),	//カーソル(マウスポインタのハンドル)
 		(HBRUSH)GetStockObject(WHITE_BRUSH),																	//背景色用のブラシハンドル
 		NULL,																									//メニューリソースを表す名前

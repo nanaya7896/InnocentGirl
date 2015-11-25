@@ -15,7 +15,7 @@
 #include"Title.h"
 #include"Result.h"
 #include"Gameover.h"
-
+#include"../DirectSound/dxsound.h"
 class GameMainTag :public SceneChange,Direct3D
 {
 private:
@@ -35,6 +35,8 @@ private:
 	Map *map1P;
 	//enemyのインスタンス
 	Enemy gmtEnemy;
+	//サウンドのインスタンス
+	CSound wave[3];
 	//時間用メンバ変数
 	int time;
 	int timeframe;

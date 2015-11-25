@@ -44,6 +44,8 @@ public:
 	//Coming Soon
 	Texture coming;
 	Sprite scoming;
+	//Waveファイル
+	CSound wave[3];
 
 	//フラグ
 	bool chapter_flag;

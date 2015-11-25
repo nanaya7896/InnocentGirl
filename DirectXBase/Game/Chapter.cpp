@@ -5,6 +5,7 @@
 Chapter::Chapter()
 {
 	Load();
+	wave[0].Play(false);
 }
 
 //デストラクタ
@@ -21,12 +22,14 @@ void Chapter::Update()
 	//鬼ごっこ選択
 	if (pJoypad->getLStick(0.1).imag() >= 0.5 || DirectInput::GetInstance().KeyDown(DIK_UP))
 	{
+		wave[2].Play(false);
 		marker_flag = false;
 		chapter_flag = false;
 	}
 	//ドッヂ選択
 	if (pJoypad->getLStick(0.1).imag() <= -0.5 || DirectInput::GetInstance().KeyDown(DIK_DOWN))
 	{
+		wave[2].Play(false);
 		marker_flag = true;
 		chapter_flag = true;
 	}
@@ -34,11 +37,13 @@ void Chapter::Update()
 	//ともだちと選択
 	if (pJoypad->getLStick(0.1).real() >= 0.5 || DirectInput::GetInstance().KeyDown(DIK_RIGHT))
 	{
+		wave[2].Play(false);
 		member_flag = true;
 	}
 	//ひとり選択
 	if (pJoypad->getLStick(0.1).real() <= -0.5 || DirectInput::GetInstance().KeyDown(DIK_LEFT))
 	{
+		wave[2].Play(false);
 		member_flag = false;
 	}
 
@@ -46,6 +51,8 @@ void Chapter::Update()
 	//GameMainおにごっこひとりプレイに画面遷移
 	if (pJoypad->isPushed(Joypad::Button::B) == true || DirectInput::GetInstance().KeyDown(DIK_RETURN) && chapter_flag == false && member_flag == false)
 	{
+		wave[0].Stop();
+		wave[1].Play(false);
 		delete scenechange;
 		scenechange = new GameMainTag();		//おにごっこひとりプレイ
 		return;
@@ -54,6 +61,8 @@ void Chapter::Update()
 
 	if (pJoypad->isPushed(Joypad::Button::B) == true || DirectInput::GetInstance().KeyDown(DIK_RETURN) && chapter_flag == false && member_flag == true)
 	{
+		wave[0].Stop();
+		wave[1].Play(false);
 		delete scenechange;
 		scenechange = new GameMainTag2P();		//おにごっこともだちとプレイ
 		return;
@@ -128,5 +137,8 @@ void Chapter::Load()
 	schapter_bg.SetPos(800, 450);
 	//画像の縦横のサイズ指定
 	schapter_bg.SetSize(1600, 900);
-
+	//WAVEの読み込み
+	wave[0].Load(_T("BGM/taitoru.wav"));
+	wave[1].Load(_T("BGM/kettei.wav"));
+	wave[2].Load(_T("BGM/ka-soruidou.wav"));
 }

@@ -35,6 +35,8 @@ GameMainTag2P::GameMainTag2P()
 	enemy2 = new Enemy();
 	//初期化関数の呼び出し
 	Init();
+
+	wave[0].Play(false);
 	
 }
 
@@ -65,7 +67,9 @@ void GameMainTag2P::Init()
 	pInfo1P.CameraAngle1P = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	pInfo2P.CameraPos2P = D3DXVECTOR3(PlayerPos2P.x, 1.0f, PlayerPos2P.z - 3.0f);
 	pInfo2P.CameraAngle2P = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
-
+	//wavファイル読み込み
+	wave[0].Load(_T("BGM/game.wav"));
+	wave[1].Load(_T("BGM/z_taoreru.wav"));
 }
 
 //アップデート
