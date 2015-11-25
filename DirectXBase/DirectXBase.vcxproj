@@ -96,7 +96,6 @@
     <ClCompile Include="DirectXAnimation\MyAllocateHierarchy.cpp" />
     <ClCompile Include="Enemy\Enemy.cpp" />
     <ClCompile Include="Game\Chapter.cpp" />
-    <ClCompile Include="Game\Chapter_GameOfTag.cpp" />
     <ClCompile Include="Game\GameMainTag.cpp" />
     <ClCompile Include="Game\GameMainTag2P.cpp" />
     <ClCompile Include="Game\Gameover.cpp" />
@@ -121,7 +120,6 @@
     <ClInclude Include="DirectXAnimation\MyAllocateHierarchy.h" />
     <ClInclude Include="Enemy\Enemy.h" />
     <ClInclude Include="Game\Chapter.h" />
-    <ClInclude Include="Game\Chapter_GameOfTag.h" />
     <ClInclude Include="Game\GameMainTag.h" />
     <ClInclude Include="Game\GameMainTag2P.h" />
     <ClInclude Include="Game\Gameover.h" />

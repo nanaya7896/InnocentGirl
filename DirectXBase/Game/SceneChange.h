@@ -1,12 +1,14 @@
 #pragma once
 #include"../Global.h"
-
+#include "../Xinput/Xinput.h"
 class SceneChange
 {
 private:
 
 
 public:
+	SceneChange * currentScene;
+	Joypad *pJoypad;
 	//コンストラクタ
 	SceneChange();
 	//デストラクタ

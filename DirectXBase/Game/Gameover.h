@@ -1,3 +1,4 @@
+
 #pragma once
 
 #include"../Global.h"
@@ -36,24 +37,30 @@
 
 
 
-class Gameover :public SceneChange,Direct3D
+class Gameover :public SceneChange, Direct3D
 {
 private:
 	//テクスチャとスプライト
+	//背景
 	Texture gameover1;
 	Sprite gameoverSprite1;
 
+	//矢印
 	Texture gameover2;
-	Sprite gameoverSprite2;
+	Sprite gameoverSprite2[2];
 
+	//文字
+	//リトライ
 	Texture gameover3;
 	Sprite gameoverSprite3;
-
+	//チャプターへ
 	Texture gameover4;
 	Sprite gameoverSprite4;
 
 
 public:
+	//フラグ
+	bool go_marker_flag;
 
 	//コンストラクタ　デストラクタ
 	Gameover();

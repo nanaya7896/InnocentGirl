@@ -1,35 +1,55 @@
 #pragma once
 
-#include"../Global.h"
+#include "../Global.h"
+
 #include "../Direct3D\texture.h"
 #include "../Direct3D\sprite.h"
 #include "../Direct3D/direct3d.h"
+
 #include "../DirectInput\directInput.h"
-#include"Chapter_GameOfTag.h"
+
+#include "GameMainTag.h"
+#include "GameMainTag2P.h"
+
 #include "SceneChange.h"
-#include "../DirectSound/dxsound.h"
 
 //派生クラス:Chapter 基底クラス:SceneChange,Direct3D
-class Chapter :public SceneChange,Direct3D
+class Chapter :public SceneChange, Direct3D
 {
-private:
-	//マーカー
-	float y = 300.0f;
-
 public:
-	Texture chapter_texture_onigo;
-	Texture chapter_texture_dodge;
-	Texture chapter_texture_marker;
-	Sprite chapter_sprite_onigo;
-	Sprite chapter_sprite_dodge;
-	Sprite chapter_sprite_marker;
+	//背景
+	Texture chapter_bg;
+	Sprite schapter_bg;
+	//マーカー
+	Texture marker;
+	Sprite smarker[2];
+	//おにごっこ
+	Texture chapter_onigo;
+	Sprite schapter_onigo;
+	//ドッヂボール
+	Texture chapter_dodge;
+	Sprite schapter_dodge;
+	//チャプター
+	Texture chapter[2];
+	Sprite schapter[2];
+	//ゲーム画面
+	Texture GameScreen[2];
+	Sprite sGameScreen[2];
+	//ひとり
+	Texture hitori[2];
+	Sprite shitori[2];
+	//ともだち
+	Texture tomodati[2];
+	Sprite stomodati[2];
+	//Coming Soon
+	Texture coming;
+	Sprite scoming;
 
-	//背景テクスチャ、スプライト読み込み
-	Texture t_bgChapter;
-	Sprite s_bgChapter;
+	//フラグ
 	bool chapter_flag;
+	bool member_flag;
+	bool marker_flag;
 
-	CSound wave[3];
 	//コンストラクタ
 	Chapter();
 	//デストラクタ

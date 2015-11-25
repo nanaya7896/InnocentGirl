@@ -31,7 +31,8 @@ private:
 	MyAllocateHierarchy mah;
 	//メッシュインスタンス
 	CSkinMesh cskinMesh;
-
+	//マップのインスタンス
+	Map *map1P;
 	//enemyのインスタンス
 	Enemy gmtEnemy;
 	//時間用メンバ変数

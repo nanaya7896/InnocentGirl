@@ -3,7 +3,6 @@
 #include"../Global.h"
 #include"../Direct3D/Camera.h"
 #include"SceneChange.h"
-#include"Chapter_GameOfTag.h"
 #include"../Game/Map.h"
 #include"../Enemy/Enemy.h"
 #include"../Player/Player.h"

@@ -33,7 +33,7 @@ void Title::Update()
 		}
 	}
 	//もしリターンキーが押された場合
-	if (DirectInput::GetInstance().KeyDown(DIK_RETURN) == true)
+	if (pJoypad->isPushed(Joypad::Button::Start) || DirectInput::GetInstance().KeyDown(DIK_RETURN) == true)
 	{
 		wave[0].Stop();
 		//ＳＥ「決定音」

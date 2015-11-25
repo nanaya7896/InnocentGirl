@@ -8,6 +8,8 @@
 #include"../DirectXAnimation/AnimateObject.h"
 #include"../Enemy/Enemy.h"
 
+#include "../XInput/XInput.h"
+
 class Player : public Map
 {
 private:
@@ -23,14 +25,12 @@ private:
 	Enemy pEnemy;
 	MyAllocateHierarchy mah;
 	CSkinMesh cskinMesh;
-
+	Joypad *pJoypad;
 	int RunFrame;
 	int RunFrame2P;
 	bool RunFlag;
 	bool RunFlag2P;
 
-	//プレイヤーのヨー回転(y軸中心)
-	double ridianYaw =  0.0f;
 public:
 	
 	Player();

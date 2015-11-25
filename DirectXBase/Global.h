@@ -26,9 +26,10 @@ const int WINDOW_HEIGHT = 900;
 #pragma comment(lib, "dinput8.lib")
 #pragma comment(lib,"dsound.lib")
 #pragma comment(lib, "winmm.lib")
-
+#pragma comment(lib,"xinput.lib ")
 
 //C++
+#include <Windows.h>
 #include <comdef.h>
 #include <dsound.h>
 #include <mmsystem.h>
@@ -43,6 +44,9 @@ const int WINDOW_HEIGHT = 900;
 #include<list>
 #include<iostream>
 #include<sstream>
+#include <complex>
+#include <XInput.h>
+#include <algorithm>
 //Direct3D
 #include <d3d9.h>
 #include <d3dx9.h>

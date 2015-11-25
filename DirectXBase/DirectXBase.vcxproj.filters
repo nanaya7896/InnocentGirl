@@ -73,9 +73,6 @@
     <ClCompile Include="Game\GameMainTag.cpp">
       <Filter>Game</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Chapter_GameOfTag.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
     <ClCompile Include="DirectXAnimation\MyAllocateHierarchy.cpp">
       <Filter>DirectXAnimation</Filter>
     </ClCompile>
@@ -141,9 +138,6 @@
     </ClInclude>
     <ClInclude Include="Xinput\Xinput.h">
       <Filter>XInput</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Chapter_GameOfTag.h">
-      <Filter>Game</Filter>
     </ClInclude>
     <ClInclude Include="Game\GameMainTag.h">
       <Filter>Game</Filter>

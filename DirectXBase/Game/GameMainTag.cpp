@@ -16,6 +16,7 @@ GameMainTag::GameMainTag()
 	PlayerSpeed.z = 0.0f;
 	time = 90;
 	timeframe = 0;
+	map1P = new Map();
 	Load();
 
 	camera = new Camera();
@@ -26,7 +27,7 @@ GameMainTag::GameMainTag()
 GameMainTag::~GameMainTag()
 {
 	delete camera;
-
+	delete map1P;
 }
 
 void GameMainTag::Update()
@@ -61,7 +62,7 @@ void GameMainTag::Update()
 
 void GameMainTag::Draw()
 {
-
+	map1P->MapRender();
 	player.PlayerCreate(PlayerPos,PlayerAngle);
 	gmtEnemy.Draw();
 	//§ŒÀŠÔ

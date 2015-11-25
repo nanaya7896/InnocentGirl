@@ -14,7 +14,7 @@
 #include "Game/SceneChange.h"
 #include "Game/Title.h"
 #include "Game/Chapter.h"
-#include "Game/Chapter_GameOfTag.h"
+#include"Xinput/Xinput.h"
 #include"Game/Result.h"
 #include"Game/Gameover.h"
 //#include"DirectXAnimation/AnimateObject.h"
@@ -169,7 +169,7 @@ int _stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 			{
 				//キー状態更新
 				DirectInput::GetInstance().Update();
-				
+				SceneChange::scenechange->pJoypad->update();
 				
 				//SceneChange::scenechange->Update();
 				

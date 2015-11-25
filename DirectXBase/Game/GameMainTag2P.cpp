@@ -4,7 +4,7 @@
 GameMainTag2P::GameMainTag2P()
 {
 
-	timeframe2 = 0;
+	
 	//
 	map2P = new Map();
 	timeTexture2= new Texture[10];
@@ -52,6 +52,7 @@ GameMainTag2P::~GameMainTag2P()
 //‰Šú‰»
 void GameMainTag2P::Init()
 {
+	timeframe2 = 0;
 	PlayerPos1P.x = 0.0f;
 	PlayerPos1P.y = 0.0f;
 	PlayerPos1P.z = 0.0f;

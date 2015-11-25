@@ -1,10 +1,10 @@
 #pragma once
-
+#include"../Global.h"
 #include "../Direct3D/direct3d.h"
 #include "../Direct3D/sprite.h"
 #include "../Direct3D/texture.h"
 #include"../DirectSound/dxsound.h"
-#include"../Global.h"
+
 #include "../DirectInput/directInput.h"
 #include"SceneChange.h"
 #include"GameMainTag.h"
@@ -57,6 +57,7 @@ private:
 
 	Texture gameclear3;
 	Sprite gameclearSprite3;
+	
 
 	int randomNum;    //ƒ‰ƒ“ƒ_ƒ€•Ï”Ši”[—p
 public:

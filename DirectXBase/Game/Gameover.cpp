@@ -2,6 +2,7 @@
 
 //コンストラクタ
 Gameover::Gameover()
+	:go_marker_flag(false)
 {
 	Load();
 }
@@ -12,45 +13,79 @@ Gameover::~Gameover()
 	//動的なメモリ確保などがないのでなし
 }
 
-//インスタンスの初期化
+//テクスチャのロード
 void Gameover::Load()
 {
-	//テクスチャ　スプライトの準備
 
+	//背景
 	gameover1.Load(_T("Texture/gameover1.png"));      //画像（ゲームオーバー１）の読み込み
-	gameover2.Load(_T("Texture/gameover2.png"));      //画像（ゲームオーバー２）の読み込み
-	gameover3.Load(_T("Texture/gameover3.png"));      //画像（ゲームオーバー３）の読み込み
-	gameover4.Load(_T("Texture/gameover4.png"));      //画像（ゲームオーバー４）の読み込み
+	gameoverSprite1.SetSize(GAMEOVER1_SPRITE_SIZE_X, GAMEOVER1_SPRITE_SIZE_Y);
+	gameoverSprite1.SetPos(GAMEOVER1_SPRITE_POS_X, GAMEOVER1_SPRITE_POS_Y);
 
-	gameoverSprite1.SetSize(GAMEOVER1_SPRITE_SIZE_X, GAMEOVER1_SPRITE_SIZE_Y);//スプライトのサイズ設定
-	gameoverSprite2.SetSize(GAMEOVER2_SPRITE_SIZE_X, GAMEOVER2_SPRITE_SIZE_Y);//スプライトのサイズ設定
-	gameoverSprite3.SetSize(GAMEOVER3_SPRITE_SIZE_X, GAMEOVER3_SPRITE_SIZE_Y);//スプライトのサイズ設定
-	gameoverSprite4.SetSize(GAMEOVER4_SPRITE_SIZE_X, GAMEOVER4_SPRITE_SIZE_Y);//スプライトのサイズ設定
+	//やじるし
+	gameover2.Load(_T("Texture/gameover2.png"));      //画像（ゲームオーバー２）の読み込み
+	gameoverSprite2[!go_marker_flag].SetSize(GAMEOVER2_SPRITE_SIZE_X, GAMEOVER2_SPRITE_SIZE_Y);
+	gameoverSprite2[!go_marker_flag].SetPos(GAMEOVER2_SPRITE_POS_X, GAMEOVER2_SPRITE_POS_Y);
+	gameoverSprite2[go_marker_flag].SetSize(GAMEOVER2_SPRITE_SIZE_X, GAMEOVER2_SPRITE_SIZE_Y);
+	gameoverSprite2[go_marker_flag].SetPos(GAMEOVER2_SPRITE_POS_X + 430, GAMEOVER2_SPRITE_POS_Y);
+
+	//文字
+	//リトライ
+	gameover3.Load(_T("Texture/gameover3.png"));      //画像（ゲームオーバー３）の読み込み
+	gameoverSprite3.SetSize(GAMEOVER3_SPRITE_SIZE_X, GAMEOVER3_SPRITE_SIZE_Y);
+	gameoverSprite3.SetPos(GAMEOVER3_SPRITE_POS_X, GAMEOVER3_SPRITE_POS_Y);
+	//ちゃぷたーへ
+	gameover4.Load(_T("Texture/gameover4.png"));
+	gameoverSprite4.SetSize(GAMEOVER4_SPRITE_SIZE_X, GAMEOVER4_SPRITE_SIZE_Y);
+	gameoverSprite4.SetPos(GAMEOVER4_SPRITE_POS_X, GAMEOVER4_SPRITE_POS_Y);
+
 }
 //ゲームの初期化
 //ゲーム開始の際に行う準備
 void Gameover::Update()
 {
-	if (DirectInput::GetInstance().KeyDown(DIK_RETURN))
+	//やじるし移動
+	//右
+	if (DirectInput::GetInstance().KeyDown(DIK_RIGHT))
+	{
+		go_marker_flag = true;
+	}
+	//左
+	if (DirectInput::GetInstance().KeyDown(DIK_LEFT))
+	{
+		go_marker_flag = false;
+	}
+
+	//画面遷移
+	//リトライ
+	if (DirectInput::GetInstance().KeyDown(DIK_RETURN) && go_marker_flag == false)
 	{
 		delete scenechange;
-		scenechange = new Title();
+		scenechange = new GameMainTag();
+		return;
 	}
+	//チャプターへ
+	if (DirectInput::GetInstance().KeyDown(DIK_RETURN) && go_marker_flag == true)
+	{
+		delete scenechange;
+		scenechange = new Chapter();
+		return;
+	}
+
 }
 
 void Gameover::Draw()
 {
-	gameoverSprite1.SetPos(GAMEOVER1_SPRITE_POS_X, GAMEOVER1_SPRITE_POS_Y);
-	gameoverSprite1.Draw(pDevice3D, gameover1.pTexture, false);
+	//やじるし
+	gameoverSprite2[!go_marker_flag].Draw(pDevice3D, gameover2.pTexture);
 
-	gameoverSprite2.SetPos(GAMEOVER2_SPRITE_POS_X, GAMEOVER2_SPRITE_POS_Y);
-	gameoverSprite2.Draw(pDevice3D, gameover2.pTexture);
-
-	gameoverSprite3.SetPos(GAMEOVER3_SPRITE_POS_X, GAMEOVER3_SPRITE_POS_Y);
+	//文字
+	//リトライ
 	gameoverSprite3.Draw(pDevice3D, gameover3.pTexture);
-
-	gameoverSprite4.SetPos(GAMEOVER4_SPRITE_POS_X, GAMEOVER4_SPRITE_POS_Y);
+	//チャプターへ
 	gameoverSprite4.Draw(pDevice3D, gameover4.pTexture);
 
+	//背景
+	gameoverSprite1.Draw(pDevice3D, gameover1.pTexture, false);
 
 }
