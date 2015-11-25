@@ -18,12 +18,14 @@ private:
 	Texture tfloor[8];
 	Texture tfloorGround[11];
 	Texture tpanelSky[4];
+	Texture tSky;
 	Texture tpanelSun;
 	Texture tBuil[4];
 	//Xfileのインスタンス生成
 	X_FILE xfloor;
 	X_FILE xpanelSky;
 	X_FILE xBuil[4];
+	X_FILE xSky;
 	//Enemyのインスタンス生成
 	//Enemy Cem;
 	//メンバ変数

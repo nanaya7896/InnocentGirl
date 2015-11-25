@@ -48,6 +48,7 @@ HRESULT Map::LoadBuldings()
 		tpanelSky[0].Load(_T("texture/sora.png"));
 		tpanelSky[1].Load(_T("texture/sora2.png"));
 		tpanelSky[2].Load(_T("texture/sora3.png"));
+		tSky.Load(_T("texture/sky-texture.png"));
 		//太陽
 		tpanelSun.Load(_T("texture/taiyo.png"));
 
@@ -55,6 +56,7 @@ HRESULT Map::LoadBuldings()
 		xfloor.XfileLoader(L"xfile/floor1.x");
 		//空のxfile
 		xpanelSky.XfileLoader(L"xfile/panele1.x");
+		xSky.XfileLoader(L"xfile/sky.X");
 		//ビルのXファイル
 		xBuil[0].XfileLoader(L"xfile/building.X");
 		xBuil[1].XfileLoader(L"xfile/building2.X");
@@ -190,7 +192,7 @@ void Map::MapRender()
 		{
 			for (float wallx = -36.0f; wallx < 37.0f; wallx += 12.0f)
 			{
-				xpanelSky.Render(&D3DXVECTOR3(wallx, wally, 72), &D3DXVECTOR3(0, 300.029f, 0), &D3DXVECTOR3(1, 1, 1), tpanelSky[0].GetTexture());
+				xpanelSky.Render(&D3DXVECTOR3(wallx, wally, 72), &D3DXVECTOR3(0, 300.029f, 0), &D3DXVECTOR3(1, 1, 1), tpanelSky[2].GetTexture());
 				
 				numv[i] = xpanelSky.g_pMesh->GetNumVertices();
 				stride[i] = D3DXGetFVFVertexSize(xpanelSky.g_pMesh->GetFVF());
@@ -222,7 +224,7 @@ void Map::MapRender()
 	{
 		for (float wallx = -36.0f; wallx < 37.0f; wallx += 12.0f)
 		{
-			xpanelSky.Render(&D3DXVECTOR3(wallx, wally, -60.0f), &D3DXVECTOR3(0, 300.029f, 0), &D3DXVECTOR3(1, 1, 1), tpanelSky[0].GetTexture());
+			xpanelSky.Render(&D3DXVECTOR3(wallx, wally, -60.0f), &D3DXVECTOR3(0, 300.029f, 0), &D3DXVECTOR3(1, 1, 1), tpanelSky[2].GetTexture());
 			numv[i] = xpanelSky.g_pMesh->GetNumVertices();
 			stride[i] = D3DXGetFVFVertexSize(xpanelSky.g_pMesh->GetFVF());
 			hr[i] = xpanelSky.g_pMesh->GetVertexBuffer(&pvb9);
@@ -252,7 +254,7 @@ void Map::MapRender()
 	{
 		for (float wallz = -54.0f; wallz < 67.0f; wallz += 12.0f)
 		{
-			xpanelSky.Render(&D3DXVECTOR3(42, wally, wallz), &D3DXVECTOR3(0, 0, 0), &D3DXVECTOR3(1, 1, 1), tpanelSky[0].GetTexture());
+			xpanelSky.Render(&D3DXVECTOR3(42, wally, wallz), &D3DXVECTOR3(0, 0, 0), &D3DXVECTOR3(1, 1, 1), tpanelSky[2].GetTexture());
 			numv[i] = xpanelSky.g_pMesh->GetNumVertices();
 			stride[i] = D3DXGetFVFVertexSize(xpanelSky.g_pMesh->GetFVF());
 			hr[i] = xpanelSky.g_pMesh->GetVertexBuffer(&pvb9);
@@ -282,7 +284,7 @@ void Map::MapRender()
 	{
 		for (float wallz = -54.0f; wallz < 67.0f; wallz += 12.0f)
 		{
-			xpanelSky.Render(&D3DXVECTOR3(-42, wally, wallz), &D3DXVECTOR3(0, 0, 0), &D3DXVECTOR3(1, 1, 1), tpanelSky[0].GetTexture());
+			xpanelSky.Render(&D3DXVECTOR3(-42, wally, wallz), &D3DXVECTOR3(0, 0, 0), &D3DXVECTOR3(1, 1, 1), tpanelSky[2].GetTexture());
 			numv[i] = xpanelSky.g_pMesh->GetNumVertices();
 			stride[i] = D3DXGetFVFVertexSize(xpanelSky.g_pMesh->GetFVF());
 			hr[i] = xpanelSky.g_pMesh->GetVertexBuffer(&pvb9);
@@ -308,14 +310,15 @@ void Map::MapRender()
 	}
 	i = 0;
 
-	//空
-	for (float skyx = -36; skyx < 37.0f; skyx += 12)
-	{
-		for (float skyz = -54; skyz < 67; skyz += 12)
-		{
-			xpanelSky.Render(&D3DXVECTOR3(skyx, 35.0f, skyz), &D3DXVECTOR3(0, 0, 1.56999886f), &D3DXVECTOR3(1, 1, 1), tpanelSky[1].GetTexture());
-		}
-	}
+	////空
+	//for (float skyx = -36; skyx < 37.0f; skyx += 12)
+	//{
+	//	for (float skyz = -54; skyz < 67; skyz += 12)
+	//	{
+	//		xpanelSky.Render(&D3DXVECTOR3(skyx, 35.0f, skyz), &D3DXVECTOR3(0, 0, 1.56999886f), &D3DXVECTOR3(1, 1, 1), tpanelSky[1].GetTexture());
+	//	}
+	//}
+	xSky.Render(&D3DXVECTOR3(0.0f, 35.0f, 0.0f), &D3DXVECTOR3(0, 0, 1.56999886f), &D3DXVECTOR3(1, 1, 1), tSky.GetTexture());
 	
 	//ビルの描画
 	
