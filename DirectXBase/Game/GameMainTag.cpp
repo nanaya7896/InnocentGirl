@@ -14,7 +14,6 @@ GameMainTag::GameMainTag()
 	PlayerSpeed.x = 0.0f;
 	PlayerSpeed.y = 0.0f;
 	PlayerSpeed.z = 0.0f;
-	timeText.Create(pDevice3D,64);
 	time = 90;
 	timeframe = 0;
 	Load();

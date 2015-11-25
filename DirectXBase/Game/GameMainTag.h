@@ -31,8 +31,7 @@ private:
 	MyAllocateHierarchy mah;
 	//メッシュインスタンス
 	CSkinMesh cskinMesh;
-	//テキストインスタンス
-	DirectXText timeText;
+
 	//enemyのインスタンス
 	Enemy gmtEnemy;
 	//時間用メンバ変数

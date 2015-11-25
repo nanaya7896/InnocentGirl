@@ -145,33 +145,15 @@ int _stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	Map map;
 	//Mapの読み込み
 	map.LoadBuldings();
-	/*Texture tfloor1(_T("floor1.bmp"));
-	Texture tfloor2(_T("floor2.bmp"));
-	Texture tfloor3(_T("floor3.bmp"));
-	Texture tfloor4(_T("floor4.bmp"));*/
 	//スプライトの作成
 	Sprite sprite[3];
 	//-------------------------------------------------------------------------------------------
-	//音声の再世
-	/*sb[0].Play(false);
-	sb[1].Play(true);
-	sb[2].Play(true);*/
-	//----------------------------------------------------
-	//カメラのロード
-	//----------------------------------------------------
-//	Camera camera;
-	//xfile.XfileLoader(direct3d.pDevice3D, _T("catsenkan.X"));
-	//----------------------------------------------------
-	//Playerのロード
-	//----------------------------------------------------
-	/*direct3d.pDevice3D->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
-	direct3d.pDevice3D->SetRenderState(D3DRS_ZENABLE, TRUE);
-	SetRenderState(direct3d.pDevice3D, RENDER_ALPHATEST);*/
+
 
 	//スキンメッシュ用クラス
 	CSkinMesh m_CSkinMesh;
 	//データのロード
-	//m_CSkinMesh.Init(direct3d.pDevice3D,"Y-runstart-P.X");
+	//m_CSkinMesh.Init(direct3d.pDevice3D,"xfile/hako.x");
 	//D3DXMatrixIdentity(&direct3d.d3dMat);
 
 	MSG msg = {};
@@ -216,6 +198,7 @@ int _stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 				direct3d.pDevice3D->Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, BlackColor, 1.0f, 0);
 				////Map描画
 				map.MapRender();
+			//	m_CSkinMesh.Draw(direct3d.pDevice3D);
 				SceneChange::scenechange->Update();
 				SceneChange::scenechange->Draw();
 					//プレイヤーの移動
