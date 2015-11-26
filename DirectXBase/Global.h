@@ -13,7 +13,7 @@
 //アニメーションコントローラーのスピード
 #define SKIN_ANIME_SPEED 60.0f / 4800.0f
 
-
+static const int ALIGNE_SIZE = 16;
 
 
 //ウィンドウサイズ

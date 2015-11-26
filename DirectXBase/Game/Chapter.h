@@ -20,6 +20,9 @@ public:
 	//背景
 	Texture chapter_bg;
 	Sprite schapter_bg;
+	//操作説明
+	Texture tContTx;
+	Sprite sContTx;
 	//マーカー
 	Texture marker;
 	Sprite smarker[2];
@@ -51,6 +54,7 @@ public:
 	bool chapter_flag;
 	bool member_flag;
 	bool marker_flag;
+	bool ContFlag;
 
 	//コンストラクタ
 	Chapter();

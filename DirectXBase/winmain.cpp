@@ -140,6 +140,10 @@ int _stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 
 	MSG msg = {};
 
+	//JoyPad‚Ì“Ç‚İ‚İ
+	
+
+
 	//‰æ–Ê‘JˆÚ
 	//SetRenderState(direct3d.pDevice3D, RENDER_DEFAULT);
 	SetRenderState(direct3d.pDevice3D, RENDER_ALPHATEST);

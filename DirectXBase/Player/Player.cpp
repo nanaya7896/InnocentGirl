@@ -59,9 +59,9 @@ D3DXVECTOR3 Player::PlayerMove(D3DXVECTOR3 pPos,D3DXVECTOR3 pAng)
 	{
 		RunFlag = true;
 	}
-//	pJoypad->update();
+	//pJoypad->update();
 
-	if ( /*pJoypad->isPushed(Joypad::Button::A) == true|| */DirectInput::GetInstance().KeyDown(DIK_F) || DirectInput::GetInstance().KeyState(DIK_F))
+	if ( pJoypad->isPushed(Joypad::Button::A) == true|| DirectInput::GetInstance().KeyDown(DIK_F) || DirectInput::GetInstance().KeyState(DIK_F))
 	{
 		if (RunFlag == true)
 		{
@@ -74,7 +74,7 @@ D3DXVECTOR3 Player::PlayerMove(D3DXVECTOR3 pPos,D3DXVECTOR3 pAng)
 		speed = 0.1f;
 	}
 		//上移動
-	if (/*pJoypad->getLStick(0.1).imag() >= 0.5 ||*/ DirectInput::GetInstance().KeyDown(DIK_W))
+	if (pJoypad->getLStick(0.1).imag() >= 0.5 || DirectInput::GetInstance().KeyDown(DIK_W))
 		{
 			mypos.x = pPos.x + (sin(pAng.y)*speed);
 			mypos.z = pPos.z + (cos(pAng.y)*speed);
@@ -87,7 +87,7 @@ D3DXVECTOR3 Player::PlayerMove(D3DXVECTOR3 pPos,D3DXVECTOR3 pAng)
 		}
 
 		//下移動
-	if (/*pJoypad->getLStick(0.1).imag() <= -0.5 || */DirectInput::GetInstance().KeyDown(DIK_S))
+	if (pJoypad->getLStick(0.1).imag() <= -0.5 || DirectInput::GetInstance().KeyDown(DIK_S))
 		{
 			//mypos.z=pPos.z - speed;
 			mypos.x = pPos.x - (sin(pAng.y)*speed);
@@ -100,7 +100,7 @@ D3DXVECTOR3 Player::PlayerMove(D3DXVECTOR3 pPos,D3DXVECTOR3 pAng)
 		}
 
 		//右移動
-	if (/*pJoypad->getLStick(0.1).real() <= -0.5 || */DirectInput::GetInstance().KeyDown(DIK_A))
+	if (pJoypad->getLStick(0.1).real() <= -0.5 || DirectInput::GetInstance().KeyDown(DIK_A))
 		{
 			//mypos.x=pPos.x - speed;
 			mypos.x = pPos.x -+ (cos(pAng.y)*speed);
@@ -113,7 +113,7 @@ D3DXVECTOR3 Player::PlayerMove(D3DXVECTOR3 pPos,D3DXVECTOR3 pAng)
 		}
 
 		//左移動
-	if (/*pJoypad->getLStick(0.1).real() >= 0.5 || */DirectInput::GetInstance().KeyDown(DIK_D))
+	if (pJoypad->getLStick(0.1).real() >= 0.5 || DirectInput::GetInstance().KeyDown(DIK_D))
 		{
 			mypos.x = pPos.x + (cos(pAng.y)*speed);
 			mypos.z = pPos.z - (sin(pAng.y)*speed);
@@ -156,7 +156,7 @@ D3DXVECTOR3 Player::PlayerMove2P(D3DXVECTOR3 pPos, D3DXVECTOR3 pAng)
 	}
 	//pJoypad->update();
 
-	if (/*pJoypad->isPushed(Joypad::Button::A) ||*/ DirectInput::GetInstance().KeyDown(DIK_H) || DirectInput::GetInstance().KeyState(DIK_H))
+	if (pJoypad->isPushed(Joypad::Button::A) || DirectInput::GetInstance().KeyDown(DIK_H) || DirectInput::GetInstance().KeyState(DIK_H))
 	{
 		if (RunFlag2P == true)
 		{
@@ -182,7 +182,7 @@ D3DXVECTOR3 Player::PlayerMove2P(D3DXVECTOR3 pPos, D3DXVECTOR3 pAng)
 	}
 
 	//下移動
-	if (/*pJoypad->getLStick(0.1).imag() >= 0.5 || */DirectInput::GetInstance().KeyDown(DIK_K))
+	if (pJoypad->getLStick(0.1).imag() >= 0.5 || DirectInput::GetInstance().KeyDown(DIK_K))
 	{
 		//mypos.z=pPos.z - speed;
 		mypos.x = pPos.x - (sin(pAng.y)*speed);
@@ -195,25 +195,25 @@ D3DXVECTOR3 Player::PlayerMove2P(D3DXVECTOR3 pPos, D3DXVECTOR3 pAng)
 	}
 
 	//右移動
-	if (/*pJoypad->getLStick(0.1).imag() <= -0.5 ||*/ DirectInput::GetInstance().KeyDown(DIK_L))
+	if (pJoypad->getLStick(0.1).imag() <= -0.5 || DirectInput::GetInstance().KeyDown(DIK_J))
 	{
 		//mypos.x=pPos.x - speed;
 		mypos.x = pPos.x - +(cos(pAng.y)*speed);
 		mypos.z = pPos.z - (sin(pAng.y)*speed);
 	}
-	else if (DirectInput::GetInstance().KeyStatePreview(DIK_L))
+	else if (DirectInput::GetInstance().KeyStatePreview(DIK_J))
 	{
 		mypos.x = pPos.x - (cos(pAng.y)*speed);
 		mypos.z = pPos.z + (sin(pAng.y)*speed);
 	}
 
 	//左移動
-	if (/*pJoypad->getLStick(0.1).real() >= 0.5 || */DirectInput::GetInstance().KeyDown(DIK_J))
+	if (pJoypad->getLStick(0.1).real() >= 0.5 || DirectInput::GetInstance().KeyDown(DIK_L))
 	{
 		mypos.x = pPos.x + (cos(pAng.y)*speed);
 		mypos.z = pPos.z - (sin(pAng.y)*speed);
 	}
-	else if (DirectInput::GetInstance().KeyStatePreview(DIK_J))
+	else if (DirectInput::GetInstance().KeyStatePreview(DIK_L))
 	{
 		mypos.x = pPos.x + (cos(pAng.y)*speed);
 		mypos.z = pPos.z - (sin(pAng.y)*speed);
@@ -241,9 +241,9 @@ D3DXVECTOR3 Player::PlayerMove2P(D3DXVECTOR3 pPos, D3DXVECTOR3 pAng)
 
 D3DXVECTOR3 Player::PlayerCameraMove(D3DXVECTOR3 pAng)
 {
-//	pJoypad->update();
+
 	//右を向く
-	if ( /*pJoypad->getRStick(0.1).real() <= -0.5 ||*/ DirectInput::GetInstance().KeyDown(DIK_Q))
+	if ( pJoypad->getRStick(0.1).real() <= -0.5 || DirectInput::GetInstance().KeyDown(DIK_Q))
 	{
 		pAng.y -= 0.1f;
 	}
@@ -253,7 +253,7 @@ D3DXVECTOR3 Player::PlayerCameraMove(D3DXVECTOR3 pAng)
 		
 	}
 	//左を向く
-	if (/*pJoypad->getRStick(0.1).real() >= 0.5 || */DirectInput::GetInstance().KeyDown(DIK_E))
+	if (pJoypad->getRStick(0.1).real() >= 0.5 || DirectInput::GetInstance().KeyDown(DIK_E))
 	{
 		pAng.y += 0.1f;
 	}
@@ -269,9 +269,9 @@ D3DXVECTOR3 Player::PlayerCameraMove(D3DXVECTOR3 pAng)
 
 D3DXVECTOR3 Player::PlayerCameraMove2P(D3DXVECTOR3 pAng)
 {
-	
+
 	//右を向く
-	if (/*pJoypad->getRStick(0.1).real() <= -0.5 || */DirectInput::GetInstance().KeyDown(DIK_P))
+	if (pJoypad->getRStick(0.1).real() <= -0.5 || DirectInput::GetInstance().KeyDown(DIK_P))
 	{
 		pAng.y -= 0.1f;
 	}
@@ -281,7 +281,7 @@ D3DXVECTOR3 Player::PlayerCameraMove2P(D3DXVECTOR3 pAng)
 
 	}
 	//左を向く
-	if (/*pJoypad->getRStick(0.1).real() >= 0.5 ||*/ DirectInput::GetInstance().KeyDown(DIK_I))
+	if (pJoypad->getRStick(0.1).real() >= 0.5 ||DirectInput::GetInstance().KeyDown(DIK_I))
 	{
 		pAng.y += 0.1f;
 	}

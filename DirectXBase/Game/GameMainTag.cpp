@@ -20,7 +20,7 @@ GameMainTag::GameMainTag()
 	Load();
 
 	camera = new Camera();
-	CameraPosition = D3DXVECTOR3(PlayerPos.x, PlayerPos.y, PlayerPos.z - 3.0f);
+	CameraPosition = D3DXVECTOR3(PlayerPos.x, PlayerPos.y, PlayerPos.z - 7.0f);
 
 	wave[0].Play(false);
 }
@@ -37,8 +37,8 @@ void GameMainTag::Update()
 	PlayerAngle = player.PlayerCameraMove(PlayerAngle);
 	PlayerPos=player.PlayerMove(PlayerPos,PlayerAngle);
 	
-	CameraPosition.x = PlayerPos.x - (3.0f*sinf(PlayerAngle.y));
-	CameraPosition.z = PlayerPos.z - (3.0f*cosf(PlayerAngle.y));
+	CameraPosition.x = PlayerPos.x - (7.0f*sinf(PlayerAngle.y));
+	CameraPosition.z = PlayerPos.z - (7.0f*cosf(PlayerAngle.y));
 
 
 	camera->View(CameraPosition, PlayerAngle);

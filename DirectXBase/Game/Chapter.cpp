@@ -4,6 +4,7 @@
 //コンストラクタ
 Chapter::Chapter()
 {
+	ContFlag = false;
 	Load();
 	wave[0].Play(false);
 }
@@ -11,7 +12,7 @@ Chapter::Chapter()
 //デストラクタ
 Chapter::~Chapter()
 {
-
+	ContFlag = false;
 }
 
 void Chapter::Update()
@@ -48,25 +49,39 @@ void Chapter::Update()
 	}
 
 
+	
 	//GameMainおにごっこひとりプレイに画面遷移
-	if (pJoypad->isPushed(Joypad::Button::B) == true || DirectInput::GetInstance().KeyDown(DIK_RETURN) && chapter_flag == false && member_flag == false)
+	if (pJoypad->isPushed(Joypad::Button::B) == true || DirectInput::GetInstance().KeyDown(DIK_RETURN))
 	{
-		wave[0].Stop();
-		wave[1].Play(false);
-		delete scenechange;
-		scenechange = new GameMainTag();		//おにごっこひとりプレイ
-		return;
+		ContFlag = true;
 	}
-	//GameMainおにごっこともだちとプレイに画面遷移
+	if (ContFlag == true)
+	{
+		sContTx.Draw(pDevice3D, tContTx.GetTexture());
+		//GameMainおにごっこひとりプレイに画面遷移
+		if (pJoypad->isPushed(Joypad::Button::B) == true || DirectInput::GetInstance().KeyDown(DIK_SPACE) && chapter_flag == false && member_flag == false)
+		{
+			sContTx.Draw(pDevice3D, tContTx.GetTexture());
+			wave[0].Stop();
+			wave[1].Play(false);
+			delete scenechange;
+			scenechange = new GameMainTag();		//おにごっこひとりプレイ
+			return;
+		}
+		//GameMainおにごっこともだちとプレイに画面遷移
 
-	if (pJoypad->isPushed(Joypad::Button::B) == true || DirectInput::GetInstance().KeyDown(DIK_RETURN) && chapter_flag == false && member_flag == true)
-	{
-		wave[0].Stop();
-		wave[1].Play(false);
-		delete scenechange;
-		scenechange = new GameMainTag2P();		//おにごっこともだちとプレイ
-		return;
+		if (pJoypad->isPushed(Joypad::Button::B) == true || DirectInput::GetInstance().KeyDown(DIK_SPACE) && chapter_flag == false && member_flag == true)
+		{
+			sContTx.Draw(pDevice3D, tContTx.GetTexture());
+			wave[0].Stop();
+			wave[1].Play(false);
+			delete scenechange;
+			scenechange = new GameMainTag2P();		//おにごっこともだちとプレイ
+			return;
+		}
 	}
+	
+	
 
 }
 
@@ -129,7 +144,10 @@ void Chapter::Load()
 	tomodati[member_flag].Load(_T("texture/tomodatito_big.png"));
 	stomodati[member_flag].SetPos(1350, 700);
 	stomodati[member_flag].SetSize(250, 200);
-
+	//操作説明
+	tContTx.Load(_T("texture/sousaonigo.png"));
+	sContTx.SetPos(WINDOW_WIDTH/2,WINDOW_HEIGHT/2);
+	sContTx.SetSize(WINDOW_WIDTH,WINDOW_HEIGHT);
 
 	//背景読み込み
 	chapter_bg.Load(_T("texture/taitoru2.png"));

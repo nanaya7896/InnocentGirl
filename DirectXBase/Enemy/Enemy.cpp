@@ -186,8 +186,8 @@ void Enemy::Draw()
 void Enemy::Load()
 {
 	//テクスチャとXファイルの読み込み
-	t_Enemy.Load("texture/teki1.bmp");
-	x_Enemy.XfileLoader(L"xfile/zombie-kari.X");
+	t_Enemy.Load("texture/zombie-tex.jpg");
+	x_Enemy.XfileLoader(L"xfile/zombie-nobone.X");
 
 	//行列の初期化
 	D3DXMatrixIdentity(&d3dMat);

@@ -5,7 +5,7 @@ Gameover::Gameover()
 	:go_marker_flag(false)
 {
 	Load();
-	wave[0].Play(true);
+	//wave[0].Play(true);
 }
 
 //デストラクタ
@@ -41,10 +41,10 @@ void Gameover::Load()
 	gameoverSprite4.SetPos(GAMEOVER4_SPRITE_POS_X, GAMEOVER4_SPRITE_POS_Y);
 
 	//wavファイル読み込み
-	wave[0].Load(_T("BGM/gameover.wav"));
+	/*wave[0].Load(_T("BGM/gameover.wav"));
 	wave[1].Load(_T("BGM/kettei.wav"));
 	wave[2].Load(_T("BGM/ka-soruidou.wav"));
-
+*/
 }
 //ゲームの初期化
 //ゲーム開始の際に行う準備
@@ -54,13 +54,13 @@ void Gameover::Update()
 	//右
 	if (DirectInput::GetInstance().KeyDown(DIK_RIGHT))
 	{
-		wave[2].Play(false);
+		//wave[2].Play(false);
 		go_marker_flag = true;
 	}
 	//左
 	if (DirectInput::GetInstance().KeyDown(DIK_LEFT))
 	{
-		wave[2].Play(false);
+		//wave[2].Play(false);
 		go_marker_flag = false;
 	}
 
@@ -68,8 +68,8 @@ void Gameover::Update()
 	//リトライ
 	if (DirectInput::GetInstance().KeyDown(DIK_RETURN) && go_marker_flag == false)
 	{
-		wave[0].Stop();
-		wave[1].Play(false);
+		/*wave[0].Stop();
+		wave[1].Play(false);*/
 		delete scenechange;
 		scenechange = new GameMainTag();
 		return;
@@ -77,8 +77,8 @@ void Gameover::Update()
 	//チャプターへ
 	if (DirectInput::GetInstance().KeyDown(DIK_RETURN) && go_marker_flag == true)
 	{
-		wave[0].Stop();
-		wave[1].Play(false);
+		/*wave[0].Stop();
+		wave[1].Play(false);*/
 
 		delete scenechange;
 		scenechange = new Chapter();

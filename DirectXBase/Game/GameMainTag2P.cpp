@@ -4,8 +4,6 @@
 GameMainTag2P::GameMainTag2P()
 {
 
-	
-	//
 	map2P = new Map();
 	timeTexture2= new Texture[10];
 	//§ŒÀŠÔ‚Ì‰æ‘œ“Ç‚İ‚İ
