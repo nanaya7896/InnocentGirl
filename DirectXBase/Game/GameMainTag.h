@@ -1,5 +1,7 @@
 #pragma once
 
+#include"../SceneChanger/ISceneChanger.h"
+#include"../SceneChanger/BaseScene.h"
 #include "../Direct3D\texture.h"
 #include "../Direct3D\sprite.h"
 #include "../Direct3D/direct3d.h"
@@ -7,7 +9,6 @@
 #include"../Player/Player.h"
 #include"../Direct3D/Camera.h"
 #include"Map.h"
-#include "SceneChange.h"
 #include"../DirectXAnimation/MyAllocateHierarchy.h"
 #include"../DirectXAnimation/AnimateObject.h"
 #include"../Direct3D/font.h"
@@ -16,7 +17,8 @@
 #include"Result.h"
 #include"Gameover.h"
 #include"../DirectSound/dxsound.h"
-class GameMainTag :public SceneChange,Direct3D
+
+class GameMainTag :public BaseScene, Direct3D
 {
 private:
 	//テクスチャインスタンス
@@ -32,7 +34,7 @@ private:
 	//メッシュインスタンス
 	CSkinMesh cskinMesh;
 	//マップのインスタンス
-	Map *map1P;
+	Map map1P;
 	//enemyのインスタンス
 	Enemy gmtEnemy;
 	//サウンドのインスタンス
@@ -41,27 +43,33 @@ private:
 	int time;
 	int timeframe;
 	//time10の位
-	int tentime=9;
+	int tentime = 6;
 	//time1の位
-	int onetime=0;
+	int onetime = 0;
+
+	//スコア仮置き
+	DirectXText score1;
+	DirectXText score2;
+	int Score1p;
+	int Score2p;
 public:
 	D3DXVECTOR3 CameraPosition;
 
 	//コンストラクタ
-	GameMainTag();
+	GameMainTag(ISceneChanger *changer);
 
 	//デストラクタ
 	~GameMainTag();
 
-	void Update();
-	void Draw();
+	void Initialize() override;
+	void Finalize() override;
+	void Update() override;
+	void Draw() override;
 
-	void Load();
 
 
 protected:
 	D3DXVECTOR3 PlayerPos;
 	D3DXVECTOR3 PlayerAngle;
 	D3DXVECTOR3 PlayerSpeed;
-
 };

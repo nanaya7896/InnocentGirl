@@ -4,11 +4,13 @@
 #include "../Direct3D/sprite.h"
 #include "../Direct3D/texture.h"
 #include"../DirectSound/dxsound.h"
-
+#include "../SceneChanger/BaseScene.h"
+#include "../SceneChanger/ISceneChanger.h"
 #include "../DirectInput/directInput.h"
-#include"SceneChange.h"
 #include"GameMainTag.h"
 #include"Title.h"
+
+#include"../Xinput/XbonInput.h"
 
 #define YUKI_SPRITE_SIZE_X 450          //ユキちゃんのサイズ（Ｘ）
 #define YUKI_SPRITE_SIZE_Y 900          //ユキちゃんのサイズ（Ｙ）
@@ -36,7 +38,7 @@
 
 
 
-class CResult :public SceneChange,Direct3D
+class CResult :public BaseScene,Direct3D
 {
 private:
 	//テクスチャとスプライト
@@ -59,21 +61,26 @@ private:
 	Sprite gameclearSprite3;
 	CSound wave[2];
 
+	XboxInput rInput;
 	int randomNum;    //ランダム変数格納用
 public:
 
-	//コンストラクタ　デストラクタ
-	CResult();
+	//コンストラクタ　
+	CResult(ISceneChanger *changer);
+	//デストラクタ
 	~CResult();
 
 
-	void Load();
+	//init
+	void Initialize() override;
 
+	//Finalize
+	void Finalize() override;
 	//update
-	void Update();
+	void Update() override;
 
 	//draw
-	void Draw();
+	void Draw() override;
 
 	// 最大と最小の間の値をランダムに返すヘルパー関数
 	float Random(float min, float max);

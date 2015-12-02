@@ -8,20 +8,35 @@
 #include"Direct3D\Xfile.h"
 #include"DirectSound/dxsound.h"
 #include "DirectInput/directInput.h"
-//#include"Direct3D\Camera.h"
+#include"SceneChanger\SceneChange.h"
 #include"Player/Player.h"
 #include"Game/Map.h"
-#include "Game/SceneChange.h"
 #include "Game/Title.h"
 #include "Game/Chapter.h"
-#include"Xinput/Xinput.h"
+
 #include"Game/Result.h"
 #include"Game/Gameover.h"
 //#include"DirectXAnimation/AnimateObject.h"
 //#include"DirectXAnimation/MyAllocateHierarchy.h"
+#include <io.h>
+#include <Fcntl.h>
+
+int hConsole = 0;
+
+void createConsoleWindow() {
+	AllocConsole();
+	hConsole = _open_osfhandle((long)GetStdHandle(STD_OUTPUT_HANDLE), _O_TEXT);
+	*stdout = *_fdopen(hConsole, "w");
+	setvbuf(stdout, NULL, _IONBF, 0);
+}
+void closeConsoleWindow() {
+	_close(hConsole);
+}
 
 
 DWORD lasttime;
+
+
 
 //FPS管理用変数
 //測定開始時刻
@@ -117,6 +132,9 @@ int _stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 		
 	DirectInput::GetInstance().Init();
 
+
+	SceneChange sceneChange;
+	sceneChange.Initialize();
 	//----------------------------------------------------
 	//Playerの初期化 主人公のロード
 	//----------------------------------------------------
@@ -140,14 +158,13 @@ int _stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 
 	MSG msg = {};
 
-	//JoyPadの読み込み
 	
-
+	
 
 	//画面遷移
 	//SetRenderState(direct3d.pDevice3D, RENDER_DEFAULT);
 	SetRenderState(direct3d.pDevice3D, RENDER_ALPHATEST);
-	SceneChange::scenechange = new Title();	//タイトル
+	
 	DirectXText fps;
 	fps.Create(direct3d.pDevice3D, 32);
 	lasttime = timeGetTime();
@@ -174,55 +191,15 @@ int _stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 			if (SUCCEEDED(direct3d.pDevice3D->BeginScene()))
 			{
 				//キー状態更新
-				DirectInput::GetInstance().Update();
-				SceneChange::scenechange->pJoypad->update();
-				
-				//SceneChange::scenechange->Update();
-				
+				DirectInput::GetInstance().Update();				
 				DWORD BlackColor = 0x0000cc;//背景黒色
 				//背景クリア
 				direct3d.pDevice3D->Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, BlackColor, 1.0f, 0);
-				////Map描画
-				//map.MapRender();
-			//	m_CSkinMesh.Draw(direct3d.pDevice3D);
-				SceneChange::scenechange->Update();
-				SceneChange::scenechange->Draw();
-					//プレイヤーの移動
-				//PlayerPos = Pplayer.PlayerMove(lasttime, D3DXVECTOR3(PlayerPos.x, PlayerPos.y, PlayerPos.z));
-//
-//
-//				//デフォルト
-//				SetRenderState(direct3d.pDevice3D, RENDER_DEFAULT);
-//				sprite[0].SetSize(100, 100);
-//				sprite[0].SetPos(200, 300);
-//				sprite[0].Draw(direct3d.pDevice3D, font.pTexture);
-//
-//				/*α
-//				SetRenderState(direct3d.pDevice3D, RENDER_ALPHATEST);
-//				sprite[1].SetPos(300, 300);
-//				sprite[1].Draw(direct3d.pDevice3D, bomb_tex.pTexture);
-//
-//				加算合成
-//				SetRenderState(direct3d.pDevice3D, RENDER_HALFADD);
-//				sprite[1].SetPos(400, 300);
-//				sprite[1].Draw(direct3d.pDevice3D, bomb_tex.pTexture);
-//
-//				半加算合成
-//				SetRenderState(direct3d.pDevice3D, RENDER_ADD);
-//				sprite[1].SetPos(500, 300);
-//				sprite[1].Draw(direct3d.pDevice3D, bomb_tex.pTexture);
-//
-//				SetRenderState(direct3d.pDevice3D, RENDER_DEFAULT);	
-				// 3Dのマテリアル等のセットアップ
-					//xfile.SetupMatrices(direct3d.pDevice3D, hWnd, lasttime);
-				//D3DXVECTOR3 viewVecE(0.0f, 0.5f, -1.5f);
-				//D3DXVECTOR3 viewVecL(0.0f, 0.0f, 0.0f);
-				//カメラのポジションと角度
-				//camera.Create(D3DXVECTOR3(PlayerPos.x + viewVecE.x, PlayerPos.y + viewVecE.y, PlayerPos.z + viewVecE.z), D3DXVECTOR3(PlayerAngle.x + viewVecL.x, PlayerAngle.y + viewVecL.y, PlayerAngle.z + viewVecL.z));
-				////描画
-				//Pplayer.PlayerCreate(D3DXVECTOR3(PlayerPos.x,PlayerPos.y,PlayerPos.z));
-				//map.MapRender();
-				fps.Draw(D3DXCOLOR(255, 255, 255, 10), 20, 20, _T("%.1f"), mFps);
+				//更新
+				sceneChange.Update();
+				//描画
+				sceneChange.Draw();
+
 				
 				direct3d.pDevice3D->EndScene();
 			}

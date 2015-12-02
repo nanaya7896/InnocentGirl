@@ -1,20 +1,24 @@
 #pragma once
 
-#include"SceneChange.h"
+#include "../SceneChanger/BaseScene.h"
+#include "../SceneChanger/ISceneChanger.h"
 #include"../Direct3D/direct3d.h"
 #include"../Direct3D/Texture.h"
 #include"../Direct3D/sprite.h"
 #include"../DirectInput/directInput.h"
 #include"Chapter.h"
 #include"Result.h"
+#include"../Xinput/XbonInput.h"
+
+
 //派生クラス:タイトル	基底クラス:SceneChange　
-class Title : public SceneChange,Direct3D
+class Title : public BaseScene,Direct3D
 {
 private:
 	//文字点滅用フレーム
 	unsigned long frame = 0;
-
-
+	//継承元
+	XboxInput xboxInput;
 public:
 	//メンバ変数
 	Texture title_Background;
@@ -27,17 +31,18 @@ public:
 	bool TitleBlink;
 
 	//コンストラクタ
-	Title();
+	Title(ISceneChanger *changer);
 	//デストラクタ
 	~Title();
 	
-	//メンバ関数
-	void Update();
-	void Draw();
-	void Load();
+	void Initialize() override;    //初期化処理をオーバーライド。
+	void Finalize() override;        //終了処理をオーバーライド
+	void Update() override;
+	void Draw() override;
+
 
 protected:
 
-
+	
 
 };

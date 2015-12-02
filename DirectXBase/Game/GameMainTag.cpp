@@ -3,7 +3,7 @@ D3DXVECTOR3 viewVecE(0.0f, 0.5f, -1.5f);
 
 
 //コンストラクタ
-GameMainTag::GameMainTag()
+GameMainTag::GameMainTag(ISceneChanger *changer) : BaseScene(changer)
 {
 	PlayerPos.x = 0.0f;
 	PlayerPos.y = 0.5f;
@@ -14,31 +14,69 @@ GameMainTag::GameMainTag()
 	PlayerSpeed.x = 0.0f;
 	PlayerSpeed.y = 0.0f;
 	PlayerSpeed.z = 0.0f;
-	time = 90;
+	time = 60;
 	timeframe = 0;
-	map1P = new Map();
-	Load();
-
+		
 	camera = new Camera();
-	CameraPosition = D3DXVECTOR3(PlayerPos.x, PlayerPos.y, PlayerPos.z - 7.0f);
+	CameraPosition = D3DXVECTOR3(PlayerPos.x, PlayerPos.y, PlayerPos.z - 5.0f);
 
-	wave[0].Play(false);
+	
 }
 
 //デストラクタ
 GameMainTag::~GameMainTag()
 {
 	delete camera;
-	delete map1P;
+	
 }
 
+void GameMainTag::Initialize()
+{
+	timeTexture[0].Load("texture/0.png");
+	timeTexture[1].Load("texture/1.png");
+	timeTexture[2].Load("texture/2.png");
+	timeTexture[3].Load("texture/3.png");
+	timeTexture[4].Load("texture/4.png");
+	timeTexture[5].Load("texture/5.png");
+	timeTexture[6].Load("texture/6.png");
+	timeTexture[7].Load("texture/7.png");
+	timeTexture[8].Load("texture/8.png");
+	timeTexture[9].Load("texture/9.png");
+	//1の位
+	timeSprite[0].SetPos(830, 100);
+	timeSprite[0].SetSize(128, 128);
+	//10の位
+	timeSprite[1].SetPos(770, 100);
+	timeSprite[1].SetSize(128, 128);
+
+	//wavファイル読み込み
+	wave[0].Load(_T("BGM/game.wav"));
+	wave[1].Load(_T("BGM/z_taoreru.wav"));
+
+	//スコア
+	score1.Create(pDevice3D, 32);
+	score2.Create(pDevice3D, 32);
+	wave[0].Play(false);
+	map1P.LoadBuldings();
+}
+
+void GameMainTag::Finalize()
+{
+
+
+
+}
+
+
 void GameMainTag::Update()
+
+
 {
 	PlayerAngle = player.PlayerCameraMove(PlayerAngle);
 	PlayerPos=player.PlayerMove(PlayerPos,PlayerAngle);
 	
-	CameraPosition.x = PlayerPos.x - (7.0f*sinf(PlayerAngle.y));
-	CameraPosition.z = PlayerPos.z - (7.0f*cosf(PlayerAngle.y));
+	CameraPosition.x = PlayerPos.x - (5.0f*sinf(PlayerAngle.y));
+	CameraPosition.z = PlayerPos.z - (5.0f*cosf(PlayerAngle.y));
 
 
 	camera->View(CameraPosition, PlayerAngle);
@@ -50,23 +88,22 @@ void GameMainTag::Update()
 	if (player.Hit == true)
 	{
 		wave[0].Stop();
-		delete scenechange;
-		scenechange = new Gameover();
+		mSceneChanger->ChangeScene(eScene_GameOver);
 	}
 	//タイムが９０秒経過したとき
 	if (tentime == 0 && onetime == 0 && player.Hit==false)
 	{
 		wave[0].Stop();
-		delete scenechange;
-		scenechange =new CResult();
+		mSceneChanger->ChangeScene(eScene_Result);
 	}
-
-	
+	//スコア保持用関数にアクセス
+	Score1p=gmtEnemy.score1P();
+	Score2p = gmtEnemy.score2P();
 }
 
 void GameMainTag::Draw()
 {
-	map1P->MapRender();
+	map1P.MapRender();
 	player.PlayerCreate(PlayerPos,PlayerAngle);
 	gmtEnemy.Draw();
 	//制限時間
@@ -87,31 +124,8 @@ void GameMainTag::Draw()
 	timeSprite[0].Draw(pDevice3D, timeTexture[onetime].pTexture);
 	timeSprite[1].Draw(pDevice3D, timeTexture[tentime].pTexture);
 
-	
+	//score1.Draw(D3DXCOLOR(10.0f, 255.0f, 255.0f, 255.0f), 10, 10, "%d", Score1p);
+	//score1.Draw(D3DXCOLOR(10.0f, 255.0f, 255.0f, 255.0f), 100, 10, "%d", Score2p);
 }
 
-void GameMainTag::Load()
-{
-		timeTexture[0].Load("texture/0.png");
-		timeTexture[1].Load("texture/1.png");
-		timeTexture[2].Load("texture/2.png");
-		timeTexture[3].Load("texture/3.png");
-		timeTexture[4].Load("texture/4.png");
-		timeTexture[5].Load("texture/5.png");
-		timeTexture[6].Load("texture/6.png");
-		timeTexture[7].Load("texture/7.png");
-		timeTexture[8].Load("texture/8.png");
-		timeTexture[9].Load("texture/9.png");
-		//1の位
-		timeSprite[0].SetPos(830,100);
-		timeSprite[0].SetSize(128,128);
-		//10の位
-		timeSprite[1].SetPos(770,100);
-		timeSprite[1].SetSize(128,128);
-
-		//wavファイル読み込み
-		wave[0].Load(_T("BGM/game.wav"));
-		wave[1].Load(_T("BGM/z_taoreru.wav"));
-		
-}
 

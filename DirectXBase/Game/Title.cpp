@@ -1,15 +1,45 @@
 #include"Title.h"
 
+
 //コンストラクタ
-Title::Title()
+Title::Title(ISceneChanger* changer) : BaseScene(changer)
 {
-	Load();
-	wave[0].Play(true);
+	
 }
 
 //デストラクタ
 Title::~Title()
 {
+	
+}
+
+void Title::Initialize()
+{
+
+	//背景の読み込み
+	title_Background.Load(_T("texture/taitoru.png"));
+	//画像の場所指定
+	stitle.SetPos(800, 450);
+	//画像の縦横のサイズ指定
+	stitle.SetSize(1600, 900);
+	//press buttonの描画
+	title_bar1.Load(_T("texture/start.png"));
+	//白い画像の描画
+	title_bar2.Load(_T("texture/aho.png"));
+	stitle_bar.SetPos(800, 700);
+	stitle_bar.SetSize(720, 200);
+
+	TitleBlink = false;
+	//wavファイル読み込み
+	wave[0].Load(_T("BGM/taitoru.wav"));
+	wave[1].Load(_T("BGM/kettei.wav"));
+	wave[0].Play(true);
+
+}
+
+void Title::Finalize()
+{
+
 
 }
 
@@ -17,6 +47,8 @@ Title::~Title()
 
 void Title::Update()
 {
+	xboxInput.checkControllers();
+	xboxInput.readControllers();
 	//press buttonの点滅処理
 	//フレーム加算
 	frame++;
@@ -33,15 +65,14 @@ void Title::Update()
 		}
 	}
 	//もしリターンキーが押された場合
-	if (pJoypad->isPushed(Joypad::Button::Start) || DirectInput::GetInstance().KeyDown(DIK_RETURN) == true)
+	if (xboxInput.getGamepadButtons(0)|| DirectInput::GetInstance().KeyDown(DIK_RETURN) == true)
 	{
+
 		wave[0].Stop();
 		//ＳＥ「決定音」
 		wave[1].Play(false);
-		//現在のシーンのメモリを解放
-		delete scenechange;
-		//次のシーン:チャプターのメモリをシーンチェンジに入れる
-		scenechange = new Chapter();
+		//シーンをチャプターへ変更
+		mSceneChanger->ChangeScene(eScene_Chapter);
 	}
 
 }
@@ -68,23 +99,3 @@ void Title::Draw()
 
 }
 
-void Title::Load()
-{
-	//背景の読み込み
-	title_Background.Load(_T("texture/taitoru.png"));
-	//画像の場所指定
-	stitle.SetPos(800, 450);
-	//画像の縦横のサイズ指定
-	stitle.SetSize(1600, 900);
-	//press buttonの描画
-	title_bar1.Load(_T("texture/start.png"));
-	//白い画像の描画
-	title_bar2.Load(_T("texture/aho.png"));
-	stitle_bar.SetPos(800, 700);
-	stitle_bar.SetSize(720, 200);
-
-	TitleBlink = false;
-	//wavファイル読み込み
-	wave[0].Load(_T("BGM/taitoru.wav"));
-	wave[1].Load(_T("BGM/kettei.wav"));
-}

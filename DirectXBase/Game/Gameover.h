@@ -6,10 +6,12 @@
 #include"../Direct3D/sprite.h"
 #include"../Direct3D/texture.h"
 #include"../DirectInput/directInput.h"
-#include"SceneChange.h"
+#include "../SceneChanger/BaseScene.h"
+#include "../SceneChanger/ISceneChanger.h"
 #include"GameMainTag.h"
 #include"Title.h"
-
+#include"../Enemy/Enemy.h"
+#include"../Xinput/XbonInput.h"
 
 #define GAMEOVER1_SPRITE_SIZE_X 1600   //ゲームオーバー１（背景）のサイズ（Ｘ）
 #define GAMEOVER1_SPRITE_SIZE_Y 900    //ゲームオーバー１（背景）のサイズ（Ｙ）
@@ -37,7 +39,7 @@
 
 
 
-class Gameover :public SceneChange, Direct3D
+class Gameover :public BaseScene, Direct3D
 {
 private:
 	//テクスチャとスプライト
@@ -58,19 +60,28 @@ private:
 	Sprite gameoverSprite4;
 
 	CSound wave[2];
+	
+	//スコア描画用
+	Enemy Gscore;
+	DirectXText dGScore;
+	int a;
+
+	//Xboxコントローラーコントローラークラスのインスタンス
+	XboxInput gInput;
 public:
 	//フラグ
 	bool go_marker_flag;
 
 	//コンストラクタ　デストラクタ
-	Gameover();
+	Gameover(ISceneChanger *changer);
 	~Gameover();
 
-	void Load();
+	void Initialize() override;
+	void Finalize() override;
 	//update
-	void Update();
+	void Update() override;
 
 	//draw
-	void Draw();
+	void Draw() override;
 
 };

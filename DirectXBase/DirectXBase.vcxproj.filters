@@ -28,6 +28,9 @@
     <Filter Include="Enemy">
       <UniqueIdentifier>{0a68bc2d-50be-43e4-9741-076244425eec}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SceneChanger">
+      <UniqueIdentifier>{f78879f7-2700-451e-9bfd-00308cf21764}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Direct3D\direct3d.cpp">
@@ -58,17 +61,11 @@
     <ClCompile Include="Game\Map.cpp">
       <Filter>Game</Filter>
     </ClCompile>
-    <ClCompile Include="Game\SceneChange.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
     <ClCompile Include="Game\Title.cpp">
       <Filter>Game</Filter>
     </ClCompile>
     <ClCompile Include="Game\Chapter.cpp">
       <Filter>Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Xinput\Xinput.cpp">
-      <Filter>XInput</Filter>
     </ClCompile>
     <ClCompile Include="Game\GameMainTag.cpp">
       <Filter>Game</Filter>
@@ -93,6 +90,18 @@
     </ClCompile>
     <ClCompile Include="DirectSound\dxsound.cpp">
       <Filter>DirctSound</Filter>
+    </ClCompile>
+    <ClCompile Include="Xinput\XbonInput.cpp">
+      <Filter>XInput</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneChanger\BaseScene.cpp">
+      <Filter>SceneChanger</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneChanger\ISceneChanger.cpp">
+      <Filter>SceneChanger</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneChanger\SceneChange.cpp">
+      <Filter>SceneChanger</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -127,17 +136,11 @@
     <ClInclude Include="Game\Map.h">
       <Filter>Game</Filter>
     </ClInclude>
-    <ClInclude Include="Game\SceneChange.h">
-      <Filter>Game</Filter>
-    </ClInclude>
     <ClInclude Include="Game\Title.h">
       <Filter>Game</Filter>
     </ClInclude>
     <ClInclude Include="Game\Chapter.h">
       <Filter>Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Xinput\Xinput.h">
-      <Filter>XInput</Filter>
     </ClInclude>
     <ClInclude Include="Game\GameMainTag.h">
       <Filter>Game</Filter>
@@ -164,8 +167,20 @@
     <ClInclude Include="DirectSound\dxsound.h">
       <Filter>DirctSound</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram.cd" />
+    <ClInclude Include="Xinput\XbonInput.h">
+      <Filter>XInput</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneChanger\BaseScene.h">
+      <Filter>SceneChanger</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneChanger\ISceneChanger.h">
+      <Filter>SceneChanger</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneChanger\SceneChange.h">
+      <Filter>SceneChanger</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneChanger\Task.h">
+      <Filter>SceneChanger</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

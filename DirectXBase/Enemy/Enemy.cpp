@@ -1,43 +1,14 @@
 #include"Enemy.h"
 
 EnemyBox Enemy::em[31];
+Score Enemy::dscore;
 
 //コンストラクタ
 Enemy::Enemy()
 {
-	//敵が動き続ける時間
-	EnemyMoveFrame = 0;
-	//敵が動くフラグ
-	SearcherFrame = 0;
+
 	//Enemyロード関数
 	Load();
-	//敵初期値ポジションの設定
-	for (int i = 0; i < MAX_ENEMY; i++)
-	{
-		PlayerEnemyDistance[i] = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
-		AutoMove[i]=0.0f;
-		//-60から60の座標間でランダム生成
-		EnemyPos[i] = D3DXVECTOR3(Random(-60.0f, 60.0f), 0.2f, Random(-60.0f,60.0f));
-		//敵が一番最初向いている角度
-		EnemyAngle[i] = D3DXVECTOR3(0.0f - (D3DX_PI / 2.0f), 0.0f, 0.0f);
-		MapHit[i] = false;
-		if (i <= 29)
-		{
-			TransformEnemy[i] = false;
-			EnemyMoveFlag[i] = true;
-			SearcherFlag[i] = false;
-		}
-		else
-		{
-			//追跡者にするために行動関数はすべてfalse
-			TransformEnemy[30] = false;
-			EnemyMoveFlag[30] = false;
-			SearcherFlag[30] = true;
-		}
-
-
-	}
-	
 }
 
 
@@ -188,10 +159,42 @@ void Enemy::Load()
 	//テクスチャとXファイルの読み込み
 	t_Enemy.Load("texture/zombie-tex.jpg");
 	x_Enemy.XfileLoader(L"xfile/zombie-nobone.X");
-
+	//WAVEの読み込み
+	wave[0].Load(_T("BGM/z_koe.wav"));
+	wave[1].Load(_T("BGM/z_koe.wav"));
 	//行列の初期化
 	D3DXMatrixIdentity(&d3dMat);
+	//敵が動き続ける時間
+	EnemyMoveFrame = 0;
+	//敵が動くフラグ
+	SearcherFrame = 0;
+	
+	//敵初期値ポジションの設定
+	for (int i = 0; i < MAX_ENEMY; i++)
+	{
+		PlayerEnemyDistance[i] = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+		AutoMove[i] = 0.0f;
+		//-60から60の座標間でランダム生成
+		EnemyPos[i] = D3DXVECTOR3(Random(-60.0f, 60.0f), 0.2f, Random(-60.0f, 60.0f));
+		//敵が一番最初向いている角度
+		EnemyAngle[i] = D3DXVECTOR3(0.0f - (D3DX_PI / 2.0f), 0.0f, 0.0f);
+		MapHit[i] = false;
+		if (i <= 29)
+		{
+			TransformEnemy[i] = false;
+			EnemyMoveFlag[i] = true;
+			SearcherFlag[i] = false;
+		}
+		else
+		{
+			//追跡者にするために行動関数はすべてfalse
+			TransformEnemy[30] = false;
+			EnemyMoveFlag[30] = false;
+			SearcherFlag[30] = true;
+		}
 
+
+	}
 
 }
 
@@ -283,6 +286,12 @@ float Enemy::EnemySearch(D3DXVECTOR3 pPos)
 		//三平方の定理
 		AutoMoveSpeed = sqrtf(pow(PlayerEnemyDistance[i].x,2 )+ pow(PlayerEnemyDistance[i].z,2));
 
+		//距離が10以下ならうめき声
+		if (AutoMoveSpeed <= 10)
+		{
+			wave[0].Play(false);
+		}
+
 	}
 
 	return AutoMoveSpeed;
@@ -314,6 +323,25 @@ void Enemy::SerachMove()
 	}
 
 
+}
+
+int Enemy::score1P()
+{
+	if (DirectInput::GetInstance().KeyDown(DIK_A))
+	{
+		dscore.Score1P++;
+	}
+	return dscore.Score1P;
+}
+
+int Enemy::score2P()
+{
+
+	if (DirectInput::GetInstance().KeyDown(DIK_L))
+	{
+		dscore.Score2P++;
+	}
+	return dscore.Score2P;
 }
 
 

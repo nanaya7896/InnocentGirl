@@ -5,16 +5,21 @@
 #include "../Direct3D\texture.h"
 #include "../Direct3D\sprite.h"
 #include "../Direct3D/direct3d.h"
-
+#include "../SceneChanger/BaseScene.h"
+#include "../SceneChanger/ISceneChanger.h"
 #include "../DirectInput\directInput.h"
-
+#include"Title.h"
 #include "GameMainTag.h"
 #include "GameMainTag2P.h"
 
-#include "SceneChange.h"
+
+#include"../DirectSound/dxsound.h"
+
+#include"../Xinput/XbonInput.h"
+
 
 //派生クラス:Chapter 基底クラス:SceneChange,Direct3D
-class Chapter :public SceneChange, Direct3D
+class Chapter :public BaseScene, Direct3D
 {
 public:
 	//背景
@@ -50,6 +55,7 @@ public:
 	//Waveファイル
 	CSound wave[3];
 
+	XboxInput chaInput;
 	//フラグ
 	bool chapter_flag;
 	bool member_flag;
@@ -57,12 +63,12 @@ public:
 	bool ContFlag;
 
 	//コンストラクタ
-	Chapter();
+	Chapter(ISceneChanger *changer);
 	//デストラクタ
 	~Chapter();
 
-	void Update();
-	void Draw();
-
-	void Load();
+	void Initialize() override;    //初期化処理をオーバーライド。
+	void Finalize() override;        //終了処理をオーバーライド。
+	void Update() override;
+	void Draw() override;
 };

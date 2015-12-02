@@ -1,21 +1,24 @@
 #include"GameOver.h"
 
 //コンストラクタ
-Gameover::Gameover()
-	:go_marker_flag(false)
+Gameover::Gameover(ISceneChanger* changer)
+	:BaseScene(changer),go_marker_flag(false)
 {
-	Load();
 	//wave[0].Play(true);
 }
 
 //デストラクタ
 Gameover::~Gameover()
 {
+
 	//動的なメモリ確保などがないのでなし
 }
 
 //テクスチャのロード
-void Gameover::Load()
+
+//ゲームの初期化
+//ゲーム開始の際に行う準備
+void Gameover::Initialize()
 {
 
 	//背景
@@ -39,26 +42,32 @@ void Gameover::Load()
 	gameover4.Load(_T("Texture/gameover4.png"));
 	gameoverSprite4.SetSize(GAMEOVER4_SPRITE_SIZE_X, GAMEOVER4_SPRITE_SIZE_Y);
 	gameoverSprite4.SetPos(GAMEOVER4_SPRITE_POS_X, GAMEOVER4_SPRITE_POS_Y);
-
+	dGScore.Create(pDevice3D, 32);
 	//wavファイル読み込み
 	/*wave[0].Load(_T("BGM/gameover.wav"));
 	wave[1].Load(_T("BGM/kettei.wav"));
 	wave[2].Load(_T("BGM/ka-soruidou.wav"));
 */
 }
-//ゲームの初期化
-//ゲーム開始の際に行う準備
+
+void Gameover::Finalize()
+{
+
+}
+
 void Gameover::Update()
 {
+	gInput.checkControllers();
+	gInput.readControllers();
 	//やじるし移動
 	//右
-	if (DirectInput::GetInstance().KeyDown(DIK_RIGHT))
+	if (gInput.getGamepadThumbLX(0)>0 ||  DirectInput::GetInstance().KeyDown(DIK_RIGHT))
 	{
 		//wave[2].Play(false);
 		go_marker_flag = true;
 	}
 	//左
-	if (DirectInput::GetInstance().KeyDown(DIK_LEFT))
+	if (gInput.getGamepadThumbLX(0)<0|| DirectInput::GetInstance().KeyDown(DIK_LEFT))
 	{
 		//wave[2].Play(false);
 		go_marker_flag = false;
@@ -66,29 +75,28 @@ void Gameover::Update()
 
 	//画面遷移
 	//リトライ
-	if (DirectInput::GetInstance().KeyDown(DIK_RETURN) && go_marker_flag == false)
+	if ((gInput.getGamepadB(0) || DirectInput::GetInstance().KeyDown(DIK_RETURN)) && go_marker_flag == false)
 	{
 		/*wave[0].Stop();
 		wave[1].Play(false);*/
-		delete scenechange;
-		scenechange = new GameMainTag();
+		mSceneChanger->ChangeScene(eScene_GameMainTag1P);
 		return;
 	}
 	//チャプターへ
-	if (DirectInput::GetInstance().KeyDown(DIK_RETURN) && go_marker_flag == true)
+	if ((gInput.getGamepadB(0) || DirectInput::GetInstance().KeyDown(DIK_RETURN)) && go_marker_flag == true)
 	{
 		/*wave[0].Stop();
 		wave[1].Play(false);*/
-
-		delete scenechange;
-		scenechange = new Chapter();
+		mSceneChanger->ChangeScene(eScene_Chapter);
 		return;
 	}
-
+	//実際にスコアを受け取る
+	//a = Gscore.score1P();
 }
 
 void Gameover::Draw()
 {
+	//dGScore.Draw(D3DXCOLOR(10, 255, 255, 255), 10, 100, "%d", a);
 	//やじるし
 	gameoverSprite2[!go_marker_flag].Draw(pDevice3D, gameover2.pTexture);
 
@@ -100,5 +108,7 @@ void Gameover::Draw()
 
 	//背景
 	gameoverSprite1.Draw(pDevice3D, gameover1.pTexture, false);
+
+	
 
 }

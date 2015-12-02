@@ -1,6 +1,6 @@
 #pragma once
 
-#define DIRECTSOUND_VERSION 0x800
+//#define DIRECTSOUND_VERSION 0x800
 #define DIRECTINPUT_VERSION 0x800
 
 //シンボル定義およびマクロ
@@ -56,4 +56,3 @@ const int WINDOW_HEIGHT = 900;
 
 //ライブラリの読み込み
 //#include"LMath.h"
-

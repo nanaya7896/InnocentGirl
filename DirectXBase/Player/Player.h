@@ -7,8 +7,8 @@
 #include"../DirectXAnimation/MyAllocateHierarchy.h"
 #include"../DirectXAnimation/AnimateObject.h"
 #include"../Enemy/Enemy.h"
+#include"../Xinput/XbonInput.h"
 
-#include "../XInput/XInput.h"
 
 class Player : public Map
 {
@@ -25,7 +25,7 @@ private:
 	Enemy pEnemy;
 	MyAllocateHierarchy mah;
 	CSkinMesh cskinMesh;
-	Joypad *pJoypad;
+	XboxInput pInput;
 	int RunFrame;
 	int RunFrame2P;
 	bool RunFlag;

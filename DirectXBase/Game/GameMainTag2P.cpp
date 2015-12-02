@@ -1,11 +1,28 @@
 #include"GameMainTag2P.h"
 
 //コンストラクタ
-GameMainTag2P::GameMainTag2P()
+GameMainTag2P::GameMainTag2P(ISceneChanger *changer) : BaseScene(changer)
 {
+	//カメラの読み込み
+	camera1 = new Camera[2];
+	camera1[0].Camera2P();
+	camera1[1].Camera2P();
+	//敵の読み込み
+	enemy2.Load();
 
-	map2P = new Map();
-	timeTexture2= new Texture[10];
+	
+	
+}
+
+//デストラクタ
+GameMainTag2P::~GameMainTag2P()
+{
+	delete[] camera1;	
+}
+
+//初期化
+void GameMainTag2P::Initialize()
+{
 	//制限時間の画像読み込み
 	timeTexture2[0].Load("texture/0.png");
 	timeTexture2[1].Load("texture/1.png");
@@ -18,40 +35,14 @@ GameMainTag2P::GameMainTag2P()
 	timeTexture2[8].Load("texture/8.png");
 	timeTexture2[9].Load("texture/9.png");
 	//制限時間の読み込み
-	timeSprite2 = new Sprite[2];
 	timeSprite2[0].SetPos(910, 100);
 	timeSprite2[0].SetSize(128, 128);
 	timeSprite2[1].SetPos(850, 100);
 	timeSprite2[1].SetSize(128, 128);
 	//プレイヤーの読み込み
-	player = new Player[2];
-	//カメラの読み込み
-	camera1 = new Camera[2];
-	camera1[0].Camera2P();
-	camera1[1].Camera2P();
-	//敵の読み込み
-	enemy2 = new Enemy();
-	//初期化関数の呼び出し
-	Init();
+	player[0].PlayerLoad();
+	player[1].PlayerLoad();
 
-	wave[0].Play(false);
-	
-}
-
-//デストラクタ
-GameMainTag2P::~GameMainTag2P()
-{
-	//delete map2P;
-	delete[] timeTexture2;
-	delete[] timeSprite2;
-	delete[] player;
-	delete[] camera1;
-	delete map2P;
-}
-
-//初期化
-void GameMainTag2P::Init()
-{
 	timeframe2 = 0;
 	PlayerPos1P.x = 0.0f;
 	PlayerPos1P.y = 0.0f;
@@ -68,6 +59,13 @@ void GameMainTag2P::Init()
 	//wavファイル読み込み
 	wave[0].Load(_T("BGM/game.wav"));
 	wave[1].Load(_T("BGM/z_taoreru.wav"));
+	wave[0].Play(false);
+	map2P.LoadBuldings();
+}
+void GameMainTag2P::Finalize()
+{
+
+
 }
 
 //アップデート
@@ -76,13 +74,13 @@ void GameMainTag2P::Update()
 	//ビューポートの作成
 	camera1[0].Camera1PUpdate();
 	//マップのレンダー
-	map2P->MapRender();
+	map2P.MapRender();
 	//１Pの作成
 	player[0].PlayerCreate(PlayerPos1P, PlayerAngle1P);
 	//敵の情報の更新
-	enemy2->Update(PlayerPos1P);
+	enemy2.Update(PlayerPos1P);
 	//敵の描画
-	enemy2->Draw();
+	enemy2.Draw();
 	//1Pのアングルとポジション移動
 	PlayerAngle1P = player[0].PlayerCameraMove(PlayerAngle1P);
 	PlayerPos1P = player[0].PlayerMove(PlayerPos1P, PlayerAngle1P);
@@ -95,13 +93,13 @@ void GameMainTag2P::Update()
 
 	//ビューポートの作成
 	camera1[1].Camera2PUpdate();
-	map2P->MapRender();
+	map2P.MapRender();
 
 	player[1].PlayerCreate2P(PlayerPos2P, PlayerAngle2P);
 	//敵の情報の更新
-	enemy2->Update(PlayerPos2P);
+	enemy2.Update(PlayerPos2P);
 	//敵の描画
-	enemy2->Draw();
+	enemy2.Draw();
 
 	PlayerAngle2P = player[1].PlayerCameraMove2P(PlayerAngle2P);
 	PlayerPos2P = player[1].PlayerMove2P(PlayerPos2P, PlayerAngle2P);
@@ -115,22 +113,20 @@ void GameMainTag2P::Update()
 	{
 		wave[0].Stop();
 		camera1[0].SetViewPort(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
-		delete scenechange;
-		scenechange = new Gameover();
+		mSceneChanger->ChangeScene(eScene_GameOver);
 	}
 	//タイムが９０秒経過したとき
 	if (tentime2 == 0 && onetime2 == 0 && (player[0].Hit == false || player[1].Hit == false))
 	{
 		wave[0].Stop();
-		delete scenechange;
-		scenechange = new CResult();
+		mSceneChanger->ChangeScene(eScene_Result);
 	}
 	//制限時間
 	if (timeframe2 >= 60)
 	{
 		if (onetime2 == 0)
 		{
-			onetime2 = 9;
+			onetime2 = 6;
 			tentime2--;
 		}
 		else

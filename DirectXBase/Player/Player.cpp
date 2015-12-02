@@ -1,15 +1,12 @@
 #include"Player.h"
 
+
+
 Player::Player()
 {
 
-	Hit = false;
-	mypos.y = 0.1f;
-	mypos.x = 0.0f;
-	mypos.z = 0.0f;
-	RunFrame = 0;
-	RunFlag = true;
 	PlayerLoad();
+
 }
 Player::~Player()
 {
@@ -18,6 +15,12 @@ Player::~Player()
 
 HRESULT Player::PlayerLoad()
 {
+	Hit = false;
+	mypos.y = 0.1f;
+	mypos.x = 0.0f;
+	mypos.z = 0.0f;
+	RunFrame = 0;
+	RunFlag = true;
 	//Xplayer.XfileLoader(L"xfile/Y-runstart-P.X");
 	Tplayer.Load("texture/yukitxture2.jpg");
 	Xplayer.XfileLoader(L"xfile/yukicyan.X");
@@ -37,20 +40,21 @@ HRESULT Player::PlayerLoad()
 }
 
 void Player::PlayerCreate(D3DXVECTOR3 pPos,D3DXVECTOR3 pAng)
-{
-	
+{	
 	Xplayer.Render(&D3DXVECTOR3(pPos.x,pPos.y,pPos.z),&D3DXVECTOR3(pAng.x-(D3DX_PI/2.0f),pAng.y,pAng.z),&D3DXVECTOR3(0.02f,0.02f,0.02f), Tplayer.GetTexture());
 }
 
 void Player::PlayerCreate2P(D3DXVECTOR3 pPos, D3DXVECTOR3 pAng)
 {
 	Xplayer2P.Render(&D3DXVECTOR3(pPos.x, pPos.y, pPos.z), &D3DXVECTOR3(pAng.x - (D3DX_PI / 2.0f), pAng.y, pAng.z), &D3DXVECTOR3(0.02f, 0.02f, 0.02f), Tplayer2P.GetTexture());
-
-
 }
 
 D3DXVECTOR3 Player::PlayerMove(D3DXVECTOR3 pPos,D3DXVECTOR3 pAng)
 {
+	pInput.checkControllers();
+
+	pInput.readControllers();
+
 	if (RunFrame >= 120)
 	{
 		RunFlag = false;
@@ -59,9 +63,9 @@ D3DXVECTOR3 Player::PlayerMove(D3DXVECTOR3 pPos,D3DXVECTOR3 pAng)
 	{
 		RunFlag = true;
 	}
-	//pJoypad->update();
 
-	if ( pJoypad->isPushed(Joypad::Button::A) == true|| DirectInput::GetInstance().KeyDown(DIK_F) || DirectInput::GetInstance().KeyState(DIK_F))
+
+	if (pInput.getGamepadA(0) || DirectInput::GetInstance().KeyDown(DIK_F) || DirectInput::GetInstance().KeyState(DIK_F))
 	{
 		if (RunFlag == true)
 		{
@@ -74,7 +78,7 @@ D3DXVECTOR3 Player::PlayerMove(D3DXVECTOR3 pPos,D3DXVECTOR3 pAng)
 		speed = 0.1f;
 	}
 		//上移動
-	if (pJoypad->getLStick(0.1).imag() >= 0.5 || DirectInput::GetInstance().KeyDown(DIK_W))
+	if (pInput.getGamepadThumbLY(0)>0 || DirectInput::GetInstance().KeyDown(DIK_W))
 		{
 			mypos.x = pPos.x + (sin(pAng.y)*speed);
 			mypos.z = pPos.z + (cos(pAng.y)*speed);
@@ -87,7 +91,7 @@ D3DXVECTOR3 Player::PlayerMove(D3DXVECTOR3 pPos,D3DXVECTOR3 pAng)
 		}
 
 		//下移動
-	if (pJoypad->getLStick(0.1).imag() <= -0.5 || DirectInput::GetInstance().KeyDown(DIK_S))
+	if (pInput.getGamepadThumbLY(0)<0 || DirectInput::GetInstance().KeyDown(DIK_S))
 		{
 			//mypos.z=pPos.z - speed;
 			mypos.x = pPos.x - (sin(pAng.y)*speed);
@@ -100,7 +104,7 @@ D3DXVECTOR3 Player::PlayerMove(D3DXVECTOR3 pPos,D3DXVECTOR3 pAng)
 		}
 
 		//右移動
-	if (pJoypad->getLStick(0.1).real() <= -0.5 || DirectInput::GetInstance().KeyDown(DIK_A))
+	if (pInput.getGamepadThumbLX(0)<0 || DirectInput::GetInstance().KeyDown(DIK_A))
 		{
 			//mypos.x=pPos.x - speed;
 			mypos.x = pPos.x -+ (cos(pAng.y)*speed);
@@ -113,7 +117,7 @@ D3DXVECTOR3 Player::PlayerMove(D3DXVECTOR3 pPos,D3DXVECTOR3 pAng)
 		}
 
 		//左移動
-	if (pJoypad->getLStick(0.1).real() >= 0.5 || DirectInput::GetInstance().KeyDown(DIK_D))
+	if (pInput.getGamepadThumbLX(0)>0 || DirectInput::GetInstance().KeyDown(DIK_D))
 		{
 			mypos.x = pPos.x + (cos(pAng.y)*speed);
 			mypos.z = pPos.z - (sin(pAng.y)*speed);
@@ -146,6 +150,9 @@ D3DXVECTOR3 Player::PlayerMove(D3DXVECTOR3 pPos,D3DXVECTOR3 pAng)
 
 D3DXVECTOR3 Player::PlayerMove2P(D3DXVECTOR3 pPos, D3DXVECTOR3 pAng)
 {
+	pInput.checkControllers();
+
+	pInput.readControllers();
 	if (RunFrame2P >= 120)
 	{
 		RunFlag2P = false;
@@ -154,13 +161,13 @@ D3DXVECTOR3 Player::PlayerMove2P(D3DXVECTOR3 pPos, D3DXVECTOR3 pAng)
 	{
 		RunFlag2P = true;
 	}
-	//pJoypad->update();
 
-	if (pJoypad->isPushed(Joypad::Button::A) || DirectInput::GetInstance().KeyDown(DIK_H) || DirectInput::GetInstance().KeyState(DIK_H))
+
+	if (pInput.getGamepadA(1) || DirectInput::GetInstance().KeyDown(DIK_H) || DirectInput::GetInstance().KeyState(DIK_H))
 	{
 		if (RunFlag2P == true)
 		{
-			speed = 0.15f;
+			speed = 0.3f;
 			RunFrame2P++;
 		}
 	}
@@ -169,7 +176,7 @@ D3DXVECTOR3 Player::PlayerMove2P(D3DXVECTOR3 pPos, D3DXVECTOR3 pAng)
 		speed = 0.1f;
 	}
 	//上移動
-	if (DirectInput::GetInstance().KeyDown(DIK_O))
+	if (pInput.getGamepadThumbLY(1)>0 || DirectInput::GetInstance().KeyDown(DIK_O))
 	{
 		mypos.x = pPos.x + (sin(pAng.y)*speed);
 		mypos.z = pPos.z + (cos(pAng.y)*speed);
@@ -182,7 +189,7 @@ D3DXVECTOR3 Player::PlayerMove2P(D3DXVECTOR3 pPos, D3DXVECTOR3 pAng)
 	}
 
 	//下移動
-	if (pJoypad->getLStick(0.1).imag() >= 0.5 || DirectInput::GetInstance().KeyDown(DIK_K))
+	if (pInput.getGamepadThumbLY(1)<0 || DirectInput::GetInstance().KeyDown(DIK_K))
 	{
 		//mypos.z=pPos.z - speed;
 		mypos.x = pPos.x - (sin(pAng.y)*speed);
@@ -195,7 +202,7 @@ D3DXVECTOR3 Player::PlayerMove2P(D3DXVECTOR3 pPos, D3DXVECTOR3 pAng)
 	}
 
 	//右移動
-	if (pJoypad->getLStick(0.1).imag() <= -0.5 || DirectInput::GetInstance().KeyDown(DIK_J))
+	if (pInput.getGamepadThumbLX(1)<0 || DirectInput::GetInstance().KeyDown(DIK_J))
 	{
 		//mypos.x=pPos.x - speed;
 		mypos.x = pPos.x - +(cos(pAng.y)*speed);
@@ -208,7 +215,7 @@ D3DXVECTOR3 Player::PlayerMove2P(D3DXVECTOR3 pPos, D3DXVECTOR3 pAng)
 	}
 
 	//左移動
-	if (pJoypad->getLStick(0.1).real() >= 0.5 || DirectInput::GetInstance().KeyDown(DIK_L))
+	if (pInput.getGamepadThumbLX(1)>0 || DirectInput::GetInstance().KeyDown(DIK_L))
 	{
 		mypos.x = pPos.x + (cos(pAng.y)*speed);
 		mypos.z = pPos.z - (sin(pAng.y)*speed);
@@ -241,9 +248,12 @@ D3DXVECTOR3 Player::PlayerMove2P(D3DXVECTOR3 pPos, D3DXVECTOR3 pAng)
 
 D3DXVECTOR3 Player::PlayerCameraMove(D3DXVECTOR3 pAng)
 {
+	pInput.checkControllers();
+
+	pInput.readControllers();
 
 	//右を向く
-	if ( pJoypad->getRStick(0.1).real() <= -0.5 || DirectInput::GetInstance().KeyDown(DIK_Q))
+	if ( pInput.getGamepadThumbRX(0)<0 || DirectInput::GetInstance().KeyDown(DIK_Q))
 	{
 		pAng.y -= 0.1f;
 	}
@@ -253,7 +263,7 @@ D3DXVECTOR3 Player::PlayerCameraMove(D3DXVECTOR3 pAng)
 		
 	}
 	//左を向く
-	if (pJoypad->getRStick(0.1).real() >= 0.5 || DirectInput::GetInstance().KeyDown(DIK_E))
+	if (pInput.getGamepadThumbRX(0)>0 || DirectInput::GetInstance().KeyDown(DIK_E))
 	{
 		pAng.y += 0.1f;
 	}
@@ -270,8 +280,12 @@ D3DXVECTOR3 Player::PlayerCameraMove(D3DXVECTOR3 pAng)
 D3DXVECTOR3 Player::PlayerCameraMove2P(D3DXVECTOR3 pAng)
 {
 
+	pInput.checkControllers();
+
+	pInput.readControllers();
+
 	//右を向く
-	if (pJoypad->getRStick(0.1).real() <= -0.5 || DirectInput::GetInstance().KeyDown(DIK_P))
+	if (pInput.getGamepadThumbRX(1)<0 || DirectInput::GetInstance().KeyDown(DIK_P))
 	{
 		pAng.y -= 0.1f;
 	}
@@ -281,7 +295,7 @@ D3DXVECTOR3 Player::PlayerCameraMove2P(D3DXVECTOR3 pAng)
 
 	}
 	//左を向く
-	if (pJoypad->getRStick(0.1).real() >= 0.5 ||DirectInput::GetInstance().KeyDown(DIK_I))
+	if (pInput.getGamepadThumbRX(1)>0 || DirectInput::GetInstance().KeyDown(DIK_I))
 	{
 		pAng.y += 0.1f;
 	}
