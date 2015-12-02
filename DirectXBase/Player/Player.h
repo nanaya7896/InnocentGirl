@@ -30,7 +30,6 @@ private:
 	int RunFrame2P;
 	bool RunFlag;
 	bool RunFlag2P;
-
 public:
 	
 	Player();

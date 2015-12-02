@@ -7,11 +7,6 @@ GameMainTag2P::GameMainTag2P(ISceneChanger *changer) : BaseScene(changer)
 	camera1 = new Camera[2];
 	camera1[0].Camera2P();
 	camera1[1].Camera2P();
-	//敵の読み込み
-	enemy2.Load();
-
-	
-	
 }
 
 //デストラクタ
@@ -60,6 +55,7 @@ void GameMainTag2P::Initialize()
 	wave[0].Load(_T("BGM/game.wav"));
 	wave[1].Load(_T("BGM/z_taoreru.wav"));
 	wave[0].Play(false);
+	enemy2.Initialize();
 	map2P.LoadBuldings();
 }
 void GameMainTag2P::Finalize()

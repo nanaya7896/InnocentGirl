@@ -76,11 +76,13 @@ public:
 	//仮想化デストラクタ
 	virtual ~Enemy();
 
+	void Initialize();
+
 	void Update(D3DXVECTOR3 pPos);
 
 	void Draw();
 
-	void Load();
+
 
 	float EnemySearch(D3DXVECTOR3 pPos);
 

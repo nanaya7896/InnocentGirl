@@ -6,7 +6,7 @@ D3DXVECTOR3 viewVecE(0.0f, 0.5f, -1.5f);
 GameMainTag::GameMainTag(ISceneChanger *changer) : BaseScene(changer)
 {
 	PlayerPos.x = 0.0f;
-	PlayerPos.y = 0.5f;
+	PlayerPos.y = 0.0f;
 	PlayerPos.z = 0.0f;
 	PlayerAngle.x=0.0f;
 	PlayerAngle.y=0.0f;
@@ -16,10 +16,10 @@ GameMainTag::GameMainTag(ISceneChanger *changer) : BaseScene(changer)
 	PlayerSpeed.z = 0.0f;
 	time = 60;
 	timeframe = 0;
-		
+	
 	camera = new Camera();
-	CameraPosition = D3DXVECTOR3(PlayerPos.x, PlayerPos.y, PlayerPos.z - 5.0f);
-
+	CameraPosition = D3DXVECTOR3(PlayerPos.x, PlayerPos.y+1.0f, PlayerPos.z - 5.0f);
+	
 	
 }
 
@@ -32,6 +32,7 @@ GameMainTag::~GameMainTag()
 
 void GameMainTag::Initialize()
 {
+	player.Hit = false;
 	timeTexture[0].Load("texture/0.png");
 	timeTexture[1].Load("texture/1.png");
 	timeTexture[2].Load("texture/2.png");
@@ -57,6 +58,9 @@ void GameMainTag::Initialize()
 	score1.Create(pDevice3D, 32);
 	score2.Create(pDevice3D, 32);
 	wave[0].Play(false);
+	//DirectInput::GetInstance().Init();
+	gmtEnemy.Initialize();
+	gmtEnemy.Draw();
 	map1P.LoadBuldings();
 }
 
@@ -69,8 +73,6 @@ void GameMainTag::Finalize()
 
 
 void GameMainTag::Update()
-
-
 {
 	PlayerAngle = player.PlayerCameraMove(PlayerAngle);
 	PlayerPos=player.PlayerMove(PlayerPos,PlayerAngle);

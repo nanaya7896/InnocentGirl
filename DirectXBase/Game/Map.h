@@ -15,9 +15,7 @@ class Map : public X_FILE
 {
 private:
 	//Textureのインスタンス生成
-	Texture tfloor[8];
 	Texture ttfloor;
-	Texture tfloorGround[11];
 	Texture tpanelSky[4];
 	Texture tSky;
 	Texture tpanelSun;

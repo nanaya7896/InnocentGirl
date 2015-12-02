@@ -16,7 +16,7 @@ Player::~Player()
 HRESULT Player::PlayerLoad()
 {
 	Hit = false;
-	mypos.y = 0.1f;
+	mypos.y = 0.2f;
 	mypos.x = 0.0f;
 	mypos.z = 0.0f;
 	RunFrame = 0;
@@ -55,6 +55,7 @@ D3DXVECTOR3 Player::PlayerMove(D3DXVECTOR3 pPos,D3DXVECTOR3 pAng)
 
 	pInput.readControllers();
 
+	//DirectInput::GetInstance().Update();
 	if (RunFrame >= 120)
 	{
 		RunFlag = false;
