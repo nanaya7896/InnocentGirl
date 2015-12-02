@@ -28,10 +28,10 @@ private:
 	//Enemyのインスタンス生成
 	//Enemy Cem;
 	//メンバ変数
-	DWORD numv[150], stride[150];
+	DWORD numv[8], stride[8];
 	LPDIRECT3DVERTEXBUFFER9 pvb9;
 	BYTE *pvertices;
-	HRESULT hr[150];
+	HRESULT hr[8];
 	D3DXVECTOR3 lminv, lmaxv;
 
 
@@ -52,5 +52,5 @@ public:
 protected:
 	int i = 0;
 
-	static BoundingBox buildingsbox[150];
+	static BoundingBox buildingsbox[8];
 };

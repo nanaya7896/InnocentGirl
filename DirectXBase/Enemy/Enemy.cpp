@@ -40,8 +40,12 @@ void Enemy::Initialize()
 	{
 		PlayerEnemyDistance[i] = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 		AutoMove[i] = 0.0f;
-		//-60‚©‚ç60‚ÌÀ•WŠÔ‚Åƒ‰ƒ“ƒ_ƒ€¶¬
-		EnemyPos[i] = D3DXVECTOR3(Random(-60.0f, 60.0f), 0.2f, Random(-60.0f, 60.0f));
+		
+		while (EnemyPos[i].x > -10 && EnemyPos[i].x<10 && EnemyPos[i].z>-10 && EnemyPos[i].z < 10)
+		{
+			//-60‚©‚ç60‚ÌÀ•WŠÔ‚Åƒ‰ƒ“ƒ_ƒ€¶¬
+			EnemyPos[i] = D3DXVECTOR3(Random(-40.0f, 40.0f), 0.1f, Random(-60.0f, 60.0f));
+		}
 		//“G‚ªˆê”ÔÅ‰Œü‚¢‚Ä‚¢‚éŠp“x
 		EnemyAngle[i] = D3DXVECTOR3(0.0f - (D3DX_PI / 2.0f), 0.0f, 0.0f);
 		MapHit[i] = false;
@@ -173,8 +177,15 @@ void Enemy::Draw()
 {
 	for (int i = 0; i < MAX_ENEMY; i++)
 	{
+		if (PlayerEnemyDistance[i].x <30.0f &&PlayerEnemyDistance[i].x >-30.0f && PlayerEnemyDistance[i].z > -30.0f && PlayerEnemyDistance[i].z < 30.0f)
+		{
+			x_Enemy.Render(&EnemyPos[i], &EnemyAngle[i], &D3DXVECTOR3(0.05f, 0.05f, 0.05f), t_Enemy.GetTexture());
+		}
 			//“G‚Ì•`‰æ
-		x_Enemy.Render(&EnemyPos[i], &EnemyAngle[i], &D3DXVECTOR3(0.05f, 0.05f, 0.05f), t_Enemy.GetTexture());
+		/*if (PlayerEnemyDistance[i] < D3DXVECTOR3(30.0f, 0.0f, 30.0f) && PlayerEnemyDistance[i] > D3DXVECTOR3(-30.0f, 0.0f, -30.0f))
+		{
+			x_Enemy.Render(&EnemyPos[i], &EnemyAngle[i], &D3DXVECTOR3(0.05f, 0.05f, 0.05f), t_Enemy.GetTexture());
+		}*/
 		//‹«ŠEüƒ{ƒbƒNƒX‚Ì¶¬
 		numv[i] = x_Enemy.g_pMesh->GetNumVertices();
 		stride[i] = D3DXGetFVFVertexSize(x_Enemy.g_pMesh->GetFVF());
