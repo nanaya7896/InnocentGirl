@@ -41,6 +41,7 @@ private:
 	D3DXVECTOR3 EMoveSpeed[31];
 	//敵の向きを変えるスピード関数
 	D3DXVECTOR3 EnemyMoveAngleSpeed[31];
+	bool isEnemyDestroy[31];
 	//敵の最大出現数
 	const int MAX_ENEMY = 31;
 
@@ -82,7 +83,7 @@ public:
 
 	void Draw();
 
-
+	void EnemyDown();
 
 	float EnemySearch(D3DXVECTOR3 pPos);
 

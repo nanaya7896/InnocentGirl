@@ -19,7 +19,8 @@ GameMainTag::GameMainTag(ISceneChanger *changer) : BaseScene(changer)
 	
 	camera = new Camera();
 	CameraPosition = D3DXVECTOR3(PlayerPos.x, PlayerPos.y+1.0f, PlayerPos.z - 5.0f);
-	
+	cameraMin = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+	cameraMax = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	
 }
 
@@ -74,11 +75,24 @@ void GameMainTag::Finalize()
 
 void GameMainTag::Update()
 {
-	PlayerAngle = player.PlayerCameraMove(PlayerAngle);
+	
 	PlayerPos=player.PlayerMove(PlayerPos,PlayerAngle);
 	
-	CameraPosition.x = PlayerPos.x - (5.0f*sinf(PlayerAngle.y));
-	CameraPosition.z = PlayerPos.z - (5.0f*cosf(PlayerAngle.y));
+	cameraMin = CameraPosition - D3DXVECTOR3(2.0f, 2.0f, 2.0f);
+	cameraMin = CameraPosition + D3DXVECTOR3(2.0f, 2.0f, 2.0f);
+	
+		PlayerAngle = player.PlayerCameraMove(PlayerAngle);
+		if (map1P.HitCTikei(&cameraMin, &cameraMax)==FALSE)
+		{
+			CameraPosition.x = PlayerPos.x - (5.0f*sinf(PlayerAngle.y));
+			CameraPosition.z = PlayerPos.z - (5.0f*cosf(PlayerAngle.y));
+		}
+		else
+		{
+			CameraPosition.x = 5.0f*sinf(PlayerAngle.y);
+			CameraPosition.z = 5.0f*cosf(PlayerAngle.y);
+		}
+	
 
 
 	camera->View(CameraPosition, PlayerAngle);

@@ -15,7 +15,7 @@ Enemy::Enemy()
 //デストラクタ
 Enemy::~Enemy()
 {
-	
+
 }
 
 
@@ -77,7 +77,10 @@ void Enemy::Update(D3DXVECTOR3 pPos)
 	
 	for (int i = 0; i < MAX_ENEMY; i++)
 	{
-		
+		if(isEnemyDestroy[i]==false)
+		{
+
+
 		AutoMove[i] = EnemySearch(pPos);
 		if (SearcherFlag[i] == false)
 		{
@@ -124,7 +127,7 @@ void Enemy::Update(D3DXVECTOR3 pPos)
 						EnemyPos[i].x -= 0.1f;
 						EnemyPos[i].z += 0.1f;
 					}
-					else if (PlayerEnemyDistance[i].x < 0 && PlayerEnemyDistance[i].x > -5.0f && PlayerEnemyDistance[i].z < 0 && PlayerEnemyDistance[i].z >-5.0f)
+					else if (PlayerEnemyDistance[i].x < 0 && PlayerEnemyDistance[i].x > -5.0f && PlayerEnemyDistance[i].z < 0 && PlayerEnemyDistance[i].z>-5.0f)
 					{
 						EnemyPos[i].x -= 0.1f;
 						EnemyPos[i].z -= 0.1f;
@@ -136,12 +139,13 @@ void Enemy::Update(D3DXVECTOR3 pPos)
 					}
 				}
 			}
+
 		}
-		else if(SearcherFlag[i]==true &&MapHit[i]==false)
+		else if (SearcherFlag[i] == true && MapHit[i] == false)
 		{
 			SerachMove();
 		}
-		
+
 		maxe.x = EnemyPos[i].x + 0.7f;
 		maxe.y = EnemyPos[i].y + 0.7f;
 		maxe.z = EnemyPos[i].z + 0.7f;
@@ -167,6 +171,10 @@ void Enemy::Update(D3DXVECTOR3 pPos)
 			}
 			EnemyAngle[i] += EnemyMoveAngleSpeed[i];
 		}
+	
+		}//isEnemyDestroy[i]==false
+		EnemyDown();
+
 	}
 	
 	SearcherFrame++;
@@ -205,8 +213,8 @@ void Enemy::Draw()
 			return;
 		}
 		//境界ボックスの範囲を設定
-		em[i].minv = EnemyPos[i] - D3DXVECTOR3(1.0f, 1.0f, 1.0f);
-		em[i].maxv = EnemyPos[i] + D3DXVECTOR3(1.0f, 1.0f, 1.0f);
+		em[i].minv = EnemyPos[i] - D3DXVECTOR3(2.0f, 1.0f, 2.0f);
+		em[i].maxv = EnemyPos[i] + D3DXVECTOR3(2.0f, 1.0f, 2.0f);
 		pvb9->Unlock();
 	}
 }
@@ -235,7 +243,7 @@ void Enemy::EnemyMove()
 	
 		for (int i = 0; i < 30; i++)
 		{
-			//0から4の間で値を生成
+			//0から6の間で値を生成
 			int EnemyCheck = (int)Random((int)0, (int)6);
 			//敵の行動を選択
 				switch (EnemyCheck)
@@ -279,12 +287,7 @@ void Enemy::EnemyMove()
 					EnemyMoveAngleSpeed[i].y = 0.0f;
 					break;
 				}
-			
-		
-
 		}
-	
-
 }
 
 float Enemy::EnemySearch(D3DXVECTOR3 pPos)
@@ -357,6 +360,31 @@ int Enemy::score2P()
 	}
 	return dscore.Score2P;
 }
+
+void Enemy::EnemyDown()
+{
+	for (int i = 0; i < MAX_ENEMY; i++)
+	{
+		if (DirectInput::GetInstance().KeyDown(DIK_G) || DirectInput::GetInstance().KeyState(DIK_G))
+		{
+			isEnemyDestroy[i] = true;
+		}
+		if (isEnemyDestroy[i] == true)
+		{
+			if (EnemyAngle[i].x<0)
+			{
+				EnemyAngle[i].x += D3DX_PI / 1200;
+			}
+			if (EnemyAngle[i].x >0)
+			{
+			
+				EnemyPos[i].y -= 0.0001f;
+			}
+		}
+	}
+
+}
+
 
 
 // 最大と最小の間の値をランダムに返すヘルパー関数

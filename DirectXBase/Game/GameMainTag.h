@@ -52,6 +52,11 @@ private:
 	DirectXText score2;
 	int Score1p;
 	int Score2p;
+
+	//カメラ地形あたり判定用変数
+	D3DXVECTOR3 cameraMin;
+	D3DXVECTOR3 cameraMax;
+
 public:
 	D3DXVECTOR3 CameraPosition;
 

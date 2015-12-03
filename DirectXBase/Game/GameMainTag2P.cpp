@@ -44,7 +44,7 @@ void GameMainTag2P::Initialize()
 	PlayerPos1P.z = 0.0f;
 	PlayerPos2P.x = 0.0f;
 	PlayerPos2P.y = 0.0f;
-	PlayerPos2P.z = 00.0f;
+	PlayerPos2P.z = 0.0f;
 	PlayerAngle1P = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	PlayerAngle2P = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	pInfo1P.CameraPos1P = D3DXVECTOR3(PlayerPos1P.x, 1.0f, PlayerPos1P.z-3.0f);
