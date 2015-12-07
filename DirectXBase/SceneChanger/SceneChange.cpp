@@ -7,7 +7,7 @@
 #include "SceneChange.h"
 #include "../Direct3D/direct3d.h"
 #include "../DirectInput/directinput.h"
-
+#include"../Game/GameMainDog.h"
 SceneChange::SceneChange() : mNextScene(eScene_None) //Ÿ‚ÌƒV[ƒ“‚ÌŠÇ—•Ï”
 {
 	mScene = (BaseScene*) new Title(this);
@@ -48,9 +48,9 @@ void SceneChange::Update()
 		case eScene_GameMainTag2P :
 			mScene = (BaseScene*) new GameMainTag2P(this);
 			break;
-		//case eScene_GameMainDodge1P :
-		//	mScene = (BaseScene*) new GameMainDodge1P(this);
-			//break;
+		case eScene_GameMainDodge1P :
+			mScene = (BaseScene*) new GameMainDodge(this);
+			break;
 			//case eScene_GameMainDodge2P :
 			//	mScene = (BaseScene*) new GameMainDodge2P(this);
 			//break;

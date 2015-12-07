@@ -31,6 +31,9 @@
     <Filter Include="SceneChanger">
       <UniqueIdentifier>{f78879f7-2700-451e-9bfd-00308cf21764}</UniqueIdentifier>
     </Filter>
+    <Filter Include="PhysicBases">
+      <UniqueIdentifier>{29fde4c4-9a28-40d6-99ca-0f892a866b70}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Direct3D\direct3d.cpp">
@@ -102,6 +105,18 @@
     </ClCompile>
     <ClCompile Include="SceneChanger\SceneChange.cpp">
       <Filter>SceneChanger</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectXAnimation\AnimationController.cpp">
+      <Filter>DirectXAnimation</Filter>
+    </ClCompile>
+    <ClCompile Include="Player\Ball.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicBases\PhysicBase.cpp">
+      <Filter>PhysicBases</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameMainDog.cpp">
+      <Filter>Game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -181,6 +196,18 @@
     </ClInclude>
     <ClInclude Include="SceneChanger\Task.h">
       <Filter>SceneChanger</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectXAnimation\AnimationController.h">
+      <Filter>DirectXAnimation</Filter>
+    </ClInclude>
+    <ClInclude Include="Player\Ball.h">
+      <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicBases\PhysicBase.h">
+      <Filter>PhysicBases</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameMainDog.h">
+      <Filter>Game</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

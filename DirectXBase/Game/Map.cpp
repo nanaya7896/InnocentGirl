@@ -250,11 +250,11 @@ xfloor.Render(&D3DXVECTOR3(0.0f, 0.0f, 0.0f), &D3DXVECTOR3(0.0f - (D3DX_PI / 2),
 BOOL Map::HitTikei(D3DXVECTOR3 *pmina, D3DXVECTOR3 *pmaxa)
 {
 	//‰æ–Ê’[‚Ì•Ç‚Ì‚ ‚½‚è”»’è
-	if (pmina->x < -40 || pmina->x >40)
+	if (pmina->x < -35 || pmina->x >35)
 	{
 		return TRUE;
 	}
-	if (pmina->z < -59 || pmina->z >70)
+	if (pmina->z < -54 || pmina->z>65)
 	{
 		return TRUE;
 	}
@@ -277,11 +277,11 @@ BOOL Map::HitTikei(D3DXVECTOR3 *pmina, D3DXVECTOR3 *pmaxa)
 BOOL Map::HitETikei(D3DXVECTOR3 *emina, D3DXVECTOR3 *emaxa)
 {
 	//‰æ–Ê’[‚Ì•Ç‚Ì‚ ‚½‚è”»’è
-	if (emina->x < -40 || emina->x >40)
+	if (emina->x < -35|| emina->x >35)
 	{
 		return TRUE;
 	}
-	if (emina->z < -59 || emina->z >70)
+	if (emina->z < -54 || emina->z >65)
 	{
 		return TRUE;
 	}
@@ -300,31 +300,3 @@ BOOL Map::HitETikei(D3DXVECTOR3 *emina, D3DXVECTOR3 *emaxa)
 }
 
 
-BOOL Map::HitCTikei(D3DXVECTOR3 *cmina, D3DXVECTOR3 *cmaxa)
-{
-	D3DXVECTOR3 *cminb, *cmaxb;
-
-
-	//‰æ–Ê’[‚Ì•Ç‚Ì‚ ‚½‚è”»’è
-	if (cmina->x < -40 || cmina->x >40)
-	{
-		return TRUE;
-	}
-	if (cmina->z < -59 || cmina->z >70)
-	{
-		return TRUE;
-	}
-	for (int i = 0; i < 7; i++)
-	{
-		
-		cminb = &buildingsbox[i].minv;
-		cmaxb = &buildingsbox[i].maxv;
-
-		if ((cmina->x < cmaxb->x) && (cmaxa->x > cminb->x) && (cmina->y <cmaxb->y) && (cmaxa->y > cminb->y) && (cmina->z < cmaxb->z) && (cmaxa->z > cminb->z))
-		{
-			return TRUE;
-		}
-	}
-	return FALSE;
-
-}

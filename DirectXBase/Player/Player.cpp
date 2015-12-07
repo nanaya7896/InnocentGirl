@@ -65,68 +65,55 @@ D3DXVECTOR3 Player::PlayerMove(D3DXVECTOR3 pPos,D3DXVECTOR3 pAng)
 		RunFlag = true;
 	}
 
-
-	if (pInput.getGamepadA(0) || DirectInput::GetInstance().KeyDown(DIK_F) || DirectInput::GetInstance().KeyState(DIK_F))
-	{
-		if (RunFlag == true)
-		{
-			speed = 0.15f;
-			RunFrame++;
-		}
-	}
-	else
-	{
-		speed = 0.1f;
-	}
 		//ãˆÚ“®
 	if (pInput.getGamepadThumbLY(0)>0 || DirectInput::GetInstance().KeyDown(DIK_W))
 		{
-			mypos.x = pPos.x + (sin(pAng.y)*speed);
-			mypos.z = pPos.z + (cos(pAng.y)*speed);
+			mypos.x = pPos.x + (sin(pAng.y)*speed());
+			mypos.z = pPos.z + (cos(pAng.y)*speed());
 			
 		}
 		else if (DirectInput::GetInstance().KeyStatePreview(DIK_W))
 		{
-			mypos.x = pPos.x + (sin(pAng.y)*speed);
-			mypos.z = pPos.z + (cos(pAng.y)*speed);
+			mypos.x = pPos.x + (sin(pAng.y)*speed());
+			mypos.z = pPos.z + (cos(pAng.y)*speed());
 		}
 
 		//‰ºˆÚ“®
 	if (pInput.getGamepadThumbLY(0)<0 || DirectInput::GetInstance().KeyDown(DIK_S))
 		{
 			//mypos.z=pPos.z - speed;
-			mypos.x = pPos.x - (sin(pAng.y)*speed);
-			mypos.z = pPos.z - (cos(pAng.y)*speed);
+			mypos.x = pPos.x - (sin(pAng.y)*speed());
+			mypos.z = pPos.z - (cos(pAng.y)*speed());
 		}
 		else if (DirectInput::GetInstance().KeyStatePreview(DIK_S))
 		{
-			mypos.x = pPos.x - (sin(pAng.y)*speed);
-			mypos.z = pPos.z - (cos(pAng.y)*speed);
+			mypos.x = pPos.x - (sin(pAng.y)*speed());
+			mypos.z = pPos.z - (cos(pAng.y)*speed());
 		}
 
 		//‰EˆÚ“®
 	if (pInput.getGamepadThumbLX(0)<0 || DirectInput::GetInstance().KeyDown(DIK_A))
 		{
 			//mypos.x=pPos.x - speed;
-			mypos.x = pPos.x -+ (cos(pAng.y)*speed);
-			mypos.z = pPos.z - (sin(pAng.y)*speed);
+			mypos.x = pPos.x -+ (cos(pAng.y)*speed());
+			mypos.z = pPos.z - (sin(pAng.y)*speed());
 		}
 		else if (DirectInput::GetInstance().KeyStatePreview(DIK_A))
 		{
-			mypos.x = pPos.x - (cos(pAng.y)*speed);
-			mypos.z = pPos.z + (sin(pAng.y)*speed);
+			mypos.x = pPos.x - (cos(pAng.y)*speed());
+			mypos.z = pPos.z + (sin(pAng.y)*speed());
 		}
 
 		//¶ˆÚ“®
 	if (pInput.getGamepadThumbLX(0)>0 || DirectInput::GetInstance().KeyDown(DIK_D))
 		{
-			mypos.x = pPos.x + (cos(pAng.y)*speed);
-			mypos.z = pPos.z - (sin(pAng.y)*speed);
+			mypos.x = pPos.x + (cos(pAng.y)*speed());
+			mypos.z = pPos.z - (sin(pAng.y)*speed());
 		}
 		else if (DirectInput::GetInstance().KeyStatePreview(DIK_D))
 		{
-			mypos.x = pPos.x + (cos(pAng.y)*speed);
-			mypos.z = pPos.z - (sin(pAng.y)*speed);
+			mypos.x = pPos.x + (cos(pAng.y)*speed());
+			mypos.z = pPos.z - (sin(pAng.y)*speed());
 		}
 		maxa.x = mypos.x + 0.5f;
 		maxa.y = mypos.y + 0.5f;
@@ -163,68 +150,55 @@ D3DXVECTOR3 Player::PlayerMove2P(D3DXVECTOR3 pPos, D3DXVECTOR3 pAng)
 		RunFlag2P = true;
 	}
 
-
-	if (pInput.getGamepadA(1) || DirectInput::GetInstance().KeyDown(DIK_H) || DirectInput::GetInstance().KeyState(DIK_H))
-	{
-		if (RunFlag2P == true)
-		{
-			speed = 0.3f;
-			RunFrame2P++;
-		}
-	}
-	else
-	{
-		speed = 0.1f;
-	}
 	//ãˆÚ“®
 	if (pInput.getGamepadThumbLY(1)>0 || DirectInput::GetInstance().KeyDown(DIK_O))
 	{
-		mypos.x = pPos.x + (sin(pAng.y)*speed);
-		mypos.z = pPos.z + (cos(pAng.y)*speed);
+		mypos.x = pPos.x + (sin(pAng.y)*speed());
+		mypos.z = pPos.z + (cos(pAng.y)*speed());
 
 	}
 	else if (DirectInput::GetInstance().KeyStatePreview(DIK_O))
 	{
-		mypos.x = pPos.x + (sin(pAng.y)*speed);
-		mypos.z = pPos.z + (cos(pAng.y)*speed);
+		mypos.x = pPos.x + (sin(pAng.y)*speed());
+		mypos.z = pPos.z + (cos(pAng.y)*speed());
 	}
 
 	//‰ºˆÚ“®
 	if (pInput.getGamepadThumbLY(1)<0 || DirectInput::GetInstance().KeyDown(DIK_K))
 	{
 		//mypos.z=pPos.z - speed;
-		mypos.x = pPos.x - (sin(pAng.y)*speed);
-		mypos.z = pPos.z - (cos(pAng.y)*speed);
+		mypos.x = pPos.x - (sin(pAng.y)*speed());
+		mypos.z = pPos.z - (cos(pAng.y)*speed());
 	}
 	else if (DirectInput::GetInstance().KeyStatePreview(DIK_K))
 	{
-		mypos.x = pPos.x - (sin(pAng.y)*speed);
-		mypos.z = pPos.z - (cos(pAng.y)*speed);
+		mypos.x = pPos.x - (sin(pAng.y)*speed());
+		mypos.z = pPos.z - (cos(pAng.y)*speed());
 	}
 
 	//‰EˆÚ“®
 	if (pInput.getGamepadThumbLX(1)<0 || DirectInput::GetInstance().KeyDown(DIK_J))
 	{
 		//mypos.x=pPos.x - speed;
-		mypos.x = pPos.x - +(cos(pAng.y)*speed);
-		mypos.z = pPos.z - (sin(pAng.y)*speed);
+		mypos.x = pPos.x - (cos(pAng.y)*speed());
+		mypos.z = pPos.z + (sin(pAng.y)*speed());
 	}
 	else if (DirectInput::GetInstance().KeyStatePreview(DIK_J))
 	{
-		mypos.x = pPos.x - (cos(pAng.y)*speed);
-		mypos.z = pPos.z + (sin(pAng.y)*speed);
+		mypos.x = pPos.x - (cos(pAng.y)*speed());
+		mypos.z = pPos.z + (sin(pAng.y)*speed());
 	}
 
 	//¶ˆÚ“®
 	if (pInput.getGamepadThumbLX(1)>0 || DirectInput::GetInstance().KeyDown(DIK_L))
 	{
-		mypos.x = pPos.x + (cos(pAng.y)*speed);
-		mypos.z = pPos.z - (sin(pAng.y)*speed);
+		mypos.x = pPos.x + (cos(pAng.y)*speed());
+		mypos.z = pPos.z - (sin(pAng.y)*speed());
 	}
 	else if (DirectInput::GetInstance().KeyStatePreview(DIK_L))
 	{
-		mypos.x = pPos.x + (cos(pAng.y)*speed);
-		mypos.z = pPos.z - (sin(pAng.y)*speed);
+		mypos.x = pPos.x + (cos(pAng.y)*speed());
+		mypos.z = pPos.z - (sin(pAng.y)*speed());
 	}
 	maxa.x = mypos.x + 0.5f;
 	maxa.y = mypos.y + 0.5f;
@@ -308,4 +282,14 @@ D3DXVECTOR3 Player::PlayerCameraMove2P(D3DXVECTOR3 pAng)
 
 
 	return pAng;
+}
+
+bool Player::isDash()
+{
+	return  pInput.getGamepadA(0) ||( DirectInput::GetInstance().KeyDown(DIK_F) || DirectInput::GetInstance().KeyState(DIK_F)) ? true : false;
+}
+
+float Player::speed()
+{
+	return isDash() ? SPEED_DASH : SPEED_NORMAL;
 }

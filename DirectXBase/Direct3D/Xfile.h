@@ -5,7 +5,7 @@
 #include"direct3d.h"
 #include"../DirectXAnimation/MyAllocateHierarchy.h"
 #include"../DirectXAnimation/AnimateObject.h"
-
+#include"../DirectXAnimation/AnimationController.h"
 class X_FILE :public Direct3D 
 {
 private:
@@ -17,7 +17,7 @@ public:
 	D3DXVECTOR3 rota;
 	D3DXVECTOR3 scale;
 
-
+	
 
 	X_FILE();
 	X_FILE(LPCWSTR FileName);

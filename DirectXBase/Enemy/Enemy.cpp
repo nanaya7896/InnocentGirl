@@ -2,7 +2,7 @@
 
 EnemyBox Enemy::em[31];
 Score Enemy::dscore;
-
+bool Enemy::isEnemyDestroy[31];
 //コンストラクタ
 Enemy::Enemy()
 {
@@ -173,7 +173,7 @@ void Enemy::Update(D3DXVECTOR3 pPos)
 		}
 	
 		}//isEnemyDestroy[i]==false
-		EnemyDown();
+		
 
 	}
 	
@@ -183,6 +183,7 @@ void Enemy::Update(D3DXVECTOR3 pPos)
 
 void Enemy::Draw()
 {
+
 	for (int i = 0; i < MAX_ENEMY; i++)
 	{
 		if (PlayerEnemyDistance[i].x <30.0f &&PlayerEnemyDistance[i].x >-30.0f && PlayerEnemyDistance[i].z > -30.0f && PlayerEnemyDistance[i].z < 30.0f)
@@ -226,11 +227,14 @@ BOOL Enemy::EneymHit(D3DXVECTOR3 *pmin, D3DXVECTOR3 *pmax)
 	D3DXVECTOR3 *Emin, *Emax;
 	for (int i = 0; i < MAX_ENEMY; i++)
 	{
-		Emin = &em[i].minv;
-		Emax = &em[i].maxv;
-		if ((pmin->x < Emax->x) && (pmax->x > Emin->x) && (pmin->y <Emax->y) && (pmax->y > Emin->y) && (pmin->z < Emax->z) && (pmax->z > Emin->z))
+		if (isEnemyDestroy[i] == false)
 		{
-			return TRUE;
+			Emin = &em[i].minv;
+			Emax = &em[i].maxv;
+			if ((pmin->x < Emax->x) && (pmax->x > Emin->x) && (pmin->y <Emax->y) && (pmax->y > Emin->y) && (pmin->z < Emax->z) && (pmax->z > Emin->z))
+			{
+				return TRUE;
+			}
 		}
 		
 	}
@@ -306,7 +310,7 @@ float Enemy::EnemySearch(D3DXVECTOR3 pPos)
 		//距離が10以下ならうめき声
 		if (AutoMoveSpeed <= 10)
 		{
-			//wave[0].Play(false);
+			wave[0].Play(false);
 		}
 
 	}
@@ -361,11 +365,11 @@ int Enemy::score2P()
 	return dscore.Score2P;
 }
 
-void Enemy::EnemyDown()
+void Enemy::EnemyDown(D3DXVECTOR3 ballPos)
 {
 	for (int i = 0; i < MAX_ENEMY; i++)
 	{
-		if (DirectInput::GetInstance().KeyDown(DIK_G) || DirectInput::GetInstance().KeyState(DIK_G))
+		if (ballPos.x>EnemyPos[i].x-1.0f && ballPos.x<EnemyPos[i].x+1.0f && ballPos.z > EnemyPos[i].z-1.0f && ballPos.z<EnemyPos[i].z+1.0f && ballPos.y<EnemyPos[i].y+10.0f &&ballPos.y>0)
 		{
 			isEnemyDestroy[i] = true;
 		}
@@ -373,12 +377,12 @@ void Enemy::EnemyDown()
 		{
 			if (EnemyAngle[i].x<0)
 			{
-				EnemyAngle[i].x += D3DX_PI / 1200;
+				EnemyAngle[i].x += D3DX_PI / 600;
 			}
 			if (EnemyAngle[i].x >0)
 			{
 			
-				EnemyPos[i].y -= 0.0001f;
+				EnemyPos[i].y -= 0.01f;
 			}
 		}
 	}

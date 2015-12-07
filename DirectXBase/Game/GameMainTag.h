@@ -8,6 +8,7 @@
 #include "../DirectInput\directInput.h"
 #include"../Player/Player.h"
 #include"../Direct3D/Camera.h"
+
 #include"Map.h"
 #include"../DirectXAnimation/MyAllocateHierarchy.h"
 #include"../DirectXAnimation/AnimateObject.h"
@@ -27,6 +28,7 @@ private:
 	Sprite timeSprite[2];
 	//プレイヤーインスタンス
 	Player player;
+
 	//カメラインスタンス
 	Camera *camera;
 	//アニメーションインスタンス
@@ -53,11 +55,30 @@ private:
 	int Score1p;
 	int Score2p;
 
-	//カメラ地形あたり判定用変数
-	D3DXVECTOR3 cameraMin;
-	D3DXVECTOR3 cameraMax;
-
+	//スタミナ
+	//文字
+	//Texture Stamina_bar;
+	//Sprite Stamina_bar;
+	//白
+	Texture Stamina_W;
+	Sprite sStamina_W;
+	//黄色
+	Texture Stamina_Y;
+	Sprite sStamina_Y;
 public:
+
+
+
+	//スタミナ上限値
+	const int MAX_STAMINA=360;
+	//スタミナ下限値
+	const int LOS_STAMINA = 0;
+	//現在のスタミナ
+	int currentStamina;
+	//スタミナを求める関数
+	int sta(int currentStamina);
+	//スタミナの上限下限制御する関数
+	int sta_clamp(int currentstamina , int low, int high);
 	D3DXVECTOR3 CameraPosition;
 
 	//コンストラクタ
@@ -77,4 +98,6 @@ protected:
 	D3DXVECTOR3 PlayerPos;
 	D3DXVECTOR3 PlayerAngle;
 	D3DXVECTOR3 PlayerSpeed;
+
+	
 };

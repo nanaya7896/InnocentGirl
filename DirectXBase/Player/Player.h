@@ -14,8 +14,10 @@ class Player : public Map
 {
 private:
 	float looptime = 0.0f;
+	
 	//プレイヤーの移動速度
-	float speed = 0.1f;
+	const float SPEED_DASH = 0.15f;
+	const float SPEED_NORMAL = 0.1f;
 	//90度/s
 	float anglesp = D3DX_PI / 2;
 	X_FILE Xplayer;
@@ -41,6 +43,9 @@ public:
 	//プレイヤーの移動
 	D3DXVECTOR3 PlayerMove(D3DXVECTOR3 pPos,D3DXVECTOR3 pAng);
 	D3DXVECTOR3 PlayerMove2P(D3DXVECTOR3 pPos, D3DXVECTOR3 pAng);
+	//ダッシュ用関数
+	bool isDash();
+	float speed();
 	//カメラの視点変更
 	D3DXVECTOR3 PlayerCameraMove(D3DXVECTOR3 pAng);
 	D3DXVECTOR3 PlayerCameraMove2P(D3DXVECTOR3 pAng);

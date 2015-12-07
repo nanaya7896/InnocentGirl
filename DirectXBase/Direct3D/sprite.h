@@ -53,4 +53,7 @@ public:
 
 	void Draw(IDirect3DDevice9* pDevice3D, IDirect3DTexture9* pTexture, bool isTurn = false);
 
+	//スタミナ専用のSprite::Draw
+	void Draw_Stamina(IDirect3DDevice9* pDevice3D, IDirect3DTexture9* pTexture, bool isTurn = false);
+
 };

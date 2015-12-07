@@ -48,9 +48,7 @@ public:
 	BOOL HitTikei(D3DXVECTOR3 *pmina,D3DXVECTOR3 *pmaxa);
 	//敵の地形とのあたり判定
 	BOOL HitETikei(D3DXVECTOR3 *emina, D3DXVECTOR3 *emaxa);
-	//カメラと地形のあたり判定
-	BOOL HitCTikei(D3DXVECTOR3 *cmina, D3DXVECTOR3 *cmaxa);
-
+	
 protected:
 	int i = 0;
 

@@ -1,6 +1,7 @@
 #include"GameMainTag.h"
 D3DXVECTOR3 viewVecE(0.0f, 0.5f, -1.5f);
 
+using namespace std;
 
 //コンストラクタ
 GameMainTag::GameMainTag(ISceneChanger *changer) : BaseScene(changer)
@@ -19,8 +20,7 @@ GameMainTag::GameMainTag(ISceneChanger *changer) : BaseScene(changer)
 	
 	camera = new Camera();
 	CameraPosition = D3DXVECTOR3(PlayerPos.x, PlayerPos.y+1.0f, PlayerPos.z - 5.0f);
-	cameraMin = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
-	cameraMax = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+
 	
 }
 
@@ -59,6 +59,20 @@ void GameMainTag::Initialize()
 	score1.Create(pDevice3D, 32);
 	score2.Create(pDevice3D, 32);
 	wave[0].Play(false);
+
+	
+	//スタミナ
+	//文字
+	//Stamina_bar.Load(_T("texture/stm.png"));
+	//白
+	Stamina_W.Load(_T("texture/sts.png"));
+	sStamina_W.SetPos(1000, 100);
+	sStamina_W.SetSize(360, 64);
+	//黄
+	Stamina_Y.Load(_T("texture/stk.png"));
+	sStamina_Y.SetPos(1000, 100);
+	//スタミナを初期値を最大値に設定
+	currentStamina = MAX_STAMINA;
 	//DirectInput::GetInstance().Init();
 	gmtEnemy.Initialize();
 	gmtEnemy.Draw();
@@ -75,27 +89,19 @@ void GameMainTag::Finalize()
 
 void GameMainTag::Update()
 {
-	
+	//現在のスタミナを求める関数
+	currentStamina = sta(currentStamina);
+	//プレイヤーのポジションを決める関数
 	PlayerPos=player.PlayerMove(PlayerPos,PlayerAngle);
 	
-	cameraMin = CameraPosition - D3DXVECTOR3(2.0f, 2.0f, 2.0f);
-	cameraMin = CameraPosition + D3DXVECTOR3(2.0f, 2.0f, 2.0f);
-	
-		PlayerAngle = player.PlayerCameraMove(PlayerAngle);
-		if (map1P.HitCTikei(&cameraMin, &cameraMax)==FALSE)
-		{
-			CameraPosition.x = PlayerPos.x - (5.0f*sinf(PlayerAngle.y));
-			CameraPosition.z = PlayerPos.z - (5.0f*cosf(PlayerAngle.y));
-		}
-		else
-		{
-			CameraPosition.x = 5.0f*sinf(PlayerAngle.y);
-			CameraPosition.z = 5.0f*cosf(PlayerAngle.y);
-		}
-	
-
-
+	//プレイヤーが向きを変える関数
+	PlayerAngle = player.PlayerCameraMove(PlayerAngle);
+	//カメラをプレイヤー中心に回す
+	CameraPosition.x = PlayerPos.x - (5.0f*sinf(PlayerAngle.y));
+	CameraPosition.z = PlayerPos.z - (5.0f*cosf(PlayerAngle.y));
+	//カメラの視点更新
 	camera->View(CameraPosition, PlayerAngle);
+
 	//敵の移動判定とかのアップデート
 	gmtEnemy.Update(PlayerPos);
 	//制限時間管理用フレーム
@@ -115,12 +121,25 @@ void GameMainTag::Update()
 	//スコア保持用関数にアクセス
 	Score1p=gmtEnemy.score1P();
 	Score2p = gmtEnemy.score2P();
+
+	
+	//現在のスタミナが上限か下限か確かめる関数
+	currentStamina = sta_clamp(currentStamina, LOS_STAMINA, MAX_STAMINA);
 }
 
 void GameMainTag::Draw()
 {
+
+	
 	map1P.MapRender();
 	player.PlayerCreate(PlayerPos,PlayerAngle);
+	//黄
+	
+	sStamina_Y.SetSize(currentStamina, 64);
+	sStamina_Y.Draw_Stamina(pDevice3D, Stamina_Y.pTexture);
+	//白
+	sStamina_W.Draw_Stamina(pDevice3D, Stamina_W.pTexture);
+
 	gmtEnemy.Draw();
 	//制限時間
 	if (timeframe >= 60)
@@ -145,3 +164,15 @@ void GameMainTag::Draw()
 }
 
 
+int GameMainTag::sta(int currentstamina)
+{
+	return (DirectInput::GetInstance().KeyDown(DIK_F) || DirectInput::GetInstance().KeyState(DIK_F) )? currentStamina-2 : currentStamina+2;
+}
+
+int GameMainTag::sta_clamp(int currentstamina, int low, int high)
+{
+	assert(low <= high);
+	
+	return min(max(currentstamina,low),high);
+
+}

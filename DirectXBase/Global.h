@@ -48,6 +48,7 @@ const int WINDOW_HEIGHT = 900;
 #include <complex>
 #include <XInput.h>
 #include <algorithm>
+#include <set>
 //Direct3D
 #include <d3d9.h>
 #include <d3dx9.h>
