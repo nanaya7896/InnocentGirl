@@ -1,5 +1,7 @@
 #include"GameOver.h"
 
+extern int SceneRetry;
+
 //コンストラクタ
 Gameover::Gameover(ISceneChanger* changer)
 	:BaseScene(changer),go_marker_flag(false)
@@ -79,7 +81,21 @@ void Gameover::Update()
 	{
 		/*wave[0].Stop();
 		wave[1].Play(false);*/
-		mSceneChanger->ChangeScene(eScene_GameMainTag1P);
+		switch (SceneRetry)
+		{
+		case 0:
+			mSceneChanger->ChangeScene(eScene_GameMainTag1P);
+			break;
+		case 1:
+			mSceneChanger->ChangeScene(eScene_GameMainTag2P);
+			break;
+		case 2:
+			mSceneChanger->ChangeScene(eScene_GameMainDodge1P);
+			break;
+		case 3:
+			mSceneChanger->ChangeScene(eScene_GameMainDodge2P);
+			break;
+		}
 		return;
 	}
 	//チャプターへ

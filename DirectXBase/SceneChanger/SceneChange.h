@@ -24,4 +24,6 @@ private:
 	BaseScene* mScene;
 	//次のシーンの管理変数
 	eScene mNextScene;
+	//リトライ時のシーン変更用変数
+
 };

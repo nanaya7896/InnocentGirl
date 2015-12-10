@@ -115,12 +115,12 @@ D3DXVECTOR3 Player::PlayerMove(D3DXVECTOR3 pPos,D3DXVECTOR3 pAng)
 			mypos.x = pPos.x + (cos(pAng.y)*speed());
 			mypos.z = pPos.z - (sin(pAng.y)*speed());
 		}
-		maxa.x = mypos.x + 0.5f;
-		maxa.y = mypos.y + 0.5f;
-		maxa.z = mypos.z + 0.5f;
-		mina.x = mypos.x - 0.5f;
-		mina.y = mypos.y - 0.5f;
-		mina.z = mypos.z - 0.5f;
+		maxa.x = mypos.x + 0.1f;
+		maxa.y = mypos.y + 0.1f;
+		maxa.z = mypos.z + 0.1f;
+		mina.x = mypos.x - 0.1f;
+		mina.y = mypos.y - 0.1f;
+		mina.z = mypos.z - 0.1f;
 
 		if (HitTikei(&mina, &maxa) == FALSE)
 		{
@@ -200,12 +200,12 @@ D3DXVECTOR3 Player::PlayerMove2P(D3DXVECTOR3 pPos, D3DXVECTOR3 pAng)
 		mypos.x = pPos.x + (cos(pAng.y)*speed());
 		mypos.z = pPos.z - (sin(pAng.y)*speed());
 	}
-	maxa.x = mypos.x + 0.5f;
-	maxa.y = mypos.y + 0.5f;
-	maxa.z = mypos.z + 0.5f;
-	mina.x = mypos.x - 0.5f;
-	mina.y = mypos.y - 0.5f;
-	mina.z = mypos.z - 0.5f;
+	maxa.x = mypos.x + 0.1f;
+	maxa.y = mypos.y + 0.1f;
+	maxa.z = mypos.z + 0.1f;
+	mina.x = mypos.x - 0.1f;
+	mina.y = mypos.y - 0.1f;
+	mina.z = mypos.z - 0.1f;
 
 	if (HitTikei(&mina, &maxa) == FALSE)
 	{

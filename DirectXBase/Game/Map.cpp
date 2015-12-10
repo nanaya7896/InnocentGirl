@@ -281,7 +281,7 @@ BOOL Map::HitETikei(D3DXVECTOR3 *emina, D3DXVECTOR3 *emaxa)
 	{
 		return TRUE;
 	}
-	if (emina->z < -54 || emina->z >65)
+	if (emina->z < -50 || emina->z >60)
 	{
 		return TRUE;
 	}

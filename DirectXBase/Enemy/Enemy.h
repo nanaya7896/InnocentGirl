@@ -24,11 +24,11 @@ private:
 	Texture t_Enemy;
 	X_FILE x_Enemy;
 	Map eMap;
-
+	
 
 	//境界ボックス生成用変数
 	LPDIRECT3DVERTEXBUFFER9 pvb9;
-	BYTE *pvertices;
+
 	HRESULT hr[31];
 	D3DXVECTOR3 lminv, lmaxv;
 	//メンバ変数
@@ -101,11 +101,12 @@ public:
 
 	//Waveファイル
 	CSound wave[2];
-
+	static int EnemyDestroyCount;
 protected:
 	static EnemyBox em[31];
 	static Score dscore;
 	static bool isEnemyDestroy[31];
+	
 
 };
 

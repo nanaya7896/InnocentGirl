@@ -98,6 +98,7 @@
     <ClCompile Include="Enemy\Enemy.cpp" />
     <ClCompile Include="Game\Chapter.cpp" />
     <ClCompile Include="Game\GameMainDog.cpp" />
+    <ClCompile Include="Game\GameMainDog2P.cpp" />
     <ClCompile Include="Game\GameMainTag.cpp" />
     <ClCompile Include="Game\GameMainTag2P.cpp" />
     <ClCompile Include="Game\Gameover.cpp" />
@@ -128,6 +129,7 @@
     <ClInclude Include="Enemy\Enemy.h" />
     <ClInclude Include="Game\Chapter.h" />
     <ClInclude Include="Game\GameMainDog.h" />
+    <ClInclude Include="Game\GameMainDog2P.h" />
     <ClInclude Include="Game\GameMainTag.h" />
     <ClInclude Include="Game\GameMainTag2P.h" />
     <ClInclude Include="Game\Gameover.h" />

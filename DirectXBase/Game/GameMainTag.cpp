@@ -2,24 +2,12 @@
 D3DXVECTOR3 viewVecE(0.0f, 0.5f, -1.5f);
 
 using namespace std;
+extern int SceneRetry;
 
 //コンストラクタ
 GameMainTag::GameMainTag(ISceneChanger *changer) : BaseScene(changer)
 {
-	PlayerPos.x = 0.0f;
-	PlayerPos.y = 0.0f;
-	PlayerPos.z = 0.0f;
-	PlayerAngle.x=0.0f;
-	PlayerAngle.y=0.0f;
-	PlayerAngle.z =0.0f;
-	PlayerSpeed.x = 0.0f;
-	PlayerSpeed.y = 0.0f;
-	PlayerSpeed.z = 0.0f;
-	time = 60;
-	timeframe = 0;
-	
-	camera = new Camera();
-	CameraPosition = D3DXVECTOR3(PlayerPos.x, PlayerPos.y+1.0f, PlayerPos.z - 5.0f);
+
 
 	
 }
@@ -33,6 +21,20 @@ GameMainTag::~GameMainTag()
 
 void GameMainTag::Initialize()
 {
+	PlayerPos.x = 0.0f;
+	PlayerPos.y = 0.0f;
+	PlayerPos.z = 0.0f;
+	PlayerAngle.x = 0.0f;
+	PlayerAngle.y = 0.0f;
+	PlayerAngle.z = 0.0f;
+	PlayerSpeed.x = 0.0f;
+	PlayerSpeed.y = 0.0f;
+	PlayerSpeed.z = 0.0f;
+	time = 60;
+	timeframe = 0;
+
+	camera = new Camera();
+	CameraPosition = D3DXVECTOR3(PlayerPos.x, PlayerPos.y + 1.0f, PlayerPos.z - 5.0f);
 	player.Hit = false;
 	timeTexture[0].Load("texture/0.png");
 	timeTexture[1].Load("texture/1.png");
@@ -100,7 +102,7 @@ void GameMainTag::Update()
 	CameraPosition.x = PlayerPos.x - (5.0f*sinf(PlayerAngle.y));
 	CameraPosition.z = PlayerPos.z - (5.0f*cosf(PlayerAngle.y));
 	//カメラの視点更新
-	camera->View(CameraPosition, PlayerAngle);
+	camera[0].View(CameraPosition, PlayerAngle);
 
 	//敵の移動判定とかのアップデート
 	gmtEnemy.Update(PlayerPos);
@@ -111,12 +113,15 @@ void GameMainTag::Update()
 	{
 		wave[0].Stop();
 		mSceneChanger->ChangeScene(eScene_GameOver);
+		SceneRetry = 0;
+		return;
 	}
 	//タイムが９０秒経過したとき
 	if (tentime == 0 && onetime == 0 && player.Hit==false)
 	{
 		wave[0].Stop();
 		mSceneChanger->ChangeScene(eScene_Result);
+		return;
 	}
 	//スコア保持用関数にアクセス
 	Score1p=gmtEnemy.score1P();

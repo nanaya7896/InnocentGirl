@@ -1,5 +1,7 @@
 #include"GameMainTag2P.h"
 
+extern int SceneRetry;
+
 //コンストラクタ
 GameMainTag2P::GameMainTag2P(ISceneChanger *changer) : BaseScene(changer)
 {
@@ -109,6 +111,7 @@ void GameMainTag2P::Update()
 	{
 		wave[0].Stop();
 		camera1[0].SetViewPort(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
+		SceneRetry = 1;
 		mSceneChanger->ChangeScene(eScene_GameOver);
 	}
 	//タイムが９０秒経過したとき

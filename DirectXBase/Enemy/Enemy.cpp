@@ -3,6 +3,7 @@
 EnemyBox Enemy::em[31];
 Score Enemy::dscore;
 bool Enemy::isEnemyDestroy[31];
+int Enemy::EnemyDestroyCount;
 //コンストラクタ
 Enemy::Enemy()
 {
@@ -38,13 +39,17 @@ void Enemy::Initialize()
 	//敵初期値ポジションの設定
 	for (int i = 0; i < MAX_ENEMY; i++)
 	{
+		EnemyPos[i] = D3DXVECTOR3(Random(-40.0f, 40.0f), 0.1f, Random(-50.0f, 50.0f));
 		PlayerEnemyDistance[i] = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 		AutoMove[i] = 0.0f;
-		
-		while (EnemyPos[i].x > -10 && EnemyPos[i].x<10 && EnemyPos[i].z>-10 && EnemyPos[i].z < 10)
+		em[i].minv = EnemyPos[i] - D3DXVECTOR3(2.0f, 1.0f, 2.0f);
+		em[i].maxv = EnemyPos[i] + D3DXVECTOR3(2.0f, 1.0f, 2.0f);
+		while (EnemyPos[i].x > -20.0f && EnemyPos[i].x<20.0f && EnemyPos[i].z>-20.0f && EnemyPos[i].z < 20.0f || eMap.HitETikei(&em[i].minv, &em[i].maxv) == TRUE)
 		{
-			//-60から60の座標間でランダム生成
-			EnemyPos[i] = D3DXVECTOR3(Random(-40.0f, 40.0f), 0.1f, Random(-60.0f, 60.0f));
+				//-60から60の座標間でランダム生成
+				EnemyPos[i] = D3DXVECTOR3(Random(-40.0f, -20.0f), 0.1f, Random(-50.0f,-30.0f));	
+				em[i].minv = EnemyPos[i] - D3DXVECTOR3(2.0f, 1.0f, 2.0f);
+				em[i].maxv = EnemyPos[i] + D3DXVECTOR3(2.0f, 1.0f, 2.0f);
 		}
 		//敵が一番最初向いている角度
 		EnemyAngle[i] = D3DXVECTOR3(0.0f - (D3DX_PI / 2.0f), 0.0f, 0.0f);
@@ -190,33 +195,9 @@ void Enemy::Draw()
 		{
 			x_Enemy.Render(&EnemyPos[i], &EnemyAngle[i], &D3DXVECTOR3(0.05f, 0.05f, 0.05f), t_Enemy.GetTexture());
 		}
-			//敵の描画
-		/*if (PlayerEnemyDistance[i] < D3DXVECTOR3(30.0f, 0.0f, 30.0f) && PlayerEnemyDistance[i] > D3DXVECTOR3(-30.0f, 0.0f, -30.0f))
-		{
-			x_Enemy.Render(&EnemyPos[i], &EnemyAngle[i], &D3DXVECTOR3(0.05f, 0.05f, 0.05f), t_Enemy.GetTexture());
-		}*/
-		//境界線ボックスの生成
-		numv[i] = x_Enemy.g_pMesh->GetNumVertices();
-		stride[i] = D3DXGetFVFVertexSize(x_Enemy.g_pMesh->GetFVF());
-		hr[i] = x_Enemy.g_pMesh->GetVertexBuffer(&pvb9);
-		if (FAILED(hr))
-		{
-			return;
-		}
-		hr[i] = pvb9->Lock(0, 0, (VOID**)&pvertices, 0);	//頂点バッファをロック
-		if (FAILED(hr))
-		{
-			return;
-		}
-		hr[i] = D3DXComputeBoundingBox((D3DXVECTOR3*)pvertices, numv[i], stride[i], &lminv, &lmaxv);
-		if (FAILED(hr))
-		{
-			return;
-		}
-		//境界ボックスの範囲を設定
-		em[i].minv = EnemyPos[i] - D3DXVECTOR3(2.0f, 1.0f, 2.0f);
-		em[i].maxv = EnemyPos[i] + D3DXVECTOR3(2.0f, 1.0f, 2.0f);
-		pvb9->Unlock();
+		em[i].minv = EnemyPos[i] - D3DXVECTOR3(1.0f, 1.0f, 1.0f);
+		em[i].maxv = EnemyPos[i] + D3DXVECTOR3(1.0f, 1.0f, 1.0f);
+		//pvb9->Unlock();
 	}
 }
 
@@ -231,7 +212,7 @@ BOOL Enemy::EneymHit(D3DXVECTOR3 *pmin, D3DXVECTOR3 *pmax)
 		{
 			Emin = &em[i].minv;
 			Emax = &em[i].maxv;
-			if ((pmin->x < Emax->x) && (pmax->x > Emin->x) && (pmin->y <Emax->y) && (pmax->y > Emin->y) && (pmin->z < Emax->z) && (pmax->z > Emin->z))
+			if ((pmin->x < Emax->x) && (pmax->x > Emin->x) && (pmin->y <Emax->y) && (pmax->y > 0) && (pmin->z < Emax->z) && (pmax->z > Emin->z))
 			{
 				return TRUE;
 			}
@@ -369,9 +350,10 @@ void Enemy::EnemyDown(D3DXVECTOR3 ballPos)
 {
 	for (int i = 0; i < MAX_ENEMY; i++)
 	{
-		if (ballPos.x>EnemyPos[i].x-1.0f && ballPos.x<EnemyPos[i].x+1.0f && ballPos.z > EnemyPos[i].z-1.0f && ballPos.z<EnemyPos[i].z+1.0f && ballPos.y<EnemyPos[i].y+10.0f &&ballPos.y>0)
+		if (ballPos.x>EnemyPos[i].x-0.5f && ballPos.x<EnemyPos[i].x+0.5f && ballPos.z > EnemyPos[i].z-0.5f && ballPos.z<EnemyPos[i].z+0.5f && ballPos.y<EnemyPos[i].y+10.0f &&ballPos.y>0)
 		{
 			isEnemyDestroy[i] = true;
+			EnemyDestroyCount++;
 		}
 		if (isEnemyDestroy[i] == true)
 		{

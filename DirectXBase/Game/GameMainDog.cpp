@@ -2,9 +2,20 @@
 
 //D3DXVECTOR3 viewVecE(0.0f, 0.5f, -1.5f);
 
-
+extern int SceneRetry;
 //コンストラクタ
 GameMainDodge::GameMainDodge(ISceneChanger *changer) : BaseScene(changer)
+{
+	
+}
+
+//デストラクタ
+GameMainDodge::~GameMainDodge()
+{
+	delete camera;
+}
+
+void GameMainDodge::Initialize()
 {
 	d_PlayerPos.x = 0.0f;
 	d_PlayerPos.y = 0.0f;
@@ -22,20 +33,8 @@ GameMainDodge::GameMainDodge(ISceneChanger *changer) : BaseScene(changer)
 	Ballthrow = false;
 	time = 90;
 	timeframe = 0;
-
 	camera = new Camera();
-	CameraPosition = D3DXVECTOR3(d_PlayerPos.x, d_PlayerPos.y+1.0f, d_PlayerPos.z - 5.0f);
-}
-
-//デストラクタ
-GameMainDodge::~GameMainDodge()
-{
-	delete camera;
-	
-}
-
-void GameMainDodge::Initialize()
-{
+	CameraPosition = D3DXVECTOR3(d_PlayerPos.x, d_PlayerPos.y + 1.0f, d_PlayerPos.z - 5.0f);
 	mapDog1P.LoadBuldings();
 
 	ball.BallLoad();
@@ -84,14 +83,15 @@ void GameMainDodge::Update()
 	
 	//制限時間管理用フレーム
 	timeframe++;
-	//敵にぶつかったときの処理
-	if (d_player.Hit == true)
+	//敵にぶつかったときもしくはタイムが９０秒経過したときの処理
+	if (d_player.Hit == true || (tentime == 0 && onetime == 0 && d_player.Hit == false))
 	{
 		wave[0].Stop();
+		SceneRetry = 2;
 		mSceneChanger->ChangeScene(eScene_GameOver);
 	}
-	//タイムが９０秒経過したとき
-	if (tentime == 0 && onetime == 0 && d_player.Hit == false)
+
+	if (Dog_Enemy.EnemyDestroyCount == 30)
 	{
 		wave[0].Stop();
 		mSceneChanger->ChangeScene(eScene_Result);
@@ -103,7 +103,6 @@ void GameMainDodge::Update()
 		//ボールのポジションに現在のポジションを入れる
 		BallPos += d_PlayerPos;
 		Ballthrow = true;
-
 	}
 	if (Ballthrow == true)
 	{

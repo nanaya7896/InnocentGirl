@@ -15,7 +15,10 @@ Ball::~Ball()
 D3DXVECTOR3 Ball::Init(D3DXVECTOR3 ballpos)
 {
 
-	pb.setPos(D3DXVECTOR3(0.5f, 1.0f, 0.0f));
+	
+
+
+	pb.setPos(ballpos);
 	
 	ballSpeed = 10.0f;
 	Bound = -1;
@@ -25,23 +28,23 @@ D3DXVECTOR3 Ball::Init(D3DXVECTOR3 ballpos)
 	Vel.z = 10.0f;
 	pb.setVelocity(Vel);
 	ballStopFram = 30;
-
+	//pb.update(unitTime);
 	ballpos =pb.getCurPos();
 	return ballpos;
 }
 
 HRESULT Ball::BallLoad()
 {
-	ballSpeed = 10.0f;
+	ballSpeed = 5.0f;
 	G.x = 0.0f;
 	G.y = -9.8f;
 	G.z = 0.0f;
 	Pos.x = 0.5f;
 	Pos.y = 1.0f;
 	Pos.z = 0.0f;
-	Vel.x = 10.0f;
+	Vel.x = 10.0f*cosf(60/180*D3DX_PI);
 	Vel.y = 0.0f;
-	Vel.z = 10.0f;
+	Vel.z = 10.0f*sinf(60/180*D3DX_PI);
 	unitTime = 1 / 60.0f;
 
 	//åªç›ÇÃÉ{Å[ÉãÇÃç¿ïWÇéÊìæ
@@ -53,6 +56,11 @@ HRESULT Ball::BallLoad()
 	Tball.Load("texture/ball-tex.jpg");
 	Xball.XfileLoader(L"xfile/ball.X");
 	D3DXMatrixIdentity(&d3dMat);
+
+
+	
+
+
 	if (Tball.pTexture == NULL)
 	{
 		return E_FAIL;
@@ -76,28 +84,32 @@ D3DXVECTOR3 Ball::BallMove(D3DXVECTOR3 bPos, D3DXVECTOR3 playerPos, D3DXVECTOR3 
 {
 
 	ballStopFram=ballStop();
-	if (ballStopFram == 0)
+	if (pb.getCurPos().y - ballR< 0.0f)
 	{
-		if (pb.getCurPos().y <= 0.1f || pb.getCurPos().y > 1.0f)
-		{
-			Bound *= -1;
-		}
-		Pos.y =Bound * cosf(Pos.y);
-		ballSpeed--;
+			Bound *= -1.0f;
+		//ballSpeed-=0.5f;
 	}
-	if (ballSpeed< 0)
+	if (BoundCoefficient > 60)
 	{
-		ballSpeed = 1;
+		Vel.y = Bound * cosf(Vel.y);
 	}
+	BoundCoefficient += 1;
 
-	Pos.x = playerPos.x + (ballSpeed*sinf(playerAngle.y));
-	Pos.z = playerPos.z + (ballSpeed*cosf(playerAngle.y));
-	pb.setPos(Pos);
+	Vel.x =/* playerPos.x + */(ballSpeed*sinf(playerAngle.y));
+	Vel.z =/* playerPos.z + */(ballSpeed*cosf(playerAngle.y));
+	//pb.setPos(D3DXVECTOR3(sinf(bPos.x),bPos.y,cosf(bPos.z)));
+	pb.setPos(bPos);
+	//pb.getPos(bPos, unitTime);
 	pb.setAccel(G);
+	//pb.getVelocity(Vel, unitTime);
 	pb.setVelocity(Vel);
-	//	bPos=pb.addPos(bPos,bPos);
+	
+	pb.getPos(bPos, unitTime);
 	pb.update(unitTime);
 	bPos = pb.getCurPos();
+
+	
+	
 
 	return bPos;
 }
@@ -109,6 +121,7 @@ D3DXVECTOR3 Ball::BallMove2P(D3DXVECTOR3 bPos)
 
 int Ball::ballStop()
 {
-	return ballStopFram > 0 ? ballStopFram - 1 : 30;
+	return ballStopFram == BoundCoefficient ? 30 : ballStopFram - 1;
 }
+
 

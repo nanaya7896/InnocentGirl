@@ -118,6 +118,9 @@
     <ClCompile Include="Game\GameMainDog.cpp">
       <Filter>Game</Filter>
     </ClCompile>
+    <ClCompile Include="Game\GameMainDog2P.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Direct3D\direct3d.h">
@@ -207,6 +210,9 @@
       <Filter>PhysicBases</Filter>
     </ClInclude>
     <ClInclude Include="Game\GameMainDog.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameMainDog2P.h">
       <Filter>Game</Filter>
     </ClInclude>
   </ItemGroup>

@@ -10,26 +10,28 @@
 #include"../Enemy/Enemy.h"
 #include"../Xinput/XbonInput.h"
 
+
+
+
 class Ball : public Map
 {
 private:
-	//重力
-	D3DXVECTOR3 G;
-	//加速度
-	D3DXVECTOR3 Vel;
-	//場所
-	D3DXVECTOR3 Pos;
+
 	float unitTime;
 	//バンドさせるための係数
-	float Bound = -1;
-	float BoundCoefficient=0.8f;
+	float Bound = -1.0f;
+	float BoundCoefficient=0.0f;
+	//ボールの半径
+	float ballR = 0.5f;
 	X_FILE Xball;
 	X_FILE Xball2P;
 	Texture Tball;
 	Texture Tball2P;
 	PhysicBase pb;
 	float ballSpeed;
-	//
+
+	
+
 	//プレイヤーインスタンス
 	Player bplayer;
 
@@ -38,7 +40,12 @@ private:
 public:
 	//ボールの移動速度
 	float ballspeed;
-
+	//重力
+	D3DXVECTOR3 G;
+	//加速度
+	D3DXVECTOR3 Vel;
+	//場所
+	D3DXVECTOR3 Pos;
 
 	//ボールのフラグ
 	bool Ball_flag;
@@ -67,6 +74,7 @@ public:
 
 	D3DXVECTOR3 Init(D3DXVECTOR3 ballpos);
 
+	
 protected:
 
 

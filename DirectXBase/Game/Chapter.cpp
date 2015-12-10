@@ -155,6 +155,14 @@ void Chapter::Update()
 			mSceneChanger->ChangeScene(eScene_GameMainDodge1P);
 			return;
 		}
+		//GameMainドッヂボールひとりプレイに画面遷移
+		if ((chaInput.getGamepadStart(0) || DirectInput::GetInstance().KeyDown(DIK_SPACE)) && chapter_flag == true && member_flag == true)
+		{
+			wave[0].Stop();
+			wave[1].Play(false);
+			mSceneChanger->ChangeScene(eScene_GameMainDodge2P);
+			return;
+		}
 	}
 
 	

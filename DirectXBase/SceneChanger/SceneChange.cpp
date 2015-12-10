@@ -8,6 +8,10 @@
 #include "../Direct3D/direct3d.h"
 #include "../DirectInput/directinput.h"
 #include"../Game/GameMainDog.h"
+#include"../Game/GameMainDog2P.h"
+
+int SceneRetry;
+
 SceneChange::SceneChange() : mNextScene(eScene_None) //次のシーンの管理変数
 {
 	mScene = (BaseScene*) new Title(this);
@@ -51,14 +55,16 @@ void SceneChange::Update()
 		case eScene_GameMainDodge1P :
 			mScene = (BaseScene*) new GameMainDodge(this);
 			break;
-			//case eScene_GameMainDodge2P :
-			//	mScene = (BaseScene*) new GameMainDodge2P(this);
-			//break;
+		case eScene_GameMainDodge2P :
+				mScene = (BaseScene*) new GameMainDodge2P(this);
+			break;
+		case eScene_GameOver:
+			mScene = (BaseScene*) new Gameover(this);
+			break;
 		case eScene_Result :
 			mScene = (BaseScene*) new CResult(this);
-
-		case eScene_GameOver :
-			mScene = (BaseScene*) new Gameover(this);
+			break;
+	
 		}
 		//次のシーンの情報をクリア
 		mNextScene = eScene_None;

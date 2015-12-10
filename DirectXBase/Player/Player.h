@@ -16,7 +16,7 @@ private:
 	float looptime = 0.0f;
 	
 	//プレイヤーの移動速度
-	const float SPEED_DASH = 0.15f;
+	const float SPEED_DASH = 0.2f;
 	const float SPEED_NORMAL = 0.1f;
 	//90度/s
 	float anglesp = D3DX_PI / 2;
@@ -52,8 +52,8 @@ public:
 	//ラジアンの角度を変える関数
 	D3DXVECTOR3 YRotation();
 	D3DXVECTOR3 mypos;
-	D3DXVECTOR3 maxa;//(mypos.x + 0.5f, mypos.y + 0.5f, mypos.z + 0.5f);
-	D3DXVECTOR3 mina;// (mypos.x - 0.5f, mypos.y - 0.5f, mypos.z - 0.5f);
+	D3DXVECTOR3 maxa;
+	D3DXVECTOR3 mina;
 	bool Hit;
 protected:
 
